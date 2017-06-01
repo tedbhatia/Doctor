@@ -6,12 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.example.doctor.ui.activity.My_Insurance">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Insurance"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textSize="40dp"/>
+        android:layout_height="match_parent"
+        android:id="@+id/insurance_frame">
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/insurance_list"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
 </LinearLayout>
