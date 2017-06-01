@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Doctor</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Navigation Menu -->
+    <string name="health_account">My Health Account</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="find_docs">Find Doctors</string>
+    <string name="emergency">Emergency Contacts</string>
+    <string name="notifications">Notifications</string>
+    <string name="medicines">Medicines</string>
+    <string name="procedure">Procedures</string>
+
+    <!-- My Health Account Java -->
+    <string name="my_doc">My Doctors</string>
+    <string name="my_diseases">My Diseases</string>
+    <string name="my_appointments">My Appointments</string>
+    <string name="my_meds">My Medicines</string>
+    <string name="my_docs">My Documents</string>
+    <string name="my_insurance">My Insurance</string>
+    <string name="my_measurements">My Measurements</string>
+
+    <!-- Main Fragment -->
+    <string name="welcome">Welcome</string>
+</resources>

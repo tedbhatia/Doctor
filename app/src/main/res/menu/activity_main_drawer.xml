@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/health_acc"
+            android:icon="@drawable/health_acc"
+            android:title="@string/health_account" />
+        <item
+            android:id="@+id/symptoms"
+            android:icon="@drawable/symptoms"
+            android:title="@string/symptoms" />
+        <item
+            android:id="@+id/find_docs"
+            android:icon="@drawable/find_docs"
+            android:title="@string/find_docs" />
+        <item
+            android:id="@+id/emergency"
+            android:icon="@drawable/emergency"
+            android:title="@string/emergency" />
+
+        <item
+            android:id="@+id/procedure"
+            android:icon="@drawable/procedure"
+            android:title="@string/procedure" />
+
+        <item
+            android:id="@+id/notifications"
+            android:icon="@drawable/notifications"
+            android:title="@string/notifications" />
+
+        <item
+            android:id="@+id/meds"
+            android:icon="@drawable/meds"
+            android:title="@string/medicines" />
+    </group>
+
+
+
+</menu>
