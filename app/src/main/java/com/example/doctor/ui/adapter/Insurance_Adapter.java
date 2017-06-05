@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.doctor.R;
@@ -24,6 +25,7 @@ import static android.R.attr.data;
 public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.MyViewHolder> {
 
     private LayoutInflater inflator;
+    private static MyClickListener myClickListener;
     List<Insurance> data = Collections.emptyList();
     private Context context;
 
@@ -31,6 +33,10 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
         inflator = LayoutInflater.from(context);
         this.data = data;
         this.context = context;
+    }
+
+    public void setOnItemClickListener(MyClickListener myClickListener) {
+        Insurance_Adapter.myClickListener = myClickListener;
     }
 
     @Override
@@ -55,23 +61,33 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
         return data.size();
     }
 
+    public interface MyClickListener{
+        void onItemClick(int position,View v);
+    }
+
     static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView plan;
         TextView note;
         TextView duration;
+        private LinearLayout linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             plan = (TextView) itemView.findViewById(R.id.BoxPlanText);
             duration = (TextView) itemView.findViewById(R.id.BoxDurationText);
             note = (TextView) itemView.findViewById(R.id.BoxNoteText);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.InsuranceLayout);
+
+            linearLayout.setOnClickListener(this);
         }
 
 
         @Override
         public void onClick(View v) {
-
+            if(myClickListener!=null){
+                myClickListener.onItemClick(getLayoutPosition(),v);
+            }
         }
     }
 }

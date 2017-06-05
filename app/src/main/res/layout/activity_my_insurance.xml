@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.doctor.ui.activity.My_Insurance">
 
-    <FrameLayout
+    <!--<FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/insurance_frame">
+        android:id="@+id/insurance_frame">-->
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -19,5 +19,5 @@
             android:layout_marginTop="20dp">
 
         </android.support.v7.widget.RecyclerView>
-    </FrameLayout>
+    <!--</FrameLayout-->
 </LinearLayout>

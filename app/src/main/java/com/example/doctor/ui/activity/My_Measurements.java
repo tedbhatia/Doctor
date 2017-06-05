@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.doctor.R;
-import com.example.doctor.ui.fragment.Insurance_Fragment;
 import com.example.doctor.ui.fragment.Measurement_Fragment;
 
 public class My_Measurements extends AppCompatActivity {
