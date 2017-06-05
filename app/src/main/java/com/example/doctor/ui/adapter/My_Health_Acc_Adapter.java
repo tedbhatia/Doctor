@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import java.util.List;
 
 public class My_Health_Acc_Adapter extends RecyclerView.Adapter<My_Health_Acc_Adapter.MyViewHolder> {
 
+    private static MyClickListener myClickListener;
     private LayoutInflater inflator;
     List<My_Health_Acc_Info> data = Collections.emptyList();
     private Context context;
@@ -51,66 +53,7 @@ public class My_Health_Acc_Adapter extends RecyclerView.Adapter<My_Health_Acc_Ad
         final My_Health_Acc_Info current = data.get(position);
         holder.title.setText(current.getTitle());
         holder.icon.setImageResource(current.getIconId());
-        holder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(current.getTitle().equals("My Doctor")){
-                    Toast.makeText(context,"My Doctor",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Diseases")){
-                    Toast.makeText(context,"My Diseases",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Appointments")){
-                    Toast.makeText(context,"My Appointments",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Medicines")){
-                    Toast.makeText(context,"My Medicines",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Documents")){
-                    Toast.makeText(context,"My Documents",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Insurance")){
-                    Toast.makeText(context,"My Insurance",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context,My_Insurance.class);
-                    context.startActivity(intent);
-                }
-                else if(current.getTitle().equals("My Measurements")){
-                    Toast.makeText(context,"My Measurements",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context,My_Measurements.class);
-                    context.startActivity(intent);
-                }
-            }
-        });
-        holder.icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(current.getTitle().equals("My Doctors")){
-                    Toast.makeText(context,"My Doctors",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Diseases")){
-                    Toast.makeText(context,"My Diseases",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Appointments")){
-                    Toast.makeText(context,"My Appointments",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Medicines")){
-                    Toast.makeText(context,"My Medicines",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Documents")){
-                    Toast.makeText(context,"My Documents",Toast.LENGTH_SHORT).show();
-                }
-                else if(current.getTitle().equals("My Insurance")){
-                    Toast.makeText(context,"My Insurance",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context,My_Insurance.class);
-                    context.startActivity(intent);
-                }
-                else if(current.getTitle().equals("My Measurements")){
-                    Toast.makeText(context,"My Measurements",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context,My_Measurements.class);
-                    context.startActivity(intent);
-                }
-            }
-        });
+
 
     }
 
@@ -119,21 +62,35 @@ public class My_Health_Acc_Adapter extends RecyclerView.Adapter<My_Health_Acc_Ad
         return data.size();
     }
 
+    public void setOnItemClickListener(MyClickListener myClickListener) {
+        My_Health_Acc_Adapter.myClickListener = myClickListener;
+    }
+
+    public interface MyClickListener{
+        void onItemClick(int position,View v);
+    }
+
     static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView title;
         ImageView icon;
+        LinearLayout layout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.BoxText);
             icon = (ImageView) itemView.findViewById(R.id.BoxIcon);
+            layout = (LinearLayout) itemView.findViewById(R.id.MainLayout);
+
+            layout.setOnClickListener(this);
         }
 
 
         @Override
         public void onClick(View v) {
-
+            if(myClickListener!=null){
+                myClickListener.onItemClick(getLayoutPosition(),v);
+            }
         }
     }
 }
