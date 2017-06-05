@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.doctor.R;
@@ -20,6 +21,7 @@ import java.util.List;
 public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapter.MyViewHolder> {
 
     private LayoutInflater inflator;
+    private static MyClickListener myClickListener;
     List<Measurement_Info> data = Collections.emptyList();
     private Context context;
 
@@ -27,6 +29,10 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
         inflator = LayoutInflater.from(context);
         this.data = data;
         this.context = context;
+    }
+
+    public void setOnItemClickListener(Measurement_Adapter.MyClickListener myClickListener) {
+        Measurement_Adapter.myClickListener = myClickListener;
     }
 
     @Override
@@ -51,23 +57,34 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
         return data.size();
     }
 
+    public interface MyClickListener{
+        void onItemClick(int position,View v);
+    }
+
     static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView type;
         TextView note;
         TextView date;
+        private LinearLayout linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             type = (TextView) itemView.findViewById(R.id.BoxTypeText);
             date = (TextView) itemView.findViewById(R.id.BoxDateText);
             note = (TextView) itemView.findViewById(R.id.BoxNoteText);
+
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.MeasurementLayout);
+
+            linearLayout.setOnClickListener(this);
         }
 
 
         @Override
         public void onClick(View v) {
-
+            if(myClickListener!=null){
+                myClickListener.onItemClick(getLayoutPosition(),v);
+            }
         }
     }
 }
