@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.doctor.R;
@@ -24,6 +25,9 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_measurements);
         setTitle("My Measurement");
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         data = new ArrayList<>();
 
@@ -56,5 +60,15 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
     @Override
     public void onItemClick(int position, View v) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

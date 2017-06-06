@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.doctor.R;
@@ -24,6 +25,9 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_insurance);
         setTitle("My Insurance");
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         data = new ArrayList<>();
 
@@ -59,5 +63,13 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        if(id == android.R.id.home){
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

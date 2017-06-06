@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/insurance_list"
             android:orientation="vertical"
-            android:background="@drawable/three">
+            android:background="@color/gray">
 
         </android.support.v7.widget.RecyclerView>
     <!--</FrameLayout-->

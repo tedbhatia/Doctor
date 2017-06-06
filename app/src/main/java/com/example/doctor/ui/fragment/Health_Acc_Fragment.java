@@ -55,7 +55,7 @@ public class Health_Acc_Fragment extends Fragment implements My_Health_Acc_Adapt
 
     public static void getData(List<My_Health_Acc_Info> data){
 
-        int[] icons={R.drawable.my_doc_96,R.drawable.my_documents_96,R.drawable.my_appointments_96,R.drawable.my_med_96,R.drawable.my_documents_96,R.drawable.my_insurance_96,R.drawable.scale_96};
+        int[] icons={R.drawable.doctor,R.drawable.disease,R.drawable.appointment,R.drawable.medicine,R.drawable.documents,R.drawable.insurance,R.drawable.measurement};
         String[] title = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
 
         for(int i=0;i<title.length && i<icons.length; i++){

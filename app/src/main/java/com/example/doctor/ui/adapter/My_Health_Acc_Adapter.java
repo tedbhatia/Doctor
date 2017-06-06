@@ -2,6 +2,7 @@ package com.example.doctor.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,13 +75,13 @@ public class My_Health_Acc_Adapter extends RecyclerView.Adapter<My_Health_Acc_Ad
 
         TextView title;
         ImageView icon;
-        LinearLayout layout;
+        CardView layout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.BoxText);
             icon = (ImageView) itemView.findViewById(R.id.BoxIcon);
-            layout = (LinearLayout) itemView.findViewById(R.id.MainLayout);
+            layout = (CardView) itemView.findViewById(R.id.card_view1);
 
             layout.setOnClickListener(this);
         }

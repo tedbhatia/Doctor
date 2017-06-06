@@ -1,6 +1,7 @@
 package com.example.doctor.ui.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,7 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
         TextView type;
         TextView note;
         TextView date;
-        private LinearLayout linearLayout;
+        private CardView linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -74,7 +75,7 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
             date = (TextView) itemView.findViewById(R.id.BoxDateText);
             note = (TextView) itemView.findViewById(R.id.BoxNoteText);
 
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.MeasurementLayout);
+            linearLayout = (CardView) itemView.findViewById(R.id.card_view2);
 
             linearLayout.setOnClickListener(this);
         }
