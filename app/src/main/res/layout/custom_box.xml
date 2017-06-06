@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_margin="5dp"
+    card_view:cardBackgroundColor="#48ffffff"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="3dp"
+    android:foreground="?selectableItemBackground"
+    android:clickable="true"
+    tools:mockup_opacity="20dp">
+
+
+
+<LinearLayout
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:id="@+id/MainLayout">
+    android:id="@+id/MainLayout"
+    android:layout_gravity="center"
+    android:gravity="center">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/emergency"
-        android:id="@+id/BoxIcon"
-        android:maxHeight="100dp"
-        android:maxWidth="100dp"
-        android:layout_gravity="center"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/emergency"
+            android:id="@+id/BoxIcon"
+            android:maxHeight="80dp"
+            android:maxWidth="80dp"
+            android:layout_gravity="center"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/BoxText"
-        android:text="Dummy Text"
-        android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BoxText"
+            android:text="Dummy Text"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
 
 </LinearLayout>
+
+</android.support.v7.widget.CardView>
