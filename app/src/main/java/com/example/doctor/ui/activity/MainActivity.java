@@ -8,8 +8,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
+import android.support.v4.app.Fragment;
 import com.example.doctor.R;
+import com.example.doctor.ui.fragment.EmergencyContactsFragment;
 import com.example.doctor.ui.fragment.Health_Acc_Fragment;
 
 public class MainActivity extends AppCompatActivity
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        android.app.FragmentManager fm = getFragmentManager();
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame,new Health_Acc_Fragment()).commit();
     }
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        android.app.FragmentManager fm = getFragmentManager();
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.emergency) {
             setTitle("Emergency Contacts");
+            fm.beginTransaction().replace(R.id.content_frame,new EmergencyContactsFragment()).commit();
+
         } else if (id == R.id.procedure) {
             setTitle("Procedures");
 

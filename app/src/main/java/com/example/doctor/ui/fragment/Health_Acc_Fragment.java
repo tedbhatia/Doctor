@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.doctor.R;
 import com.example.doctor.ui.activity.MainActivity;
 import com.example.doctor.ui.activity.My_Insurance;
@@ -27,7 +26,7 @@ import java.util.List;
  * Created by tejas on 1/6/17.
  */
 
-public class Health_Acc_Fragment extends Fragment implements My_Health_Acc_Adapter.MyClickListener{
+public class Health_Acc_Fragment extends android.support.v4.app.Fragment implements My_Health_Acc_Adapter.MyClickListener{
 
     private RecyclerView recyclerView;
     private My_Health_Acc_Adapter adapter;
