@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -68,16 +69,17 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
         TextView note;
         TextView date;
         private CardView linearLayout;
+        private ImageView imageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             type = (TextView) itemView.findViewById(R.id.BoxTypeText);
             date = (TextView) itemView.findViewById(R.id.BoxDateText);
             note = (TextView) itemView.findViewById(R.id.BoxNoteText);
-
+            imageView = (ImageView) itemView.findViewById(R.id.imageButton2);
             linearLayout = (CardView) itemView.findViewById(R.id.card_view2);
 
-            linearLayout.setOnClickListener(this);
+            imageView.setOnClickListener(this);
         }
 
 

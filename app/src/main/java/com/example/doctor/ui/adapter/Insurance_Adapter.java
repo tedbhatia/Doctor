@@ -36,9 +36,6 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
         this.context = context;
     }
 
-    public void setOnItemClickListener(MyClickListener myClickListener) {
-        Insurance_Adapter.myClickListener = myClickListener;
-    }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,6 +59,11 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
         return data.size();
     }
 
+
+    public void setOnItemClickListener(MyClickListener myClickListener) {
+        Insurance_Adapter.myClickListener = myClickListener;
+    }
+
     public interface MyClickListener{
         void onItemClick(int position,View v);
     }
@@ -72,6 +74,7 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
         TextView note;
         TextView duration;
         private CardView linearLayout;
+        private ImageView imageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -79,8 +82,9 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
             duration = (TextView) itemView.findViewById(R.id.BoxDurationText);
             note = (TextView) itemView.findViewById(R.id.BoxNoteText);
             linearLayout = (CardView) itemView.findViewById(R.id.card_view3);
+            imageView = (ImageView) itemView.findViewById(R.id.imageButton);
 
-            linearLayout.setOnClickListener(this);
+            imageView.setOnClickListener(this);
         }
 
 

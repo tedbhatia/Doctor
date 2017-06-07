@@ -1,11 +1,13 @@
 package com.example.doctor.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.Insurance_Adapter;
@@ -54,13 +56,33 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.insurance_list);
         recyclerView.setAdapter(adapter);
-
+        adapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(My_Insurance.this,1,false));
     }
 
     @Override
     public void onItemClick(int position, View v) {
-
+        if(position==0){
+            Toast.makeText(My_Insurance.this,"My Doctor",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==1){
+            Toast.makeText(My_Insurance.this,"My Diseases",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==2){
+            Toast.makeText(My_Insurance.this,"My Appointments",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==3){
+            Toast.makeText(My_Insurance.this,"My Medicines",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==4){
+            Toast.makeText(My_Insurance.this,"My Documents",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==5){
+            Toast.makeText(My_Insurance.this,"My Insurance",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==6){
+            Toast.makeText(My_Insurance.this,"My Measurements",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

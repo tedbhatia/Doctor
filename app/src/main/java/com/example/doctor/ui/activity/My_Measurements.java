@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.Measurement_Adapter;
@@ -38,7 +39,7 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.measurement_list);
         recyclerView.setAdapter(adapter);
-
+        adapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(My_Measurements.this,1,false));
     }
 
@@ -59,7 +60,27 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
 
     @Override
     public void onItemClick(int position, View v) {
-
+        if(position==0){
+            Toast.makeText(My_Measurements.this,"My Doctor",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==1){
+            Toast.makeText(My_Measurements.this,"My Diseases",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==2){
+            Toast.makeText(My_Measurements.this,"My Appointments",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==3){
+            Toast.makeText(My_Measurements.this,"My Medicines",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==4){
+            Toast.makeText(My_Measurements.this,"My Documents",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==5){
+            Toast.makeText(My_Measurements.this,"My Insurance",Toast.LENGTH_SHORT).show();
+        }
+        else if(position==6){
+            Toast.makeText(My_Measurements.this,"My Measurements",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
