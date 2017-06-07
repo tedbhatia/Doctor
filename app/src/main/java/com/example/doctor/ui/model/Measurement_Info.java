@@ -1,10 +1,12 @@
 package com.example.doctor.ui.model;
 
+import java.io.Serializable;
+
 /**
  * Created by tejas on 2/6/17.
  */
 
-public class Measurement_Info {
+public class Measurement_Info implements Serializable{
     private String note;
     private String type;
     private String date;

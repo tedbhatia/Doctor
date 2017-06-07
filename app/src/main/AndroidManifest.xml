@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.My_Insurance" />
-        <activity android:name=".ui.activity.My_Measurements"></activity>
+        <activity android:name=".ui.activity.My_Measurements" />
+        <activity android:name=".ui.activity.InsuranceEdit"></activity>
     </application>
 
 </manifest>

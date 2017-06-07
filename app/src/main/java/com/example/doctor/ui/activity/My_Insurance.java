@@ -1,10 +1,12 @@
 package com.example.doctor.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -61,6 +63,14 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+
+    @Override
     public void onItemClick(int position, View v) {
         if(position==0){
             Toast.makeText(My_Insurance.this,"My Doctor",Toast.LENGTH_SHORT).show();
@@ -91,6 +101,11 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
 
         if(id == android.R.id.home){
             this.finish();
+        }
+        else {
+            Intent intent = new Intent(My_Insurance.this,InsuranceEdit.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
