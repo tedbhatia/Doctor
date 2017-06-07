@@ -32,7 +32,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         setContentView(R.layout.activity_my_appointments);
 
         setTitle("My Appointments");
-        
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

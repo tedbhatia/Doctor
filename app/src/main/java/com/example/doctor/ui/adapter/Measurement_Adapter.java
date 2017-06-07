@@ -49,9 +49,9 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
     public void onBindViewHolder(Measurement_Adapter.MyViewHolder holder, int position) {
 
         final Measurement_Info current = data.get(position);
-        holder.type.setText(current.getType());
-        holder.date.setText(current.getDate());
-        holder.note.setText(current.getNote());
+        holder.height.setText(current.getHeight());
+        holder.weight.setText(current.getWeight());
+        holder.bp.setText(current.getBloodPressure());
     }
 
     @Override
@@ -65,17 +65,17 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
 
     static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView type;
-        TextView note;
-        TextView date;
+        TextView height;
+        TextView weight;
+        TextView bp;
         private CardView linearLayout;
         private ImageView imageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            type = (TextView) itemView.findViewById(R.id.BoxTypeText);
-            date = (TextView) itemView.findViewById(R.id.BoxDateText);
-            note = (TextView) itemView.findViewById(R.id.BoxNoteText);
+            height = (TextView) itemView.findViewById(R.id.BoxHeightText);
+            weight = (TextView) itemView.findViewById(R.id.BoxWeightText);
+            bp = (TextView) itemView.findViewById(R.id.BoxBPText);
             imageView = (ImageView) itemView.findViewById(R.id.imageButton2);
             linearLayout = (CardView) itemView.findViewById(R.id.card_view2);
 

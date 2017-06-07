@@ -46,15 +46,19 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
     }
 
     private void prepareData() {
-        String[] type = {"Aplha", "Beta", "Gamma", "Theta", "Psi", "Phi", "Omega"};
-        String[] date = {"Aplha", "Beta", "Gamma", "Theta", "Psi", "Phi", "Omega"};
-        String[] note = {"Aplha", "Beta", "Gamma", "Theta", "Psi", "Phi", "Omega"};
+        String[] height = {"5.6", "5.7", "5.8", "5.9", "5.5", "5.56", "5.84"};
+        String[] weight = {"65", "58", "52", "48", "68", "78", "58"};
+        String[] bp = {"BP 1", "BP 2", "BP 3", "BP 4", "BP 5", "BP6 ", "BP 7"};
+        String[] bSugar = {"Aplha", "Beta", "Gamma", "Theta", "Psi", "Phi", "Omega"};
+        String[] cho = {"cho 1", "cho 2", "cho 3", "cho 4", "cho 5", "cho 6", "cho 7"};
 
-        for (int i = 0; i < type.length && i < date.length && i < note.length; i++) {
+        for (int i = 0; i < height.length && i < weight.length && i < bp.length; i++) {
             Measurement_Info current = new Measurement_Info();
-            current.setType(type[i]);
-            current.setDate(date[i]);
-            current.setNote(note[i]);
+            current.setHeight(height[i]);
+            current.setWeight(weight[i]);
+            current.setBloodPressure(bp[i]);
+            current.setBloodSugar(bSugar[i]);
+            current.setCholesterol(cho[i]);
             data.add(current);
         }
         adapter = new Measurement_Adapter(My_Measurements.this,data);
@@ -69,27 +73,9 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
 
     @Override
     public void onItemClick(int position, View v) {
-        if(position==0){
-            Toast.makeText(My_Measurements.this,"My Doctor",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==1){
-            Toast.makeText(My_Measurements.this,"My Diseases",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==2){
-            Toast.makeText(My_Measurements.this,"My Appointments",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==3){
-            Toast.makeText(My_Measurements.this,"My Medicines",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==4){
-            Toast.makeText(My_Measurements.this,"My Documents",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==5){
-            Toast.makeText(My_Measurements.this,"My Insurance",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==6){
-            Toast.makeText(My_Measurements.this,"My Measurements",Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(My_Measurements.this,MeasurementsEdit.class);
+        intent.putExtra("measurement",data.get(position));
+        startActivity(intent);
     }
 
     @Override
@@ -100,7 +86,7 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
             this.finish();
         }
         else {
-            Intent intent = new Intent(My_Measurements.this,InsuranceEdit.class);
+            Intent intent = new Intent(My_Measurements.this,MeasurementsEdit.class);
             startActivity(intent);
             return true;
         }

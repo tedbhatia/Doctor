@@ -41,15 +41,17 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
     }
 
     private void prepareData() {
-        String[] plan = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
-        String[] duration = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
+        String[] plan = {"Plan 1", "Plan 2", "Plan 3", "Plan 4", "Plan 5", "Plan 6", "Plan 7"};
+        String[] duration = {"1 Month", "2 Month", "3 Month", "4 Month", "5 Month", "6 Month", "7 Month"};
         String[] note = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
+        String[] date = {"01/01/2000","01/01/2001","01/01/2002","01/01/2003","01/01/2004","01/01/2006","01/01/2007"};
 
         for(int i=0;i<plan.length && i<duration.length && i<note.length; i++){
             Insurance current = new Insurance();
             current.setPlan(plan[i]);
             current.setDuration(duration[i]);
             current.setNote(note[i]);
+            current.setDate(date[i]);
             data.add(current);
         }
         adapter = new Insurance_Adapter(My_Insurance.this,data);
@@ -72,27 +74,9 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
 
     @Override
     public void onItemClick(int position, View v) {
-        if(position==0){
-            Toast.makeText(My_Insurance.this,"My Doctor",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==1){
-            Toast.makeText(My_Insurance.this,"My Diseases",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==2){
-            Toast.makeText(My_Insurance.this,"My Appointments",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==3){
-            Toast.makeText(My_Insurance.this,"My Medicines",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==4){
-            Toast.makeText(My_Insurance.this,"My Documents",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==5){
-            Toast.makeText(My_Insurance.this,"My Insurance",Toast.LENGTH_SHORT).show();
-        }
-        else if(position==6){
-            Toast.makeText(My_Insurance.this,"My Measurements",Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(My_Insurance.this,InsuranceEdit.class);
+        intent.putExtra("insurance",data.get(position));
+        startActivity(intent);
     }
 
     @Override
