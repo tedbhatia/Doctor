@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.doctor.R;
 import com.example.doctor.ui.activity.MainActivity;
+import com.example.doctor.ui.activity.MyAppointments;
+import com.example.doctor.ui.activity.MyMedicines;
 import com.example.doctor.ui.activity.My_Insurance;
 import com.example.doctor.ui.activity.My_Measurements;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
@@ -76,9 +78,13 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
         }
         else if(position==2){
             Toast.makeText(getActivity(),"My Appointments",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(),MyAppointments.class);
+            startActivity(intent);
         }
         else if(position==3){
             Toast.makeText(getActivity(),"My Medicines",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(),MyMedicines.class);
+            startActivity(intent);
         }
         else if(position==4){
             Toast.makeText(getActivity(),"My Documents",Toast.LENGTH_SHORT).show();
