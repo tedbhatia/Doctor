@@ -57,7 +57,7 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
     public void addAll(List<find_doctor_model> models) {
 
         int position = getItemCount();
-        getModels().addAll(models);
+        //getModels().addAll(models);
         notifyItemRangeInserted(position, models.size());
     }
 

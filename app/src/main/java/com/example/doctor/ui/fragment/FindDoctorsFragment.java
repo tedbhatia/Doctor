@@ -39,6 +39,12 @@ public class FindDoctorsFragment extends android.support.v4.app.Fragment impleme
     private SearchView actionSearch;
     List<find_doctor_model> model;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -55,9 +61,10 @@ public class FindDoctorsFragment extends android.support.v4.app.Fragment impleme
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
         inflater.inflate(R.menu.dashboard, menu);
         MenuItem searchItem = menu.findItem(R.id.search);
-
         actionSearch= (SearchView) searchItem.getActionView();
 
         actionSearch.setQueryHint("Name or Info");
@@ -67,7 +74,6 @@ public class FindDoctorsFragment extends android.support.v4.app.Fragment impleme
         searchEditText.setTextColor(getResources().getColor(android.R.color.white));
         searchEditText.setHintTextColor(getResources().getColor(android.R.color.white));
 
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void prepareData(List<find_doctor_model> model) {
