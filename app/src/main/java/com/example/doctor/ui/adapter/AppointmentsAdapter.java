@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -74,6 +75,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
         private TextView name,date,time,reason,notes;
         private LinearLayout linearLayout;
+        private ImageView forward;
 
         public ViewHolder(View itemView) {
 
@@ -85,7 +87,9 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
             reason=(TextView)itemView.findViewById(R.id.reason);
             notes=(TextView)itemView.findViewById(R.id.notes);
             linearLayout=(LinearLayout)itemView.findViewById(R.id.AppointmentsLayout);
+            forward=(ImageView)itemView.findViewById(R.id.forwardButton);
 
+            forward.setOnClickListener(this);
             linearLayout.setOnClickListener(this);
 
         }

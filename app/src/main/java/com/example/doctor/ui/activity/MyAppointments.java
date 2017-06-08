@@ -24,6 +24,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     private AppointmentsAdapter adapter;
 
     private List<Appointments> listItems;
+    private Appointments listItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +43,12 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Appointments("Aaa","23/05/17","12:00","qwerty","notes"));
-        listItems.add(1,new Appointments("Bbb","23/05/17","12:00","qwerty","notes"));
-        listItems.add(2,new Appointments("Ccc","23/05/17","12:00","qwerty","notes"));
-        listItems.add(3,new Appointments("Ddd","23/05/17","12:00","qwerty","notes"));
-        listItems.add(4,new Appointments("Eee","23/05/17","12:00","qwerty","notes"));
+        listItems.add(0,new Appointments("Aaa","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(1,new Appointments("Bbb","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(2,new Appointments("Ccc","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(3,new Appointments("Ddd","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(4,new Appointments("Eee","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+
 
         adapter=new AppointmentsAdapter(this,listItems);
         recyclerView.setAdapter(adapter);
@@ -58,7 +60,42 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     @Override
     public void onItemClick(int position, View v) {
 
-        Toast.makeText(this,listItems.get(position).getName().toString(),Toast.LENGTH_LONG).show();
+        switch (v.getId()){
+
+            case R.id.AppointmentsLayout:{
+
+                Toast.makeText(this,listItems.get(position).getName().toString(),Toast.LENGTH_LONG).show();
+
+            }break;
+
+            case R.id.forwardButton:{
+
+                listItem=listItems.get(position);
+
+                Intent intent=new Intent(MyAppointments.this,EditAppointments.class);
+                intent.putExtra("itemInfo",listItem);
+
+                startActivityForResult(intent,1);
+
+            }break;
+
+        }
+
+    }
+
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode==1){
+            if(resultCode==RESULT_OK){
+                listItem.setName("name");
+                listItem.setPhone("phone");
+                listItem.setAddress("address");
+                listItem.setReason("reason");
+                listItem.setNotes("notes");
+            }
+        }
 
     }
 
@@ -77,7 +114,9 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
             this.finish();
         }
         else {
-            Toast.makeText(MyAppointments.this,"My Appointments Add",Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(MyAppointments.this,AddAppointments.class);
+            startActivity(intent);
+
             return true;
         }
         return super.onOptionsItemSelected(item);
