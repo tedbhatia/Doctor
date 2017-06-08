@@ -3,8 +3,11 @@ package com.example.doctor.ui.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.model.Insurance;
@@ -12,6 +15,8 @@ import com.example.doctor.ui.model.Insurance;
 public class InsuranceEdit extends AppCompatActivity {
 
     private Insurance insurance;
+    private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +25,16 @@ public class InsuranceEdit extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        button = (Button) findViewById(R.id.EditButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(InsuranceEdit.this,"Insurance Added",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        ((TextView)findViewById(R.id.InsuranceText)).setText("Add Insurance");
         if(getIntent().hasExtra("insurance")){
             insurance = (Insurance) getIntent().getSerializableExtra("insurance");
             bindView();
@@ -28,6 +43,14 @@ public class InsuranceEdit extends AppCompatActivity {
     }
 
     private void bindView() {
+        button = (Button) findViewById(R.id.EditButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(InsuranceEdit.this,"Insurance Edited",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
         if(!(insurance.getPlan().equals(""))) {
             ((EditText) findViewById(R.id.plan_edit)).setText(insurance.getPlan());
             ((EditText) findViewById(R.id.plan_edit)).setSelection(((EditText) findViewById(R.id.plan_edit)).length());
@@ -45,6 +68,7 @@ public class InsuranceEdit extends AppCompatActivity {
             ((EditText) findViewById(R.id.note_edit)).setSelection(((EditText) findViewById(R.id.note_edit)).length());
         }
         ((Button)findViewById(R.id.EditButton)).setText("SAVE");
+        ((TextView)findViewById(R.id.InsuranceText)).setText("Edit Insurance");
     }
 
     @Override
