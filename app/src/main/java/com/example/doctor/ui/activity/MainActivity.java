@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.support.v4.app.Fragment;
 import com.example.doctor.R;
 import com.example.doctor.ui.fragment.EmergencyContactsFragment;
+import com.example.doctor.ui.fragment.FindDoctorsFragment;
 import com.example.doctor.ui.fragment.Health_Acc_Fragment;
 
 public class MainActivity extends AppCompatActivity
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.find_docs) {
             setTitle("Find Doctors");
+            fm.beginTransaction().replace(R.id.content_frame,new FindDoctorsFragment()).commit();
 
         } else if (id == R.id.emergency) {
             setTitle("Emergency Contacts");
