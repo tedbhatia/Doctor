@@ -1,10 +1,12 @@
 package com.example.doctor.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,16 +14,53 @@ import android.widget.Toast;
 import com.example.doctor.R;
 import com.example.doctor.ui.model.Medicines;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class EditMedicines extends AppCompatActivity {
 
     private Button button;
     private Medicines medicine;
+    private EditText date_edit;
+    private int mYear,mMonth,mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_medicines);
+
+        date_edit = (EditText) findViewById(R.id.date_edit);
+        date_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar mCurrentDate=Calendar.getInstance();
+                mYear=mCurrentDate.get(Calendar.YEAR);
+                mMonth=mCurrentDate.get(Calendar.MONTH);
+                mDay=mCurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog mDatePicker=new DatePickerDialog(EditMedicines.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                        mCurrentDate.set(Calendar.YEAR,year);
+                        mCurrentDate.set(Calendar.MONTH,month);
+                        mCurrentDate.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+                        String myFormat="dd/MM/yyyy";
+                        SimpleDateFormat sdf=new SimpleDateFormat(myFormat, Locale.ENGLISH);
+
+                        date_edit.setText(sdf.format(mCurrentDate.getTime()));
+
+                    }
+                },mYear,mMonth,mDay);
+                mDatePicker.setTitle("Select Date");
+                mDatePicker.show();
+
+            }
+        });
+
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

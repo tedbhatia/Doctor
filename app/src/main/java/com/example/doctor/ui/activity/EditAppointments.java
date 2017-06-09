@@ -1,51 +1,110 @@
 package com.example.doctor.ui.activity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.model.Appointments;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class EditAppointments extends AppCompatActivity {
 
     private Button button;
-    Appointments appointment;
+    private Appointments appointment;
+    private EditText date_edit,time_edit;
+    private int mYear,mMonth,mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_edit_appointments);
+
+        date_edit = (EditText) findViewById(R.id.date_edit);
+        date_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar mCurrentDate=Calendar.getInstance();
+                mYear=mCurrentDate.get(Calendar.YEAR);
+                mMonth=mCurrentDate.get(Calendar.MONTH);
+                mDay=mCurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog mDatePicker=new DatePickerDialog(EditAppointments.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                        mCurrentDate.set(Calendar.YEAR,year);
+                        mCurrentDate.set(Calendar.MONTH,month);
+                        mCurrentDate.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+                        String myFormat="dd/MM/yyyy";
+                        SimpleDateFormat sdf=new SimpleDateFormat(myFormat,Locale.ENGLISH);
+
+                        date_edit.setText(sdf.format(mCurrentDate.getTime()));
+
+                    }
+                },mYear,mMonth,mDay);
+                mDatePicker.setTitle("Select Date");
+                mDatePicker.show();
+
+            }
+        });
+
+        time_edit=(EditText)findViewById(R.id.time_edit);
+        time_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(EditAppointments.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        time_edit.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+            }
+        });
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        button=(Button)findViewById(R.id.editButton);
+
+        button = (Button) findViewById(R.id.editButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(EditAppointments.this,"New Appointment Added.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditAppointments.this, "New Appointment Added.", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
 
-        ((TextView)findViewById(R.id.AppointmentText)).setText("Add Appointment");
+        ((TextView) findViewById(R.id.AppointmentText)).setText("Add Appointment");
 
-        if(getIntent().hasExtra("appointment")){
+        if (getIntent().hasExtra("appointment")) {
 
-            appointment=(Appointments)getIntent().getSerializableExtra("appointment");
+            appointment = (Appointments) getIntent().getSerializableExtra("appointment");
             bindView();
 
         }
-
     }
 
     private void bindView(){
