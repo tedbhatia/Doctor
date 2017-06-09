@@ -9,13 +9,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.example.doctor.R;
 import com.example.doctor.ui.fragment.EmergencyContactsFragment;
 import com.example.doctor.ui.fragment.FindDoctorsFragment;
 import com.example.doctor.ui.fragment.Health_Acc_Fragment;
+import com.example.doctor.ui.fragment.MyProfileFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +34,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void bindView() {
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -40,6 +49,10 @@ public class MainActivity extends AppCompatActivity
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame,new Health_Acc_Fragment()).commit();
+
+        View view = navigationView.getHeaderView(0);
+        view.findViewById(R.id.imageView).setOnClickListener(this);
+
     }
 
     @Override
@@ -48,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
         }
     }
 
@@ -57,8 +70,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -88,8 +99,17 @@ public class MainActivity extends AppCompatActivity
             setTitle("Medicines");
         }
 
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+            setTitle("My Profile");
+            fm.beginTransaction().replace(R.id.content_frame,new MyProfileFragment()).commit();
+            drawer.closeDrawers();
     }
 }
