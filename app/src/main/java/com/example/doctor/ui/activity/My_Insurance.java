@@ -89,7 +89,6 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
         else {
             Intent intent = new Intent(My_Insurance.this,InsuranceEdit.class);
             startActivity(intent);
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }

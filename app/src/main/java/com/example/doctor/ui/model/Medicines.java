@@ -1,34 +1,87 @@
 package com.example.doctor.ui.model;
 
+import java.io.Serializable;
+
 /**
  * Created by SHIVIKA NAGPAL on 06-06-2017.
  */
 
-public class Medicines {
+public class Medicines implements Serializable {
 
-    String medName,method,frequency,unit;
+    String medName,dosageAmount,unit,method,frequency,date,doctorName,notes;
 
-    public Medicines(String name, String unit, String method, String frequency) {
-        this.frequency = frequency;
-        this.method = method;
-        this.medName = name;
+    public Medicines(String medName, String dosageAmount, String unit, String method, String frequency, String date, String doctorName, String notes) {
+        this.medName = medName;
+        this.dosageAmount = dosageAmount;
         this.unit = unit;
-    }
-
-    public String getFrequency() {
-        return frequency;
-    }
-
-    public String getMethod() {
-        return method;
+        this.method = method;
+        this.frequency = frequency;
+        this.date = date;
+        this.doctorName = doctorName;
+        this.notes = notes;
     }
 
     public String getMedName() {
         return medName;
     }
 
+    public void setMedName(String medName) {
+        this.medName = medName;
+    }
+
+    public String getDosageAmount() {
+        return dosageAmount;
+    }
+
+    public void setDosageAmount(String dosageAmount) {
+        this.dosageAmount = dosageAmount;
+    }
+
     public String getUnit() {
         return unit;
     }
 
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }

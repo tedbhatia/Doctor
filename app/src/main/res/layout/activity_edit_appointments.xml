@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.doctor.ui.activity.InsuranceEdit">
+    tools:context="com.example.doctor.ui.activity.EditAppointments">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,6 +18,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:id="@+id/AppointmentText"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp">
 
                 <android.support.design.widget.TextInputLayout
@@ -25,7 +38,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/name"
+                        android:id="@+id/name_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Doctor's Name"
@@ -46,7 +59,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/phone"
+                        android:id="@+id/phone_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Phone No."
@@ -67,7 +80,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/address"
+                        android:id="@+id/address_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Address"
@@ -88,10 +101,10 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/speciality"
+                        android:id="@+id/speciality_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Speciality"
+                        android:hint="Enter Speciality"
                         android:inputType="text"
                         android:imeOptions="actionNext"
                         android:textSize="20dp"/>
@@ -111,7 +124,7 @@
                     <EditText
                         android:clickable="true"
                         android:focusable="false"
-                        android:id="@+id/dateView"
+                        android:id="@+id/date_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Date"
@@ -134,7 +147,7 @@
                     <EditText
                         android:clickable="true"
                         android:focusable="false"
-                        android:id="@+id/timeView"
+                        android:id="@+id/time_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Time"
@@ -155,7 +168,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/reason"
+                        android:id="@+id/reason_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Reason"
@@ -176,7 +189,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/notes"
+                        android:id="@+id/notes_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Notes"
@@ -197,10 +210,10 @@
                 android:layout_margin="10dp">
 
                 <Button
-                    android:id="@+id/saveButton"
+                    android:id="@+id/editButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SAVE CHANGES"/>
+                    android:text="ADD"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

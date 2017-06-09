@@ -24,6 +24,7 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
     private MedicinesAdapter adapter;
 
     private List<Medicines> listItems;
+    private Medicines listItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +42,11 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         listItems=new ArrayList<>();
 
 
-        listItems.add(0,new Medicines("Name1","1 capsule","qwerty","twice a day"));
-        listItems.add(1,new Medicines("Name2","0.5 capsule","qwerty","twice a day"));
-        listItems.add(2,new Medicines("Name3","0.5 capsule","qwerty","twice a day"));
-        listItems.add(3,new Medicines("Name4","0.5 capsule","qwerty","twice a day"));
-        listItems.add(4,new Medicines("Name5","1 capsule","qwerty","twice a day"));
+        listItems.add(0,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
+        listItems.add(1,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
+        listItems.add(2,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
+        listItems.add(3,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
+        listItems.add(4,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
 
         adapter=new MedicinesAdapter(this,listItems);
         recyclerView.setAdapter(adapter);
@@ -56,7 +57,11 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
     @Override
     public void onItemClick(int position, View v) {
 
-        Toast.makeText(this,listItems.get(position).getMedName().toString(),Toast.LENGTH_LONG).show();
+        listItem=listItems.get(position);
+
+        Intent intent=new Intent(MyMedicines.this,EditMedicines.class);
+        intent.putExtra("medicine",listItem);
+        startActivity(intent);
 
     }
 
@@ -72,11 +77,15 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         int id = item.getItemId();
 
         if(id == android.R.id.home){
+
             this.finish();
+
         }
         else {
-            Toast.makeText(MyMedicines.this,"My Meds Add",Toast.LENGTH_SHORT).show();
-            return true;
+
+            Intent intent=new Intent(MyMedicines.this,EditMedicines.class);
+            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

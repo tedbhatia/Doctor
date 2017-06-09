@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -73,6 +74,7 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
 
         private TextView med_name,unit,method,frequency;
         private LinearLayout linearLayout;
+        private ImageView forward;
 
         public ViewHolder(View itemView) {
 
@@ -83,8 +85,10 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
             method=(TextView)itemView.findViewById(R.id.method);
             frequency=(TextView)itemView.findViewById(R.id.frequency);
             linearLayout=(LinearLayout)itemView.findViewById(R.id.MedicinesLayout);
+            forward=(ImageView)itemView.findViewById(R.id.forwardButton);
 
             linearLayout.setOnClickListener(this);
+            forward.setOnClickListener(this);
 
         }
 
