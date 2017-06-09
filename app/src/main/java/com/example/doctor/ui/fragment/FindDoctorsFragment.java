@@ -70,10 +70,6 @@ public class FindDoctorsFragment extends android.support.v4.app.Fragment impleme
         actionSearch.setQueryHint("Name or Info");
         actionSearch.setOnQueryTextListener(this);
 
-        EditText searchEditText = (EditText) actionSearch.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(android.R.color.white));
-        searchEditText.setHintTextColor(getResources().getColor(android.R.color.white));
-
     }
 
     private void prepareData(List<find_doctor_model> model) {
