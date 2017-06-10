@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <item>
+        <bitmap android:src="@drawable/hospital1"
+            android:antialias="true"
+            android:gravity="center"
+
+
+
+            android:alpha="0.4">
+
+        </bitmap>
+    </item>
+    <gradient
+    android:startColor="#E6DADA"
+        android:endColor="#274046"
+
+
+
+        android:angle="90">
+
+    </gradient>
+
+
+</selector>
