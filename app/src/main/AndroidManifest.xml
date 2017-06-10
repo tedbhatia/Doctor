@@ -25,7 +25,7 @@
         <activity android:name=".ui.activity.My_Measurements" />
         <activity android:name=".ui.activity.InsuranceEdit" />
         <activity android:name=".ui.activity.EditAppointments" />
-        <activity android:name=".ui.activity.EditMedicines"></activity>
+        <activity android:name=".ui.activity.EditMedicines" />
     </application>
 
 </manifest>

@@ -2,12 +2,31 @@ package com.example.doctor.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.DisplayMetrics;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
@@ -31,6 +50,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointments);
+
 
         setTitle("My Appointments");
 
@@ -67,7 +87,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
     }
 
-    
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

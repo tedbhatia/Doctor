@@ -65,6 +65,12 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
     }
 
+    public void removeItem(int pos){
+        grid.remove(pos);
+        notifyItemRemoved(pos);
+        notifyItemRangeChanged(pos,grid.size());
+    }
+
     public interface MyClickListener{
 
         void onItemClick(int position, View v);
