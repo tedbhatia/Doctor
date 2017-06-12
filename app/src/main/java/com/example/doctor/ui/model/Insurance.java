@@ -10,7 +10,7 @@ public class Insurance implements Serializable {
     private String plan;
     private String date;
     private String duration;
-    private String note;
+    private String notes;
 
     public String getPlan() {
         return plan;
@@ -36,11 +36,11 @@ public class Insurance implements Serializable {
         this.duration = duration;
     }
 
-    public String getNote() {
-        return note;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

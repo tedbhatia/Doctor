@@ -7,11 +7,16 @@ import java.io.Serializable;
  */
 
 public class Measurement_Info implements Serializable{
-    private String height;
-    private String weight;
-    private String cholesterol;
-    private String bloodPressure;
-    private String bloodSugar;
+
+    private String date,height,weight,bloodPressure,bloodSugar,cholesterol;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getHeight() {
         return height;
@@ -29,14 +34,6 @@ public class Measurement_Info implements Serializable{
         this.weight = weight;
     }
 
-    public String getCholesterol() {
-        return cholesterol;
-    }
-
-    public void setCholesterol(String cholesterol) {
-        this.cholesterol = cholesterol;
-    }
-
     public String getBloodPressure() {
         return bloodPressure;
     }
@@ -51,5 +48,13 @@ public class Measurement_Info implements Serializable{
 
     public void setBloodSugar(String bloodSugar) {
         this.bloodSugar = bloodSugar;
+    }
+
+    public String getCholesterol() {
+        return cholesterol;
+    }
+
+    public void setCholesterol(String cholesterol) {
+        this.cholesterol = cholesterol;
     }
 }

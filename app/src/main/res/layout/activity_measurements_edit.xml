@@ -40,6 +40,27 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Enter Date"
+                        android:inputType="numberDecimal"
+                        android:imeOptions="actionNext"
+                        android:textSize="20dp"
+                        android:id="@+id/date_edit"/>
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="Enter Height"
                         android:inputType="numberDecimal"
                         android:imeOptions="actionNext"
@@ -62,7 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Weight"
-                        android:inputType="numberDecimal"
+                        android:inputType="text"
                         android:imeOptions="actionNext"
                         android:textSize="20dp"
                         android:id="@+id/weight_edit"/>
@@ -82,11 +103,11 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter BP"
+                        android:hint="Enter Blood Pressure"
                         android:inputType="text"
                         android:imeOptions="actionNext"
                         android:textSize="20dp"
-                        android:id="@+id/BP_edit"/>
+                        android:id="@+id/bloodPressure_edit"/>
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -107,7 +128,7 @@
                         android:inputType="text"
                         android:imeOptions="actionNext"
                         android:textSize="20dp"
-                        android:id="@+id/bSugar_edit"/>
+                        android:id="@+id/bloodSugar_edit"/>
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -126,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Enter Cholesterol"
                         android:inputType="text"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
                         android:textSize="20dp"
                         android:id="@+id/cholesterol_edit"/>
 

@@ -33,17 +33,24 @@ import com.example.doctor.R;
 import com.example.doctor.ui.adapter.AppointmentsAdapter;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
 import com.example.doctor.ui.model.Appointments;
+import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
+import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener {
+public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
     private AppointmentsAdapter adapter;
 
     private List<Appointments> listItems;
     private Appointments listItem;
+
+    private OnActivityTouchListener touchListener;
+    private RecyclerTouchListener onTouchListener;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +81,45 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         adapter.setOnItemClickListener(this);
 
+        onTouchListener=new RecyclerTouchListener(this,recyclerView);
+
+        onTouchListener
+                .setIndependentViews(R.id.editButton)
+                .setViewsToFade(R.id.editButton)
+                .setClickable(new RecyclerTouchListener.OnRowClickListener() {
+                    @Override
+                    public void onRowClicked(int position) {
+                        Toast.makeText(MyAppointments.this,"View",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onIndependentViewClicked(int independentViewID, int position) {
+                        Toast.makeText(MyAppointments.this,"Button",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                    @Override
+                    public void onRowLongClicked(int position) {
+                        Toast.makeText(MyAppointments.this,"View long clicked!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setSwipeOptionViews(R.id.delete)
+                .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
+                    @Override
+                    public void onSwipeOptionClicked(int viewID, int position) {
+                    }
+                });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerView.addOnItemTouchListener(onTouchListener); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        recyclerView.removeOnItemTouchListener(onTouchListener);
     }
 
     @Override
@@ -86,6 +132,18 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         startActivity(intent);
 
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (touchListener != null) touchListener.getTouchCoordinates(ev);
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
+        this.touchListener = listener;
+    }
+
 
 
 

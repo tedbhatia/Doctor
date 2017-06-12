@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,17 +15,22 @@ import com.example.doctor.R;
 import com.example.doctor.ui.adapter.MedicinesAdapter;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
 import com.example.doctor.ui.model.Medicines;
+import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
+import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener {
+public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
     private MedicinesAdapter adapter;
 
     private List<Medicines> listItems;
     private Medicines listItem;
+
+    private OnActivityTouchListener touchListener;
+    private RecyclerTouchListener onTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,47 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(this);
+
+        onTouchListener=new RecyclerTouchListener(this,recyclerView);
+
+        onTouchListener
+                .setIndependentViews(R.id.editButton)
+                .setViewsToFade(R.id.editButton)
+                .setClickable(new RecyclerTouchListener.OnRowClickListener() {
+                    @Override
+                    public void onRowClicked(int position) {
+                        Toast.makeText(MyMedicines.this,"View",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onIndependentViewClicked(int independentViewID, int position) {
+                        Toast.makeText(MyMedicines.this,"Button",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                    @Override
+                    public void onRowLongClicked(int position) {
+                        Toast.makeText(MyMedicines.this,"View long clicked!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setSwipeOptionViews(R.id.delete)
+                .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
+                    @Override
+                    public void onSwipeOptionClicked(int viewID, int position) {
+                    }
+                });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerView.addOnItemTouchListener(onTouchListener); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        recyclerView.removeOnItemTouchListener(onTouchListener);
     }
 
     @Override
@@ -64,6 +111,18 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         startActivity(intent);
 
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (touchListener != null) touchListener.getTouchCoordinates(ev);
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
+        this.touchListener = listener;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

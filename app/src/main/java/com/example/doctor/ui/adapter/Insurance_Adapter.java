@@ -51,7 +51,7 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
         final Insurance current = data.get(position);
         holder.plan.setText(current.getPlan());
         holder.duration.setText(current.getDuration());
-        holder.note.setText(current.getNote());
+        holder.notes.setText(current.getNotes());
     }
 
     @Override
@@ -71,20 +71,20 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
     static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView plan;
-        TextView note;
+        TextView notes;
         TextView duration;
         private CardView linearLayout;
-        private ImageView imageView;
+        private ImageView edit;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            plan = (TextView) itemView.findViewById(R.id.BoxPlanText);
-            duration = (TextView) itemView.findViewById(R.id.BoxDurationText);
-            note = (TextView) itemView.findViewById(R.id.BoxNoteText);
-            linearLayout = (CardView) itemView.findViewById(R.id.card_view3);
-            imageView = (ImageView) itemView.findViewById(R.id.imageButton);
+            plan = (TextView) itemView.findViewById(R.id.plan_edit);
+            duration = (TextView) itemView.findViewById(R.id.duration_edit);
+            notes = (TextView) itemView.findViewById(R.id.notes_edit);
+            linearLayout = (CardView) itemView.findViewById(R.id.recycler_view);
+            edit = (ImageView) itemView.findViewById(R.id.editButton);
 
-            imageView.setOnClickListener(this);
+            edit.setOnClickListener(this);
         }
 
 

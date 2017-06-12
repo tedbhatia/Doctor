@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -80,23 +82,22 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView name,date,time,reason,notes;
-        private LinearLayout linearLayout;
-        private ImageView forward;
+        //private LinearLayout linearLayout;
+        private ImageButton edit;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            name=(TextView)itemView.findViewById(R.id.name);
-            date=(TextView)itemView.findViewById(R.id.date);
-            time=(TextView)itemView.findViewById(R.id.time);
-            reason=(TextView)itemView.findViewById(R.id.reason);
-            notes=(TextView)itemView.findViewById(R.id.notes);
-            linearLayout=(LinearLayout)itemView.findViewById(R.id.AppointmentsLayout);
-            forward=(ImageView)itemView.findViewById(R.id.forwardButton);
+            name=(TextView)itemView.findViewById(R.id.name_edit);
+            date=(TextView)itemView.findViewById(R.id.date_edit);
+            time=(TextView)itemView.findViewById(R.id.time_edit);
+            reason=(TextView)itemView.findViewById(R.id.reason_edit);
+            notes=(TextView)itemView.findViewById(R.id.notes_edit);
+            //linearLayout=(LinearLayout)itemView.findViewById(R.id.rowFG);
+            edit=(ImageButton) itemView.findViewById(R.id.editButton);
 
-            forward.setOnClickListener(this);
-            linearLayout.setOnClickListener(this);
+            edit.setOnClickListener(this);
 
         }
 

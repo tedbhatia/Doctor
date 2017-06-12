@@ -63,9 +63,9 @@ public class InsuranceEdit extends AppCompatActivity {
             ((EditText) findViewById(R.id.duration_edit)).setText(insurance.getDuration());
             ((EditText) findViewById(R.id.duration_edit)).setSelection(((EditText) findViewById(R.id.duration_edit)).length());
         }
-        if(!(insurance.getNote().equals(""))) {
-            ((EditText) findViewById(R.id.note_edit)).setText(insurance.getNote());
-            ((EditText) findViewById(R.id.note_edit)).setSelection(((EditText) findViewById(R.id.note_edit)).length());
+        if(!(insurance.getNotes().equals(""))) {
+            ((EditText) findViewById(R.id.notes_edit)).setText(insurance.getNotes());
+            ((EditText) findViewById(R.id.notes_edit)).setSelection(((EditText) findViewById(R.id.notes_edit)).length());
         }
         ((Button)findViewById(R.id.EditButton)).setText("SAVE");
         ((TextView)findViewById(R.id.InsuranceText)).setText("Edit Insurance");
