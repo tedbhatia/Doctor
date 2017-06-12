@@ -3,6 +3,7 @@
     package="com.example.doctor">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,11 +15,6 @@
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.My_Insurance" />
         <activity android:name=".ui.activity.MyAppointments" />
@@ -28,14 +24,21 @@
         <activity android:name=".ui.activity.EditAppointments" />
         <activity android:name=".ui.activity.MeasurementsEdit" />
         <activity android:name=".ui.activity.EditMedicines" />
-        <activity android:name=".ui.activity.SplashScreen" />
+        <activity android:name=".ui.activity.SplashScreen">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.LoginScreen" />
         <activity android:name=".ui.activity.SignUp" />
         <activity android:name=".ui.activity.EditProfile" />
         <activity android:name=".ui.activity.ChangePassword" />
         <activity android:name=".ui.activity.MyDoctor" />
         <activity android:name=".ui.activity.EditDoctor" />
-        <activity android:name=".ui.activity.MyDocuments"></activity>
+        <activity android:name=".ui.activity.MyDocuments" />
+        <activity android:name=".ui.activity.EditDocument"></activity>
     </application>
 
 </manifest>
