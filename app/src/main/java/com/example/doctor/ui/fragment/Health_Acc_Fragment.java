@@ -75,6 +75,8 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
     public void onItemClick(int position, View v) {
         if(position==0){
             Toast.makeText(getActivity(),"My Doctor",Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getActivity(),MyDoctor.class);
+            startActivity(intent);
         }
         else if(position==1){
             Toast.makeText(getActivity(),"My Diseases",Toast.LENGTH_SHORT).show();
