@@ -69,23 +69,20 @@ public class MyDoctorAdapter extends RecyclerView.Adapter<MyDoctorAdapter.MyView
 
         TextView name;
         TextView type;
-        TextView address;
+        //TextView address,notes;
         TextView phone;
-        TextView note;
-        private CardView linearLayout;
-        private ImageView imageView;
-        private Button button;
+        private ImageView edit;
+        private Button request;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.BoxNameText);
-            type = (TextView) itemView.findViewById(R.id.BoxTypeText);
-            phone = (TextView) itemView.findViewById(R.id.BoxPhoneText);
-            linearLayout = (CardView) itemView.findViewById(R.id.card_view4);
-            imageView = (ImageView) itemView.findViewById(R.id.imageButton);
-            button = (Button) itemView.findViewById(R.id.requestButton);
+            name = (TextView) itemView.findViewById(R.id.doctor_name_edit);
+            type = (TextView) itemView.findViewById(R.id.speciality_edit);
+            phone = (TextView) itemView.findViewById(R.id.phone_edit);
+            edit = (ImageView) itemView.findViewById(R.id.editButton);
+            request = (Button) itemView.findViewById(R.id.requestButton);
 
-            imageView.setOnClickListener(this);
+            edit.setOnClickListener(this);
         }
 
 

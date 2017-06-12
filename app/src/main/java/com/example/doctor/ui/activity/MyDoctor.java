@@ -7,22 +7,29 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.Insurance_Adapter;
 import com.example.doctor.ui.adapter.MyDoctorAdapter;
 import com.example.doctor.ui.model.Doctor;
 import com.example.doctor.ui.model.Insurance;
+import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
+import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyClickListener{
+public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper{
 
     private RecyclerView recyclerView;
     private MyDoctorAdapter adapter;
     private List<Doctor> data;
+
+    private OnActivityTouchListener touchListener;
+    private RecyclerTouchListener onTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,58 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
 
         prepareData();
         initRecyclerView();
+
+        onTouchListener=new RecyclerTouchListener(this,recyclerView);
+
+        onTouchListener
+                .setIndependentViews(R.id.editButton)
+                .setViewsToFade(R.id.editButton)
+                .setClickable(new RecyclerTouchListener.OnRowClickListener() {
+                    @Override
+                    public void onRowClicked(int position) {
+                        Toast.makeText(MyDoctor.this,"View",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onIndependentViewClicked(int independentViewID, int position) {
+                        Toast.makeText(MyDoctor.this,"Button",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                    @Override
+                    public void onRowLongClicked(int position) {
+                        Toast.makeText(MyDoctor.this,"View long clicked!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setSwipeOptionViews(R.id.delete)
+                .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
+                    @Override
+                    public void onSwipeOptionClicked(int viewID, int position) {
+                    }
+                });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerView.addOnItemTouchListener(onTouchListener); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        recyclerView.removeOnItemTouchListener(onTouchListener);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (touchListener != null) touchListener.getTouchCoordinates(ev);
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
+        this.touchListener = listener;
     }
 
     private void prepareData() {
@@ -58,7 +117,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         adapter = new MyDoctorAdapter(MyDoctor.this,data);
     }
     private void initRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.doctor_list);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyDoctor.this,1,false));

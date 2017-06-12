@@ -20,6 +20,7 @@ import com.example.doctor.ui.fragment.EmergencyContactsFragment;
 import com.example.doctor.ui.fragment.FindDoctorsFragment;
 import com.example.doctor.ui.fragment.Health_Acc_Fragment;
 import com.example.doctor.ui.fragment.MyProfileFragment;
+import com.example.doctor.ui.fragment.NotificationsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.notifications) {
             setTitle("Notifications");
+            fm.beginTransaction().replace(R.id.content_frame,new NotificationsFragment()).commit();
 
         } else if (id == R.id.meds) {
             setTitle("Medicines");
