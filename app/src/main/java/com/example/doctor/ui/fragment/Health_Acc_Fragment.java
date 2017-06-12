@@ -17,6 +17,7 @@ import com.example.doctor.ui.activity.MainActivity;
 import com.example.doctor.ui.activity.MyAppointments;
 import com.example.doctor.ui.activity.MyDoctor;
 import com.example.doctor.ui.activity.MyDocuments;
+import com.example.doctor.ui.activity.MyDiseases;
 import com.example.doctor.ui.activity.MyMedicines;
 import com.example.doctor.ui.activity.My_Insurance;
 import com.example.doctor.ui.activity.My_Measurements;
@@ -74,11 +75,11 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
     public void onItemClick(int position, View v) {
         if(position==0){
             Toast.makeText(getActivity(),"My Doctor",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(),MyDoctor.class);
-            startActivity(intent);
         }
         else if(position==1){
             Toast.makeText(getActivity(),"My Diseases",Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getActivity(),MyDiseases.class);
+            startActivity(intent);
         }
         else if(position==2){
             Toast.makeText(getActivity(),"My Appointments",Toast.LENGTH_SHORT).show();
@@ -92,8 +93,6 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
         }
         else if(position==4){
             Toast.makeText(getActivity(),"My Documents",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(),MyDocuments.class);
-            startActivity(intent);
         }
         else if(position==5){
             Toast.makeText(getActivity(),"My Insurance",Toast.LENGTH_SHORT).show();
