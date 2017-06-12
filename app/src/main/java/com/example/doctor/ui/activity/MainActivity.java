@@ -1,5 +1,6 @@
 package com.example.doctor.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.fragment.EmergencyContactsFragment;
@@ -97,6 +99,11 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.meds) {
             setTitle("Medicines");
+
+        } else if (id == R.id.logout) {
+            Toast.makeText(MainActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this,LoginScreen.class);
+            startActivity(intent);
         }
 
 

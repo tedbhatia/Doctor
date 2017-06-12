@@ -33,6 +33,11 @@
             android:id="@+id/meds"
             android:icon="@drawable/meds"
             android:title="@string/medicines" />
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
     </group>
 
 
