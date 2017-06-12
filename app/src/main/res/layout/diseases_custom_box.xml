@@ -177,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:text="Date"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:tāextStyle="bold"/>
 
                 <TextView
                     android:id="@+id/notes_edit"
