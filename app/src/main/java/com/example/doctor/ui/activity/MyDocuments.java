@@ -68,7 +68,7 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
 
     @Override
     public void onItemClick(int position, View v) {
-        Intent intent = new Intent(MyDocuments.this,EditDoctor.class);
+        Intent intent = new Intent(MyDocuments.this,EditDocument.class);
         intent.putExtra("docs",data.get(position));
         startActivity(intent);
     }
@@ -81,7 +81,7 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
             this.finish();
         }
         else {
-            Intent intent = new Intent(MyDocuments.this,EditDoctor.class);
+            Intent intent = new Intent(MyDocuments.this,EditDocument.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
