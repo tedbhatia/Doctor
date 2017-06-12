@@ -93,6 +93,8 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
         }
         else if(position==4){
             Toast.makeText(getActivity(),"My Documents",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(),MyDocuments.class);
+            startActivity(intent);
         }
         else if(position==5){
             Toast.makeText(getActivity(),"My Insurance",Toast.LENGTH_SHORT).show();
