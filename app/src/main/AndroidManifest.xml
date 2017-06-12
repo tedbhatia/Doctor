@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.doctor">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,7 +34,8 @@
         <activity android:name=".ui.activity.EditProfile" />
         <activity android:name=".ui.activity.ChangePassword" />
         <activity android:name=".ui.activity.MyDoctor" />
-        <activity android:name=".ui.activity.EditDoctor"></activity>
+        <activity android:name=".ui.activity.EditDoctor" />
+        <activity android:name=".ui.activity.MyDocuments"></activity>
     </application>
 
 </manifest>
