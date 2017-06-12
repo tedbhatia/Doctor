@@ -27,14 +27,13 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     private static final int REQUEST_GALLERY_LAUNCH = 2;
     CircleImageView image;
     Button update_profile, change_password;
-    EditText name,email,password,confirm_password;
+    EditText username,email,first_name,last_name,dob,address,mobile_number,blood_group;
     RadioButton rb_male,rb_female;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        setTitle("Edit Profile");
         bindViews();
         collectData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -42,8 +41,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
     private void collectData() {
 //        image.setImageBitmap("@drawable/test1");
-        name.setText("Pankaj", TextView.BufferType.EDITABLE);
-        name.setSelection(name.getText().length());
+        first_name.setText("Pankaj", TextView.BufferType.EDITABLE);
+        first_name.setSelection(first_name.getText().length());
         email.setText("pankaj0010g@gmail.com", TextView.BufferType.EDITABLE);
         email.setSelection(email.getText().length());
         rb_male.setChecked(true);
@@ -51,11 +50,14 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
     private void bindViews() {
         image = (CircleImageView) findViewById(R.id.image);
-        name = (EditText)    findViewById(R.id.name);
+        username = (EditText)    findViewById(R.id.username);
         email = (EditText)    findViewById(R.id.email);
-//        password = (EditText)    findViewById(R.id.password);
-//        confirm_password = (EditText)    findViewById(R.id.confirm_password);
-        update_profile = (Button) findViewById(R.id.update_profile);
+        first_name = (EditText)    findViewById(R.id.first_name);
+        last_name = (EditText)    findViewById(R.id.last_name);
+        dob = (EditText)    findViewById(R.id.dob);
+        address = (EditText) findViewById(R.id.address);
+        mobile_number = (EditText) findViewById(R.id.mobile_number);
+        blood_group = (EditText) findViewById(R.id.blood_group);
         change_password = (Button) findViewById(R.id.change_password);
         rb_male = (RadioButton) findViewById(R.id.rb_male);
         rb_female = (RadioButton) findViewById(R.id.rb_female);
@@ -129,16 +131,12 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         switch(v.getId()){
             case R.id.update_profile:
                 showToast("Updated successfully");
-                startActivity(new Intent(this, MainActivity.class));
+                finish();
                 break;
             case R.id.change_password:
                 startActivity(new Intent(EditProfile.this, ChangePassword.class));
                 break;
         }
-    }
-
-    private void showToast(String string){
-        Toast.makeText(this,string,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -152,4 +150,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         return super.onOptionsItemSelected(item);
 
     }
-}
+
+
+    private void showToast(String string){
+        Toast.makeText(this,string,Toast.LENGTH_SHORT).show();
+    }}
