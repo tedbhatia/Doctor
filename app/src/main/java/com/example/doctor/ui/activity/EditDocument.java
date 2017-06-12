@@ -1,5 +1,6 @@
 package com.example.doctor.ui.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -76,6 +77,13 @@ public class EditDocument extends AppCompatActivity {
                 finish();
             }
         });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zoomOut();
+            }
+        });
     }
 
     @Override
@@ -98,6 +106,16 @@ public class EditDocument extends AppCompatActivity {
                     imageView.setImageURI(uri);
                 }
         }
+    }
+
+    private void zoomOut() {
+        //
+        Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
+        dialog.setContentView(R.layout.image);
+        //dialog.findViewById(R.id.imageZoom);
+        //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
+        Picasso.with(EditDocument.this).load(Uri.parse(documents.getUrl())).into((ImageView)dialog.findViewById(R.id.imageZoom));
+        dialog.show();
     }
 
 }
