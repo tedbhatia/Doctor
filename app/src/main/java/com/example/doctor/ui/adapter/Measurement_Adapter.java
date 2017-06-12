@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,9 +50,13 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
     public void onBindViewHolder(Measurement_Adapter.MyViewHolder holder, int position) {
 
         final Measurement_Info current = data.get(position);
+        holder.date.setText(current.getDate());
         holder.height.setText(current.getHeight());
         holder.weight.setText(current.getWeight());
-        holder.bp.setText(current.getBloodPressure());
+        holder.bloodPressure.setText(current.getBloodPressure());
+        holder.bloodSugar.setText(current.getBloodSugar());
+        holder.cholesterol.setText(current.getCholesterol());
+
     }
 
     @Override
@@ -65,21 +70,23 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
 
     static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView height;
-        TextView weight;
-        TextView bp;
-        private CardView linearLayout;
-        private ImageView imageView;
+        private TextView date, height, weight, bloodPressure, bloodSugar, cholesterol;
+        private ImageView edit;
 
         public MyViewHolder(View itemView) {
-            super(itemView);
-            height = (TextView) itemView.findViewById(R.id.BoxHeightText);
-            weight = (TextView) itemView.findViewById(R.id.BoxWeightText);
-            bp = (TextView) itemView.findViewById(R.id.BoxBPText);
-            imageView = (ImageView) itemView.findViewById(R.id.imageButton2);
-            linearLayout = (CardView) itemView.findViewById(R.id.card_view2);
 
-            imageView.setOnClickListener(this);
+            super(itemView);
+
+            date = (TextView) itemView.findViewById(R.id.date_edit);
+            height = (TextView) itemView.findViewById(R.id.height_edit);
+            weight = (TextView) itemView.findViewById(R.id.weight_edit);
+            bloodPressure = (TextView) itemView.findViewById(R.id.bloodPressure_edit);
+            bloodSugar = (TextView) itemView.findViewById(R.id.bloodSugar_edit);
+            cholesterol = (TextView) itemView.findViewById(R.id.cholesterol_edit);
+            edit=(ImageButton)itemView.findViewById(R.id.editButton);
+
+            edit.setOnClickListener(this);
+
         }
 
 

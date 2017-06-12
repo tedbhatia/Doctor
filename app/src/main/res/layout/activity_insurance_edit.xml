@@ -103,14 +103,14 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Note"
+                        android:hint="Notes"
                         android:inputType="textMultiLine"
                         android:lines="5"
                         android:imeOptions="actionDone"
                         android:textSize="20dp"
                         android:gravity="top"
                         android:scrollbars="none"
-                        android:id="@+id/note_edit"/>
+                        android:id="@+id/notes_edit"/>
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>

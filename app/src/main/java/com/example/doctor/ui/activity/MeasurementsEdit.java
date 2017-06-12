@@ -50,26 +50,31 @@ public class MeasurementsEdit extends AppCompatActivity {
                 finish();
             }
         });
+        if(!(measurement_info.getDate().equals(""))) {
+            ((EditText) findViewById(R.id.date_edit)).setText(measurement_info.getDate());
+            ((EditText) findViewById(R.id.date_edit)).setSelection(((EditText) findViewById(R.id.date_edit)).length());
+        }
         if(!(measurement_info.getHeight().equals(""))) {
             ((EditText) findViewById(R.id.height_edit)).setText(measurement_info.getHeight());
             ((EditText) findViewById(R.id.height_edit)).setSelection(((EditText) findViewById(R.id.height_edit)).length());
         }
-        if(!(measurement_info.getWeight().equals(""))) {
+        if(measurement_info.getWeight()!=null) {
             ((EditText) findViewById(R.id.weight_edit)).setText(measurement_info.getWeight());
             ((EditText) findViewById(R.id.weight_edit)).setSelection(((EditText) findViewById(R.id.weight_edit)).length());
         }
-        if(measurement_info.getBloodPressure()!=null) {
-            ((EditText) findViewById(R.id.BP_edit)).setText(measurement_info.getBloodPressure());
-            ((EditText) findViewById(R.id.BP_edit)).setSelection(((EditText) findViewById(R.id.BP_edit)).length());
+        if(!(measurement_info.getBloodPressure().equals(""))) {
+            ((EditText) findViewById(R.id.bloodPressure_edit)).setText(measurement_info.getBloodPressure());
+            ((EditText) findViewById(R.id.bloodPressure_edit)).setSelection(((EditText) findViewById(R.id.bloodPressure_edit)).length());
         }
         if(!(measurement_info.getBloodSugar().equals(""))) {
-            ((EditText) findViewById(R.id.bSugar_edit)).setText(measurement_info.getBloodSugar());
-            ((EditText) findViewById(R.id.bSugar_edit)).setSelection(((EditText) findViewById(R.id.bSugar_edit)).length());
+            ((EditText) findViewById(R.id.bloodSugar_edit)).setText(measurement_info.getBloodSugar());
+            ((EditText) findViewById(R.id.bloodSugar_edit)).setSelection(((EditText) findViewById(R.id.bloodSugar_edit)).length());
         }
         if(!(measurement_info.getCholesterol().equals(""))) {
             ((EditText) findViewById(R.id.cholesterol_edit)).setText(measurement_info.getCholesterol());
             ((EditText) findViewById(R.id.cholesterol_edit)).setSelection(((EditText) findViewById(R.id.cholesterol_edit)).length());
         }
+
         ((Button)findViewById(R.id.EditButton2)).setText("SAVE");
         ((TextView)findViewById(R.id.MeasurementText)).setText("Edit Measurement");
     }

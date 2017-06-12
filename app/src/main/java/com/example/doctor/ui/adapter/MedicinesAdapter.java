@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -73,22 +74,21 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView med_name,unit,method,frequency;
-        private LinearLayout linearLayout;
-        private ImageView forward;
+        //private LinearLayout linearLayout;
+        private ImageButton edit;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            med_name=(TextView)itemView.findViewById(R.id.med_name);
-            unit=(TextView)itemView.findViewById(R.id.unit);
-            method=(TextView)itemView.findViewById(R.id.method);
-            frequency=(TextView)itemView.findViewById(R.id.frequency);
-            linearLayout=(LinearLayout)itemView.findViewById(R.id.MedicinesLayout);
-            forward=(ImageView)itemView.findViewById(R.id.forwardButton);
+            med_name=(TextView)itemView.findViewById(R.id.med_name_edit);
+            unit=(TextView)itemView.findViewById(R.id.unit_edit);
+            method=(TextView)itemView.findViewById(R.id.method_edit);
+            frequency=(TextView)itemView.findViewById(R.id.frequency_edit);
+            //linearLayout=(LinearLayout)itemView.findViewById(R.id.MedicinesLayout);
+            edit=(ImageButton)itemView.findViewById(R.id.editButton);
 
-            linearLayout.setOnClickListener(this);
-            forward.setOnClickListener(this);
+            edit.setOnClickListener(this);
 
         }
 

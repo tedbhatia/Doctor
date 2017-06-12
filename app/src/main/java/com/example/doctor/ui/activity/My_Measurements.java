@@ -7,21 +7,29 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.Measurement_Adapter;
 import com.example.doctor.ui.model.Measurement_Info;
+import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
+import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class My_Measurements extends AppCompatActivity implements Measurement_Adapter.MyClickListener {
+public class My_Measurements extends AppCompatActivity implements Measurement_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
     private Measurement_Adapter adapter;
-    private List<Measurement_Info> data;
+
+    private List<Measurement_Info> listItems;
+    private Measurement_Info listItem;
+
+    private OnActivityTouchListener touchListener;
+    private RecyclerTouchListener onTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,37 +40,95 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        data = new ArrayList<>();
+        listItems = new ArrayList<>();
 
         prepareData();
         initRecyclerView();
+
+        onTouchListener=new RecyclerTouchListener(this,recyclerView);
+        onTouchListener
+                .setIndependentViews(R.id.editButton)
+                .setViewsToFade(R.id.editButton)
+                .setClickable(new RecyclerTouchListener.OnRowClickListener() {
+                    @Override
+                    public void onRowClicked(int position) {
+                        Toast.makeText(My_Measurements.this,"View",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onIndependentViewClicked(int independentViewID, int position) {
+                        Toast.makeText(My_Measurements.this,"Button",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                    @Override
+                    public void onRowLongClicked(int position) {
+                        Toast.makeText(My_Measurements.this,"View long clicked!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setSwipeOptionViews(R.id.delete)
+                .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
+                    @Override
+                    public void onSwipeOptionClicked(int viewID, int position) {
+                    }
+                });
+
     }
 
     private void initRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.measurement_list);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(My_Measurements.this,1,false));
     }
 
     private void prepareData() {
-        String[] height = {"5.6", "5.7", "5.8", "5.9", "5.5", "5.56", "5.84"};
-        String[] weight = {"65", "58", "52", "48", "68", "78", "58"};
-        String[] bp = {"BP 1", "BP 2", "BP 3", "BP 4", "BP 5", "BP6 ", "BP 7"};
-        String[] bSugar = {"Aplha", "Beta", "Gamma", "Theta", "Psi", "Phi", "Omega"};
-        String[] cho = {"cho 1", "cho 2", "cho 3", "cho 4", "cho 5", "cho 6", "cho 7"};
 
-        for (int i = 0; i < height.length && i < weight.length && i < bp.length; i++) {
+        String[] date = {"23/05/2017", "23/05/2017", "25/05/2017", "30/05/2017", "30/05/2017"};
+        String[] height = {"5'6\"","5'6\"","5'6\"","5'6\"","5'6\""};
+        String[] weight={"67 kg","68 kg","68 kg","65 kg","65 kg"};
+        String[] bloodPressure={"xxx","yyy","zzz","aaa","bbb"};
+        String[] bloodSugar={"qwerty 1","qwerty 2","qwerty 3","qwerty 4","qwerty 5"};
+        String[] cholesterol={"111","222","333","444","555"};
+
+        for (int i = 0; i < date.length; i++) {
             Measurement_Info current = new Measurement_Info();
+            current.setDate(date[i]);
             current.setHeight(height[i]);
             current.setWeight(weight[i]);
-            current.setBloodPressure(bp[i]);
-            current.setBloodSugar(bSugar[i]);
-            current.setCholesterol(cho[i]);
-            data.add(current);
+            current.setBloodPressure(bloodPressure[i]);
+            current.setBloodSugar(bloodSugar[i]);
+            current.setCholesterol(cholesterol[i]);
+
+            listItems.add(current);
         }
-        adapter = new Measurement_Adapter(My_Measurements.this,data);
+        adapter = new Measurement_Adapter(My_Measurements.this,listItems);
+
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerView.addOnItemTouchListener(onTouchListener); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        recyclerView.removeOnItemTouchListener(onTouchListener);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (touchListener != null) touchListener.getTouchCoordinates(ev);
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
+        this.touchListener = listener;
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,7 +140,7 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
     @Override
     public void onItemClick(int position, View v) {
         Intent intent = new Intent(My_Measurements.this,MeasurementsEdit.class);
-        intent.putExtra("measurement",data.get(position));
+        intent.putExtra("measurement",listItems.get(position));
         startActivity(intent);
     }
 

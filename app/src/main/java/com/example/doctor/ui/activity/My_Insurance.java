@@ -8,21 +8,27 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.Insurance_Adapter;
 import com.example.doctor.ui.model.Insurance;
+import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
+import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class My_Insurance extends AppCompatActivity implements Insurance_Adapter.MyClickListener{
+public class My_Insurance extends AppCompatActivity implements Insurance_Adapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper{
 
     private RecyclerView recyclerView;
     private Insurance_Adapter adapter;
     private List<Insurance> data;
+
+    private OnActivityTouchListener touchListener;
+    private RecyclerTouchListener onTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,59 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
         prepareData();
         initRecyclerView();
 
+        onTouchListener=new RecyclerTouchListener(this,recyclerView);
+
+        onTouchListener
+                .setIndependentViews(R.id.editButton)
+                .setViewsToFade(R.id.editButton)
+                .setClickable(new RecyclerTouchListener.OnRowClickListener() {
+                    @Override
+                    public void onRowClicked(int position) {
+                        Toast.makeText(My_Insurance.this,"View",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onIndependentViewClicked(int independentViewID, int position) {
+                        Toast.makeText(My_Insurance.this,"Button",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                    @Override
+                    public void onRowLongClicked(int position) {
+                        Toast.makeText(My_Insurance.this,"View long clicked!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setSwipeOptionViews(R.id.delete)
+                .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
+                    @Override
+                    public void onSwipeOptionClicked(int viewID, int position) {
+                    }
+                });
+
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerView.addOnItemTouchListener(onTouchListener); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        recyclerView.removeOnItemTouchListener(onTouchListener);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (touchListener != null) touchListener.getTouchCoordinates(ev);
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
+        this.touchListener = listener;
+    }
+
 
     private void prepareData() {
         String[] plan = {"Plan 1", "Plan 2", "Plan 3", "Plan 4", "Plan 5", "Plan 6", "Plan 7"};
@@ -50,7 +108,7 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
             Insurance current = new Insurance();
             current.setPlan(plan[i]);
             current.setDuration(duration[i]);
-            current.setNote(note[i]);
+            current.setNotes(note[i]);
             current.setDate(date[i]);
             data.add(current);
         }
@@ -58,7 +116,7 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
     }
 
     private void initRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.insurance_list);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(My_Insurance.this,1,false));
