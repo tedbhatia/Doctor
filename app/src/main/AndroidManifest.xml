@@ -12,8 +12,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.activity.My_Insurance" />
         <activity android:name=".ui.activity.MyAppointments" />
         <activity android:name=".ui.activity.MyMedicines" />
@@ -32,7 +31,9 @@
         <activity android:name=".ui.activity.LoginScreen" />
         <activity android:name=".ui.activity.SignUp" />
         <activity android:name=".ui.activity.EditProfile" />
-        <activity android:name=".ui.activity.ChangePassword"></activity>
+        <activity android:name=".ui.activity.ChangePassword" />
+        <activity android:name=".ui.activity.MyDiseases" />
+        <activity android:name=".ui.activity.EditDiseases"></activity>
     </application>
 
 </manifest>
