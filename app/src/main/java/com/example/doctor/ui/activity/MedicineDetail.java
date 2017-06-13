@@ -1,12 +1,11 @@
-package com.example.doctor.ui.fragment;
+package com.example.doctor.ui.activity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -14,46 +13,33 @@ import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.MedicineDetailExpandableListAdapter;
-import com.example.doctor.ui.adapter.ProcedureDetailExpandableListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by tejas on 13/6/17.
- */
-
-public class MedicineDetailFragment extends android.support.v4.app.Fragment {
+public class MedicineDetail extends AppCompatActivity implements View.OnClickListener{
     ExpandableListAdapter expandable_list_adapter;
     ExpandableListView expandable_list_view;
     List<String> listHeading;
     HashMap<String, String> listMap;
     Button share;
-    private View rootView;
+
     TextView usage_instructions, overdose_instructions, possible_side_effects, brand_names;
 
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        rootView = inflater.inflate(R.layout.activity_medicine_detail, container, false);
-
-        expandable_list_view = (ExpandableListView) rootView.findViewById(R.id.expandable_list_view);
+        setContentView(R.layout.activity_medicine_detail);
+        expandable_list_view = (ExpandableListView) findViewById(R.id.expandable_list_view);
         prepareData();
-        expandable_list_adapter = new MedicineDetailExpandableListAdapter(getActivity(), listHeading, listMap);
+        expandable_list_adapter = new MedicineDetailExpandableListAdapter(this, listHeading, listMap);
         expandable_list_view.setAdapter(expandable_list_adapter);
 
-        bindView(rootView);
-
-        return rootView;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Orienoflobin");
+        bindView();
+//        launch();
     }
 
     private void prepareData() {
@@ -72,19 +58,14 @@ public class MedicineDetailFragment extends android.support.v4.app.Fragment {
 
     }
 
-    private void bindView(View rootView) {
+    private void bindView() {
 //        usage_instructions = (TextView) findViewById(R.id.usage_instructions);
 //        overdose_instructions = (TextView) findViewById(R.id.overdose_instructions);
 //        possible_side_effects = (TextView) findViewById(R.id.possible_side_effects);
 //        brand_names = (TextView) findViewById(R.id.brand_names);
 //        usage_instructions.setOnClickListener(this);
-        share = (Button) rootView.findViewById(R.id.share);
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Sharing..", Toast.LENGTH_SHORT).show();
-            }
-        });
+        share = (Button) findViewById(R.id.share);
+        share.setOnClickListener(this);
     }
 
     public void launch() {
@@ -102,4 +83,26 @@ public class MedicineDetailFragment extends android.support.v4.app.Fragment {
 //
 //
 //    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+
+            this.finish();
+
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.share:
+                Toast.makeText(this,"Sharing..",Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }
+
+

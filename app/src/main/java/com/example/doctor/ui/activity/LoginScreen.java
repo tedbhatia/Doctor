@@ -19,7 +19,7 @@ import com.example.doctor.ui.fragment.MyProfileFragment;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
     private TextView emailText;
-    private EditText emailId;
+    private EditText username;
     private TextView passwordText;
     private EditText password;
     private Button btnLogin;
@@ -40,7 +40,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     private void bindViews() {
-        emailId= (EditText) findViewById(R.id.input_name);
+        username= (EditText) findViewById(R.id.input_name);
         password= (EditText) findViewById(R.id.input_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnSignup = (Button) findViewById(R.id.btn_signup);
@@ -67,10 +67,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 forgotpassword();
                 break;
             case R.id.btn_login: {
-                if(validEmail()&&validPassword())
+                if(validPassword())
                     callinglogin();
-                else if(!validEmail())
-                    Toast.makeText(LoginScreen.this,"Email Incorrect",Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(LoginScreen.this,"Password Should be greater than 6 characters",Toast.LENGTH_SHORT).show();
 
@@ -97,13 +95,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         else
             return false;
     }
-
-    private boolean validEmail() {
-        String emailString=emailId.getText().toString();
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(emailString).matches();
-
-    }
-
 
     private void callingGoogle() {
     }

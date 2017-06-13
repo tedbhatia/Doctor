@@ -15,10 +15,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.activity.EditProfile;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by tejas on 9/6/17.
@@ -27,8 +30,8 @@ import com.example.doctor.ui.activity.EditProfile;
 public class MyProfileFragment extends android.support.v4.app.Fragment {
 
     private View rootView;
-    private TextView username;
-    private TextView email;
+    private ImageView image;
+    private TextView username,email,first_name,last_name,dob,address,mobile_number,blood_group,gender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,14 +46,34 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
         rootView=inflater.inflate(R.layout.activity_my_profile,container,false);
 
         bindViews(rootView);
-
+        setData();
         return rootView;
 
     }
 
     private void bindViews(View rootView) {
-        username=(TextView)rootView.findViewById(R.id.username);
-        email=(TextView)rootView.findViewById(R.id.email);
+        image = (CircleImageView) rootView.findViewById(R.id.image);
+        username = (TextView)    rootView.findViewById(R.id.username);
+        email = (TextView)    rootView.findViewById(R.id.email);
+        first_name = (TextView)    rootView.findViewById(R.id.first_name);
+        last_name = (TextView)    rootView.findViewById(R.id.last_name);
+        dob = (TextView)    rootView.findViewById(R.id.dob);
+        address = (TextView) rootView.findViewById(R.id.address);
+        mobile_number = (TextView) rootView.findViewById(R.id.mobile_number);
+        blood_group = (TextView) rootView.findViewById(R.id.blood_group);
+        gender = (TextView) rootView.findViewById(R.id.gender);
+    }
+
+    private void setData() {
+        username.setText("pankaj0010");
+        email.setText("pankaj0010g@gmail.com");
+        first_name.setText("Paankaj");
+        last_name.setText("Kumar");
+        dob.setText("1.1.1");
+        address.setText("steerrt 5, db road, hello world, india");
+        mobile_number.setText("4325347");
+        blood_group.setText("B+");
+        gender.setText("Male");
     }
 
     @Override
