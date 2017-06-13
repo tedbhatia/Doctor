@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.ui.activity.DiseaseDetail;
 import com.example.doctor.ui.activity.MainActivity;
 import com.example.doctor.ui.activity.ProcedureDetail;
 import com.example.doctor.ui.adapter.Body_Parts_Adapter;
@@ -38,7 +39,7 @@ public class Diseases_ViewHolder extends ChildViewHolder implements View.OnClick
     @Override
     public void onClick(View v) {
         Toast.makeText(context,male_disease_name.getText(),Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(context,ProcedureDetail.class);
+        Intent intent = new Intent(context,DiseaseDetail.class);
         //intent.putExtra("procs",model.get(position));
         context.startActivity(intent);
     }
