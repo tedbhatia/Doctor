@@ -36,7 +36,7 @@ public class EditDoctor extends AppCompatActivity {
         });
 
         ((TextView)findViewById(R.id.InsuranceText)).setText("Add Doctor");
-        ((TextView)findViewById(R.id.InsuranceText)).setText("Add Insurance");
+        //((TextView)findViewById(R.id.InsuranceText)).setText("Add Insurance");
         if(getIntent().hasExtra("doctor")){
             doctor = (Doctor) getIntent().getSerializableExtra("doctor");
             bindView();

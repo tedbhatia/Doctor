@@ -23,6 +23,7 @@ import com.example.doctor.ui.fragment.MedicineFragment;
 import com.example.doctor.ui.fragment.MyProfileFragment;
 import com.example.doctor.ui.fragment.NotificationsFragment;
 import com.example.doctor.ui.fragment.ProcedureFragment;
+import com.example.doctor.ui.fragment.Symptoms_Fragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.symptoms) {
             setTitle("Symptoms");
+            fm.beginTransaction().replace(R.id.content_frame,new Symptoms_Fragment()).commit();
 
         } else if (id == R.id.find_docs) {
             setTitle("Find Doctors");
