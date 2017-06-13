@@ -10,5 +10,6 @@
 
     <dimen name="swipeWidth">20dp</dimen>
     <dimen name="ic_clear_margin">20dp</dimen>
+    <dimen name="swipeWidth">20dp</dimen>
 
 </resources>
