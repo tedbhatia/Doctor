@@ -19,8 +19,10 @@ import com.example.doctor.R;
 import com.example.doctor.ui.fragment.EmergencyContactsFragment;
 import com.example.doctor.ui.fragment.FindDoctorsFragment;
 import com.example.doctor.ui.fragment.Health_Acc_Fragment;
+import com.example.doctor.ui.fragment.MedicineFragment;
 import com.example.doctor.ui.fragment.MyProfileFragment;
 import com.example.doctor.ui.fragment.NotificationsFragment;
+import com.example.doctor.ui.fragment.ProcedureFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.procedure) {
             setTitle("Procedures");
+            fm.beginTransaction().replace(R.id.content_frame,new ProcedureFragment()).commit();
 
         } else if (id == R.id.notifications) {
             setTitle("Notifications");
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.meds) {
             setTitle("Medicines");
+            fm.beginTransaction().replace(R.id.content_frame,new MedicineFragment()).commit();
 
         } else if (id == R.id.logout) {
             Toast.makeText(MainActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();

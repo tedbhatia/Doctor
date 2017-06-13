@@ -41,6 +41,8 @@
         <activity android:name=".ui.activity.EditDocument"/>
         <activity android:name=".ui.activity.EditDoctor"/>
         <activity android:name=".ui.activity.MyDoctor"/>
+        <activity android:name=".ui.activity.MedicineDetail"/>
+        <activity android:name=".ui.activity.ProcedureDetail"/>
         <activity android:name=".ui.activity.EditDiseases"></activity>
     </application>
 

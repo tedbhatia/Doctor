@@ -65,11 +65,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         rb_male = (RadioButton) findViewById(R.id.rb_male);
         rb_female = (RadioButton) findViewById(R.id.rb_female);
         register.setOnClickListener(this);
-        image.setOnClickListener(this);
+//        image.setOnClickListener(this);
 //        picasso.with(Screen3.this).load("https://www.hello.com/img_/hello_logo_hero.png").into(image);
     }
 
-    private void launchDialog() {
+   /* private void launchDialog() {
         final CharSequence[] items = {"Take Photo", "Choose from Gallery"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
@@ -93,7 +93,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     private void launchGallery() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
+        intent.setType("image*//*");
 
         startActivityForResult(intent, REQUEST_GALLERY_LAUNCH);
     }
@@ -134,7 +134,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             }
         }
 
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
@@ -151,7 +151,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.image:
-                launchDialog();
+                //launchDialog();
                 break;
         }
     }

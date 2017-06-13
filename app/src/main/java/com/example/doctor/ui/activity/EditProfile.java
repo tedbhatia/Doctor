@@ -34,6 +34,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        setTitle("Edit Profile");
         bindViews();
         collectData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,14 +63,15 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         rb_male = (RadioButton) findViewById(R.id.rb_male);
         rb_female = (RadioButton) findViewById(R.id.rb_female);
         change_password.setOnClickListener(this);
+        image.setOnClickListener(this);
     }
 
-    public void onImageClick(View view) {
-
-        if (view.getId() == R.id.image) {
-            launchDialog();
-        }
-    }
+//    public void onImageClick(View view) {
+//
+//        if (view.getId() == R.id.image) {
+//            launchDialog();
+//        }
+//    }
 
     private void launchDialog() {
         final CharSequence[] items = {"Take Photo", "Choose from Gallery"};
@@ -135,6 +137,9 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.change_password:
                 startActivity(new Intent(EditProfile.this, ChangePassword.class));
+                break;
+            case R.id.image:
+                launchDialog();
                 break;
         }
     }
