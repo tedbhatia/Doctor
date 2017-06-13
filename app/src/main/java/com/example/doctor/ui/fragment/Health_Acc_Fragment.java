@@ -57,19 +57,19 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
         return rootView;
     }
 
-        public static void getData(List<My_Health_Acc_Info> data){
+    public static void getData(List<My_Health_Acc_Info> data){
 
-            int[] icons={R.drawable.doctor,R.drawable.disease,R.drawable.appointment,R.drawable.pill3,R.drawable.documents,R.drawable.insurance,R.drawable.measurement};
-            String[] title = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
+        int[] icons={R.drawable.doctor,R.drawable.disease,R.drawable.appointment,R.drawable.pill3,R.drawable.documents,R.drawable.insurance,R.drawable.measurement};
+        String[] title = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
 
-            for(int i=0;i<title.length && i<icons.length; i++){
-                My_Health_Acc_Info current = new My_Health_Acc_Info();
-                current.setIconId(icons[i]);
-                current.setTitle(title[i]);
-                data.add(current);
-            }
-
+        for(int i=0;i<title.length && i<icons.length; i++){
+            My_Health_Acc_Info current = new My_Health_Acc_Info();
+            current.setIconId(icons[i]);
+            current.setTitle(title[i]);
+            data.add(current);
         }
+
+    }
 
     @Override
     public void onItemClick(int position, View v) {
