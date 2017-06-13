@@ -7,4 +7,6 @@
     <color name="pink1">#FFB5C5</color>
     <color name="cyan">#00FFFF</color>
 
+    <color name="swipebg">#cccccc</color>
+
 </resources>

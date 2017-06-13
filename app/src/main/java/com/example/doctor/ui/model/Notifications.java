@@ -10,6 +10,11 @@ public class Notifications implements Serializable {
 
     String title, description;
 
+    public Notifications(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     public String getTitle() {
         return title;
     }
