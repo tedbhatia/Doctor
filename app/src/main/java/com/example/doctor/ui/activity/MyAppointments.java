@@ -24,6 +24,7 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -43,43 +44,15 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointments);
-
-
         setTitle("My Appointments");
 
-        pullRefreshLayout=(PullRefreshLayout) findViewById(R.id.pullLayout);
-        pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
-                                   @Override
-                                   public void onRefresh() {
-                                        pullRefreshLayout.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                pullRefreshLayout.setRefreshing(false);
-                                            }
-                                        },3000);
-                                   }
-                               });
-
-
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Appointments("Aaa","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(1,new Appointments("Bbb","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(2,new Appointments("Ccc","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(3,new Appointments("Ddd","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(4,new Appointments("Eee","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-
-        adapter=new AppointmentsAdapter(this,listItems);
-        recyclerView.setAdapter(adapter);
-
-        adapter.setOnItemClickListener(this);
+        prepareData();
+        initRecyclerView();
 
         onTouchListener=new RecyclerTouchListener(this,recyclerView);
 
@@ -109,6 +82,37 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                     public void onSwipeOptionClicked(int viewID, int position) {
                     }
                 });
+
+        pullRefreshLayout=(PullRefreshLayout) findViewById(R.id.pullLayout);
+        pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pullRefreshLayout.postDelayed(new TimerTask() {
+                    @Override
+                    public void run() {
+                        pullRefreshLayout.setRefreshing(false);
+                    }
+                },3000);
+            }
+        });
+    }
+
+    private void initRecyclerView() {
+        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        //recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MyAppointments.this, 1, false));
+    }
+
+    private void prepareData() {
+        listItems.add(0,new Appointments("Aaa","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(1,new Appointments("Bbb","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(2,new Appointments("Ccc","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(3,new Appointments("Ddd","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(4,new Appointments("Eee","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+
+        adapter=new AppointmentsAdapter(this,listItems);
     }
 
 
