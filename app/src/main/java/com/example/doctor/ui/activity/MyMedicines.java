@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.MedicinesAdapter;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
@@ -32,12 +33,29 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
 
+    private PullRefreshLayout pullRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_medicines);
 
         setTitle("My Medicines");
+
+        pullRefreshLayout=(PullRefreshLayout) findViewById(R.id.pullLayout);
+        pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pullRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pullRefreshLayout.setRefreshing(false);
+                    }
+                },3000);
+            }
+        });
+
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

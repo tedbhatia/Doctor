@@ -4,16 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
 import com.example.doctor.ui.adapter.NotificationsAdapter;
@@ -33,13 +32,28 @@ public class NotificationsFragment extends Fragment implements My_Health_Acc_Ada
     private NotificationsAdapter adapter;
     private List<Notifications> data;
 
+    private PullRefreshLayout pullRefreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_health_acc,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_notifications,container,false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_list);
+
+        pullRefreshLayout=(PullRefreshLayout)rootView.findViewById(R.id.pullLayout);
+        pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pullRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pullRefreshLayout.setRefreshing(false);
+                    }
+                },3000);
+            }
+        });
+
         return rootView;
 
     }
