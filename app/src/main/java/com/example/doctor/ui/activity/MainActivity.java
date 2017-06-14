@@ -1,13 +1,16 @@
 package com.example.doctor.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -127,4 +130,34 @@ public class MainActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.content_frame,new MyProfileFragment()).commit();
             drawer.closeDrawers();
     }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            exitByBackKey();
+            return true;
+        }
+        return super.onKeyDown(keyCode,event);
+
+    }
+
+    protected void exitByBackKey() {
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you wish to exit?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+
+    }
+
 }

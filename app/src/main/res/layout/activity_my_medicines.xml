@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.baoyz.widget.PullRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_my_medicines"
+    android:id="@+id/pullLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.doctor.ui.activity.MyMedicines">
+    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <RelativeLayout
+        android:id="@+id/activity_my_medicines"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:background="@color/gray">
+        android:layout_height="match_parent"
+        tools:context="com.example.doctor.ui.activity.MyMedicines">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:background="@color/gray">
 
-</RelativeLayout>
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+</com.baoyz.widget.PullRefreshLayout>
+
+
