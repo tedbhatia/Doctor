@@ -21,6 +21,7 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -33,7 +34,7 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
 
-    private PullRefreshLayout pullRefreshLayout;
+    PullRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +43,6 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
 
         setTitle("My Medicines");
 
-        pullRefreshLayout=(PullRefreshLayout) findViewById(R.id.pullLayout);
-        pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                pullRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        pullRefreshLayout.setRefreshing(false);
-                    }
-                },3000);
-            }
-        });
 
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -105,6 +94,20 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
                     public void onSwipeOptionClicked(int viewID, int position) {
                     }
                 });
+
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.pullLayout);
+        refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.postDelayed(new TimerTask() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
 
     }
 

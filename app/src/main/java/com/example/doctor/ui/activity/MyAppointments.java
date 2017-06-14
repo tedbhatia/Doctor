@@ -2,9 +2,6 @@ package com.example.doctor.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +21,7 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -36,7 +34,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
 
-    PullRefreshLayout pullRefreshLayout;
+    PullRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,21 +45,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         setTitle("My Appointments");
 
-        pullRefreshLayout=(PullRefreshLayout) findViewById(R.id.pullLayout);
-        pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
-                                   @Override
-                                   public void onRefresh() {
-                                        pullRefreshLayout.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                pullRefreshLayout.setRefreshing(false);
-                                            }
-                                        },3000);
-                                   }
-                               });
-
-
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
@@ -109,8 +93,21 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                     public void onSwipeOptionClicked(int viewID, int position) {
                     }
                 });
-    }
 
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.pullLayout);
+        refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.postDelayed(new TimerTask() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
+    }
 
     @Override
     protected void onResume() {

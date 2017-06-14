@@ -7,6 +7,11 @@
     tools:context="com.example.doctor.ui.activity.My_Insurance">
 
 
+        <com.baoyz.widget.PullRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipeLayoutInsurance">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -16,4 +21,5 @@
 
         </android.support.v7.widget.RecyclerView>
 
+        </com.baoyz.widget.PullRefreshLayout>
 </LinearLayout>

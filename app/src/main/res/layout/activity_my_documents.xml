@@ -6,14 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.example.doctor.ui.activity.MyDocuments">
 
-
-    <android.support.v7.widget.RecyclerView
+    <com.baoyz.widget.PullRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/doctor_list"
-        android:orientation="vertical"
-        android:background="@color/gray">
+        android:id="@+id/swipeLayoutDocuments">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/doctor_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray"
+            android:orientation="vertical">
 
+        </android.support.v7.widget.RecyclerView>
+    </com.baoyz.widget.PullRefreshLayout>
 </LinearLayout>
