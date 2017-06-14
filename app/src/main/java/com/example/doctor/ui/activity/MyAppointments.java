@@ -2,9 +2,6 @@ package com.example.doctor.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,22 +34,36 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
 
-    PullRefreshLayout pullRefreshLayout;
+    PullRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointments);
+
+
         setTitle("My Appointments");
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         listItems=new ArrayList<>();
 
-        prepareData();
-        initRecyclerView();
+        listItems.add(0,new Appointments("Aaa","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(1,new Appointments("Bbb","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(2,new Appointments("Ccc","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(3,new Appointments("Ddd","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(4,new Appointments("Eee","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+
+        adapter=new AppointmentsAdapter(this,listItems);
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(this);
 
         onTouchListener=new RecyclerTouchListener(this,recyclerView);
 
@@ -83,38 +94,20 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                     }
                 });
 
-        pullRefreshLayout=(PullRefreshLayout) findViewById(R.id.pullLayout);
-        pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.pullLayout);
+        refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                pullRefreshLayout.postDelayed(new TimerTask() {
+                refreshLayout.postDelayed(new TimerTask() {
                     @Override
                     public void run() {
-                        pullRefreshLayout.setRefreshing(false);
+                        refreshLayout.setRefreshing(false);
                     }
-                },3000);
+                }, 3000);
             }
         });
     }
-
-    private void initRecyclerView() {
-        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
-        //recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MyAppointments.this, 1, false));
-    }
-
-    private void prepareData() {
-        listItems.add(0,new Appointments("Aaa","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(1,new Appointments("Bbb","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(2,new Appointments("Ccc","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(3,new Appointments("Ddd","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(4,new Appointments("Eee","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-
-        adapter=new AppointmentsAdapter(this,listItems);
-    }
-
 
     @Override
     protected void onResume() {
