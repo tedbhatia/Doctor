@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.Measurement_Adapter;
 import com.example.doctor.ui.model.Measurement_Info;
@@ -19,6 +20,7 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class My_Measurements extends AppCompatActivity implements Measurement_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -30,6 +32,8 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
 
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
+
+    PullRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,21 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
                     public void onSwipeOptionClicked(int viewID, int position) {
                     }
                 });
+
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.swipeLayoutMeasurement);
+        refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.postDelayed(new TimerTask() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
+
 
     }
 

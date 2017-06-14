@@ -6,24 +6,35 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.DocumentsAdapter;
 import com.example.doctor.ui.adapter.MyDoctorAdapter;
 import com.example.doctor.ui.model.Doctor;
 import com.example.doctor.ui.model.Documents;
+import com.baoyz.widget.PullRefreshLayout;
+import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
+import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.MyClickListener{
 
     private RecyclerView recyclerView;
     private DocumentsAdapter adapter;
     private List<Documents> data;
+
+    private OnActivityTouchListener touchListener;
+    private RecyclerTouchListener onTouchListener;
+
+    PullRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,20 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         data = new ArrayList<>();
+
+        refreshLayout = (PullRefreshLayout) findViewById(R.id.swipeLayoutDocuments);
+        refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.postDelayed(new TimerTask() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
 
         prepareData();
         initRecyclerView();

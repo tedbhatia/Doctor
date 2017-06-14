@@ -77,8 +77,9 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.MyVi
             linearLayout = (CardView) itemView.findViewById(R.id.recycler_view);
             image = (ImageView) itemView.findViewById(R.id.imageDoc);
             docName = (TextView) itemView.findViewById(R.id.docName);
+            linearLayout = (CardView) itemView.findViewById(R.id.card_view2);
 
-            image.setOnClickListener(this);
+            linearLayout.setOnClickListener(this);
         }
 
 
@@ -88,5 +89,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.MyVi
                 myClickListener.onItemClick(getLayoutPosition(),v);
             }
         }
+
+
     }
 }
