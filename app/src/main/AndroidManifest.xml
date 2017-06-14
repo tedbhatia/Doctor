@@ -31,7 +31,8 @@
         <activity android:name=".ui.activity.EditAppointments" />
         <activity android:name=".ui.activity.MeasurementsEdit" />
         <activity android:name=".ui.activity.EditMedicines" />
-        <activity android:name=".ui.activity.SplashScreen"/>
+        <activity android:name=".ui.activity.SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.activity.LoginScreen" />
         <activity android:name=".ui.activity.SignUp" />
         <activity android:name=".ui.activity.EditProfile" />
@@ -43,6 +44,7 @@
         <activity android:name=".ui.activity.MyDoctor"/>
         <activity android:name=".ui.activity.MedicineDetail"/>
         <activity android:name=".ui.activity.ProcedureDetail"/>
+        <activity android:name=".ui.activity.DiseaseDetail"/>
         <activity android:name=".ui.activity.EditDiseases"></activity>
     </application>
 

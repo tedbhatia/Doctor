@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:text="Medicine Name"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="normal"/>
 
                 <TextView
                     android:id="@+id/unit_edit"
@@ -177,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:text="Unit"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="normal"/>
 
                 <TextView
                     android:id="@+id/method_edit"
@@ -185,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:text="Method"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="normal"/>
 
                 <TextView
                     android:id="@+id/frequency_edit"
@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:text="Frequency"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="normal"/>
 
             </LinearLayout>
 
