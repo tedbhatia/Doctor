@@ -7,6 +7,9 @@ import java.io.Serializable;
  */
 
 public class Documents implements Serializable{
+
+    private boolean isChecked;
+
     private String url;
     private String docName;
 
@@ -25,4 +28,12 @@ public class Documents implements Serializable{
     public void setDocName(String docName) {
         this.docName = docName;
     }
+
+    public boolean isChecked(){
+        return isChecked;
+    }
+    public void toggleChecked(){
+        isChecked = !isChecked;
+    }
+
 }
