@@ -138,7 +138,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
             }
         });
 
-        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int mLastFirstVisibleItem = 0;
 
             @Override

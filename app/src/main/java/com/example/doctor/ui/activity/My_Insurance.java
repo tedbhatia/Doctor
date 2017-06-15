@@ -110,7 +110,7 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
             }
         });
 
-        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int mLastFirstVisibleItem = 0;
 
             @Override

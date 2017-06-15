@@ -1,7 +1,9 @@
 package com.example.doctor.ui.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +29,8 @@ import com.example.doctor.ui.fragment.MyProfileFragment;
 import com.example.doctor.ui.fragment.NotificationsFragment;
 import com.example.doctor.ui.fragment.ProcedureFragment;
 import com.example.doctor.ui.fragment.Symptoms_Fragment;
+
+import static com.example.doctor.ui.activity.LoginScreen.MY_SHARED_PREFERENCES;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -113,6 +117,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.logout) {
             Toast.makeText(MainActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("password");
+            editor.commit();
             Intent intent = new Intent(MainActivity.this,LoginScreen.class);
             startActivity(intent);
         }

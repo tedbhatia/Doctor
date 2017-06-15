@@ -37,6 +37,7 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Nullable
@@ -92,5 +93,7 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }

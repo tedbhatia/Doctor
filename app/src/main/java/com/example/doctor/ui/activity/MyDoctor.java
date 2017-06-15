@@ -112,7 +112,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
             }
         });
 
-        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int mLastFirstVisibleItem = 0;
 
             @Override

@@ -127,7 +127,7 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
             }
         });
 
-        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int mLastFirstVisibleItem = 0;
 
             @Override
