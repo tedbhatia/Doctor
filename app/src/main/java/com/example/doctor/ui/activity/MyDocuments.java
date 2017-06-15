@@ -136,8 +136,8 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
         } else {
             if (adapter.getCheckedStatus()) {
                 Toast.makeText(this, "Deleted.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MyDocuments.this, MyDocuments.class);
-                startActivity(intent);
+                recyclerView.setAdapter(new DocumentsAdapter(this,data));
+                recyclerView.invalidate();
 
             } else {
                 Intent intent = new Intent(MyDocuments.this, EditDocument.class);

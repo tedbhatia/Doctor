@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame,new Health_Acc_Fragment()).commit();
+        fm.beginTransaction().replace(R.id.content_frame, new Health_Acc_Fragment()).commit();
 
         View view = navigationView.getHeaderView(0);
         view.findViewById(R.id.imageView).setOnClickListener(this);
@@ -70,10 +70,25 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you wish to exit?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
     }
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -85,38 +100,37 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.health_acc) {
             setTitle("My Health Account");
-            fm.beginTransaction().replace(R.id.content_frame,new Health_Acc_Fragment()).commit();
+            fm.beginTransaction().replace(R.id.content_frame, new Health_Acc_Fragment()).commit();
 
         } else if (id == R.id.symptoms) {
             setTitle("Symptoms");
-            fm.beginTransaction().replace(R.id.content_frame,new Symptoms_Fragment()).commit();
+            fm.beginTransaction().replace(R.id.content_frame, new Symptoms_Fragment()).commit();
 
         } else if (id == R.id.find_docs) {
             setTitle("Find Doctors");
-            fm.beginTransaction().replace(R.id.content_frame,new FindDoctorsFragment()).commit();
+            fm.beginTransaction().replace(R.id.content_frame, new FindDoctorsFragment()).commit();
 
         } else if (id == R.id.emergency) {
             setTitle("Emergency Contacts");
-            fm.beginTransaction().replace(R.id.content_frame,new EmergencyContactsFragment()).commit();
+            fm.beginTransaction().replace(R.id.content_frame, new EmergencyContactsFragment()).commit();
 
         } else if (id == R.id.procedure) {
             setTitle("Procedures");
-            fm.beginTransaction().replace(R.id.content_frame,new ProcedureFragment()).commit();
+            fm.beginTransaction().replace(R.id.content_frame, new ProcedureFragment()).commit();
 
         } else if (id == R.id.notifications) {
             setTitle("Notifications");
-            fm.beginTransaction().replace(R.id.content_frame,new NotificationsFragment()).commit();
+            fm.beginTransaction().replace(R.id.content_frame, new NotificationsFragment()).commit();
 
         } else if (id == R.id.meds) {
             setTitle("Medicines");
-            fm.beginTransaction().replace(R.id.content_frame,new MedicineFragment()).commit();
+            fm.beginTransaction().replace(R.id.content_frame, new MedicineFragment()).commit();
 
         } else if (id == R.id.logout) {
-            Toast.makeText(MainActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this,LoginScreen.class);
+            Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, LoginScreen.class);
             startActivity(intent);
         }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -126,41 +140,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-            setTitle("My Profile");
-            fm.beginTransaction().replace(R.id.content_frame,new MyProfileFragment()).commit();
-            drawer.closeDrawers();
-    }
-
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-
-        if(keyCode==KeyEvent.KEYCODE_BACK){
-            exitByBackKey();
-            return true;
-        }
-        return super.onKeyDown(keyCode,event);
-
-    }
-
-    protected void exitByBackKey() {
-
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you wish to exit?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        AlertDialog alertDialog=builder.create();
-        alertDialog.show();
-
+        setTitle("My Profile");
+        fm.beginTransaction().replace(R.id.content_frame, new MyProfileFragment()).commit();
+        drawer.closeDrawers();
     }
 
 }

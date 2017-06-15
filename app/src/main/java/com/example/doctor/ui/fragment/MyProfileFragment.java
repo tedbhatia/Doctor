@@ -5,7 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,6 +49,28 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
 
         bindViews(rootView);
         setData();
+
+        rootView.setFocusableInTouchMode(true);
+        rootView.requestFocus();
+        rootView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+
+                    Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
+
+                    FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.content_frame,health_acc_fragment);
+
+                    transaction.commit();
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
         return rootView;
 
     }
@@ -92,5 +116,7 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }
