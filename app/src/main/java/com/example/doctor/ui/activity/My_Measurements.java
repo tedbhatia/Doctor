@@ -110,7 +110,7 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
             }
         });
 
-        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int mLastFirstVisibleItem = 0;
 
             @Override

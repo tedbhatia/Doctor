@@ -1,26 +1,48 @@
 package com.example.doctor.ui.model;
 
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+import com.bignerdranch.expandablerecyclerview.model.Parent;
+import com.example.doctor.ui.model.Diseases;
 
 import java.util.List;
 
 /**
- * Created by Aviral on 09-06-2017.
+ * Created by Aviral on 15-06-2017.
  */
 
-public class Body_Parts extends ExpandableGroup{
-    private String male_body_parts;
+public class Body_Parts implements Parent<DiseasesList> {
 
-    public Body_Parts(String title, List items) {
-        super(title, items);
+    private String name;
+    List<DiseasesList> diseasesList;
+
+    public Body_Parts(String name,List<DiseasesList> diseasesList) {
+        this.name=name;
+        this.diseasesList = diseasesList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public DiseasesList getDiseases(int position){
+        return diseasesList.get(position);
+    }
+
+    public DiseasesList setDiseases(int position){
+        return diseasesList.get(position);
     }
 
 
-    public String get_body_parts() {
-        return male_body_parts;
+    @Override
+    public List<DiseasesList> getChildList() {
+        return diseasesList;
     }
 
-    public void set_body_parts(String male_body_parts) {
-        this.male_body_parts = male_body_parts;
+    @Override
+    public boolean isInitiallyExpanded() {
+        return false;
     }
 }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.ExpandableListAdapter;
+import com.example.doctor.ui.model.DiseasesList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class DiseaseDetail extends AppCompatActivity implements View.OnClickList
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
+    DiseasesList diseases;
     HashMap<String, List<String>> listDataChild;
     TextView share;
 
@@ -41,7 +43,11 @@ public class DiseaseDetail extends AppCompatActivity implements View.OnClickList
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        prepareListData();
+        if(getIntent().hasExtra("diseasedetail")){
+            diseases = (DiseasesList) getIntent().getSerializableExtra("diseasedetail");
+            prepareListData();
+        }
+
         share = (TextView) findViewById(R.id.share);
         expListView = (ExpandableListView) findViewById(R.id.dis_detail_listview);
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
@@ -104,17 +110,17 @@ public class DiseaseDetail extends AppCompatActivity implements View.OnClickList
         listDataHeader.add("Tests");
         listDataHeader.add("Related Videos");
 
-        List<String> description = new ArrayList<String>();
-        description.add("The first thing you may think of is heart attack. Certainly chest pain is not something to ignore. But you should know that it has many possible causes. In fact, as much as a quarter of the U.S. population experiences chest pain that is not related to the heart. Chest pain may also be caused by problems in your lungs, esophagus, muscles, ribs, or nerves, for example. Some of these conditions are serious and life threatening. Others are not. If you have unexplained chest pain, the only way to confirm its cause is to have a doctor evaluate you.");
-        List<String> tests = new ArrayList<String>();
-        tests.add("ECG");
-        tests.add("EEG");
-        List<String> videos = new ArrayList<String>();
-        videos.add("Video_link1");
-        videos.add("Video_link2");
-        listDataChild.put(listDataHeader.get(0), description); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), tests);
-        listDataChild.put(listDataHeader.get(2), videos);
+//        List<String> description = new ArrayList<String>();
+//        description.add("The first thing you may think of is heart attack. Certainly chest pain is not something to ignore. But you should know that it has many possible causes. In fact, as much as a quarter of the U.S. population experiences chest pain that is not related to the heart. Chest pain may also be caused by problems in your lungs, esophagus, muscles, ribs, or nerves, for example. Some of these conditions are serious and life threatening. Others are not. If you have unexplained chest pain, the only way to confirm its cause is to have a doctor evaluate you.");
+//        List<String> tests = new ArrayList<String>();
+//        tests.add("ECG");
+//        tests.add("EEG");
+//        List<String> videos = new ArrayList<String>();
+//        videos.add("Video_link1");
+//        videos.add("Video_link2");
+        listDataChild.put(listDataHeader.get(0),diseases.getDisease_desc()); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), diseases.getDisease_tests());
+        listDataChild.put(listDataHeader.get(2), diseases.getDisease_video());
     }
 
     @Override
