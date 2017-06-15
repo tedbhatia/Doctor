@@ -116,7 +116,8 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            this.finish();
+            Intent intent = new Intent(MyDocuments.this, MainActivity.class);
+            startActivity(intent);
         } else {
             if (adapter.getCheckedStatus()) {
                 Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
