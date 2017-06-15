@@ -1,7 +1,9 @@
 package com.example.doctor.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,8 +28,11 @@ import java.util.TimerTask;
 public class My_Insurance extends AppCompatActivity implements Insurance_Adapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
     private Insurance_Adapter adapter;
     private List<Insurance> data;
+
+    private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
@@ -39,6 +44,20 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_insurance);
         setTitle("My Insurance");
+//
+//        progressDialog=new ProgressDialog(this);
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.setCancelable(false);
+//        progressDialog.isIndeterminate();
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                progressDialog.dismiss();
+//            }
+//        }, 3000);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,6 +110,28 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
             }
         });
 
+        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            int mLastFirstVisibleItem = 0;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                final int currentFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (currentFirstVisibleItem > this.mLastFirstVisibleItem) {
+                    My_Insurance.this.getSupportActionBar().hide();
+                } else if (currentFirstVisibleItem < this.mLastFirstVisibleItem) {
+                    My_Insurance.this.getSupportActionBar().show();
+                }
+
+                this.mLastFirstVisibleItem = currentFirstVisibleItem;
+            }
+        });
+
     }
 
     @Override
@@ -136,9 +177,10 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(My_Insurance.this, 1, false));
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     @Override

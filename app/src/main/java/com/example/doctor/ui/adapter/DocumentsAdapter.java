@@ -11,9 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.doctor.R;
-import com.example.doctor.ui.activity.MyDocuments;
 import com.example.doctor.ui.model.Documents;
-import com.example.doctor.ui.model.Insurance;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -103,11 +101,12 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.MyVi
 
         @Override
         public void onClick(View v) {
-            if(myClickListener!=null && !checked){
-                myClickListener.onItemClick(getLayoutPosition(),v);
-            }
-            else{
-                checkBox.toggle();
+            if (myClickListener != null) {
+                if (!checked) {
+                    myClickListener.onItemClick(getLayoutPosition(), v);
+                } else {
+                    checkBox.toggle();
+                }
             }
         }
 

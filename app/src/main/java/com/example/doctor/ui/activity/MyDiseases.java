@@ -1,6 +1,8 @@
 package com.example.doctor.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,10 +28,13 @@ import java.util.TimerTask;
 public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
     private DiseasesAdapter adapter;
 
     private List<Diseases> listItems;
     private Diseases listItem;
+
+    private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
@@ -43,13 +48,28 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
 
         setTitle("My Diseases");
 
+//        progressDialog=new ProgressDialog(this);
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.setCancelable(false);
+//        progressDialog.isIndeterminate();
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                progressDialog.dismiss();
+//            }
+//        }, 3000);
+
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         listItems=new ArrayList<>();
 
@@ -104,6 +124,28 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
                         refreshLayout.setRefreshing(false);
                     }
                 }, 3000);
+            }
+        });
+
+        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            int mLastFirstVisibleItem = 0;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                final int currentFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (currentFirstVisibleItem > this.mLastFirstVisibleItem) {
+                    MyDiseases.this.getSupportActionBar().hide();
+                } else if (currentFirstVisibleItem < this.mLastFirstVisibleItem) {
+                    MyDiseases.this.getSupportActionBar().show();
+                }
+
+                this.mLastFirstVisibleItem = currentFirstVisibleItem;
             }
         });
 

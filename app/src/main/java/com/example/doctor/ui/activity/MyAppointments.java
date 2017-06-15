@@ -1,7 +1,9 @@
 package com.example.doctor.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,10 +28,13 @@ import java.util.TimerTask;
 public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
     private AppointmentsAdapter adapter;
 
     private List<Appointments> listItems;
     private Appointments listItem;
+
+    private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
@@ -45,20 +50,45 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         setTitle("My Appointments");
 
+
+
+//        progressDialog=new ProgressDialog(this);
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.setCancelable(false);
+//        progressDialog.isIndeterminate();
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                progressDialog.dismiss();
+//            }
+//        }, 3000);
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Appointments("Aaa","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(1,new Appointments("Bbb","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(2,new Appointments("Ccc","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(3,new Appointments("Ddd","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(4,new Appointments("Eee","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(0,new Appointments("aaa","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(1,new Appointments("bbb","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(2,new Appointments("ccc","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(3,new Appointments("ddd","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(4,new Appointments("eee","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(5,new Appointments("fff","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(6,new Appointments("ggg","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(7,new Appointments("hhh","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(8,new Appointments("iii","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(9,new Appointments("jjj","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(10,new Appointments("kkk","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(11,new Appointments("lll","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+
 
         adapter=new AppointmentsAdapter(this,listItems);
         recyclerView.setAdapter(adapter);
@@ -107,6 +137,29 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                 }, 3000);
             }
         });
+
+        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            int mLastFirstVisibleItem = 0;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                final int currentFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (currentFirstVisibleItem > this.mLastFirstVisibleItem) {
+                    MyAppointments.this.getSupportActionBar().hide();
+                } else if (currentFirstVisibleItem < this.mLastFirstVisibleItem) {
+                    MyAppointments.this.getSupportActionBar().show();
+                }
+
+                this.mLastFirstVisibleItem = currentFirstVisibleItem;
+            }
+        });
+
     }
 
     @Override

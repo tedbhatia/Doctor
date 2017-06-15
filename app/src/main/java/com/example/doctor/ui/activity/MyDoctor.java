@@ -1,6 +1,8 @@
 package com.example.doctor.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,8 +30,11 @@ import java.util.TimerTask;
 public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
     private MyDoctorAdapter adapter;
     private List<Doctor> data;
+
+    private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
@@ -41,6 +46,20 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_doctor);
         setTitle("My Doctor");
+
+//        progressDialog=new ProgressDialog(this);
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.setCancelable(false);
+//        progressDialog.isIndeterminate();
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                progressDialog.dismiss();
+//            }
+//        }, 3000);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -93,6 +112,28 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
             }
         });
 
+        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            int mLastFirstVisibleItem = 0;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                final int currentFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (currentFirstVisibleItem > this.mLastFirstVisibleItem) {
+                    MyDoctor.this.getSupportActionBar().hide();
+                } else if (currentFirstVisibleItem < this.mLastFirstVisibleItem) {
+                    MyDoctor.this.getSupportActionBar().show();
+                }
+
+                this.mLastFirstVisibleItem = currentFirstVisibleItem;
+            }
+        });
+
     }
 
     @Override
@@ -139,9 +180,10 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MyDoctor.this, 1, false));
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     @Override

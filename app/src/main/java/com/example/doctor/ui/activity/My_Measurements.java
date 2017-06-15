@@ -1,6 +1,8 @@
 package com.example.doctor.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,10 +27,13 @@ import java.util.TimerTask;
 public class My_Measurements extends AppCompatActivity implements Measurement_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
     private Measurement_Adapter adapter;
 
     private List<Measurement_Info> listItems;
     private Measurement_Info listItem;
+
+    private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
@@ -40,6 +45,20 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_measurements);
         setTitle("My Measurement");
+
+//        progressDialog=new ProgressDialog(this);
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.setCancelable(false);
+//        progressDialog.isIndeterminate();
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                progressDialog.dismiss();
+//            }
+//        }, 3000);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,24 +110,46 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
             }
         });
 
+        this.recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            int mLastFirstVisibleItem = 0;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                final int currentFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (currentFirstVisibleItem > this.mLastFirstVisibleItem) {
+                    My_Measurements.this.getSupportActionBar().hide();
+                } else if (currentFirstVisibleItem < this.mLastFirstVisibleItem) {
+                    My_Measurements.this.getSupportActionBar().show();
+                }
+
+                this.mLastFirstVisibleItem = currentFirstVisibleItem;
+            }
+        });
 
     }
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(My_Measurements.this,1,false));
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     private void prepareData() {
 
-        String[] date = {"23/05/2017", "23/05/2017", "25/05/2017", "30/05/2017", "30/05/2017"};
-        String[] height = {"5'6\"","5'6\"","5'6\"","5'6\"","5'6\""};
-        String[] weight={"67 kg","68 kg","68 kg","65 kg","65 kg"};
-        String[] bloodPressure={"xxx","yyy","zzz","aaa","bbb"};
-        String[] bloodSugar={"qwerty 1","qwerty 2","qwerty 3","qwerty 4","qwerty 5"};
-        String[] cholesterol={"111","222","333","444","555"};
+        String[] date = {"23/05/2017", "23/05/2017", "25/05/2017", "30/05/2017", "30/05/2017","05/06/2017"};
+        String[] height = {"5'6\"","5'6\"","5'6\"","5'6\"","5'6\"","5'6\""};
+        String[] weight={"67 kg","68 kg","68 kg","65 kg","65 kg","64 kg"};
+        String[] bloodPressure={"xxx","yyy","zzz","aaa","bbb","ccc"};
+        String[] bloodSugar={"qwerty 1","qwerty 2","qwerty 3","qwerty 4","qwerty 5","qwerty 6"};
+        String[] cholesterol={"111","222","333","444","555","666"};
 
         for (int i = 0; i < date.length; i++) {
             Measurement_Info current = new Measurement_Info();

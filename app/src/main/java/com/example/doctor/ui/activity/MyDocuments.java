@@ -1,12 +1,12 @@
 package com.example.doctor.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +14,8 @@ import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.DocumentsAdapter;
-import com.example.doctor.ui.adapter.MyDoctorAdapter;
-import com.example.doctor.ui.model.Doctor;
 import com.example.doctor.ui.model.Documents;
 import com.baoyz.widget.PullRefreshLayout;
-import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
-import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +27,7 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
     private DocumentsAdapter adapter;
     private List<Documents> data;
     private Menu menu;
-
-    private OnActivityTouchListener touchListener;
-    private RecyclerTouchListener onTouchListener;
+    private ProgressDialog progressDialog;
 
     PullRefreshLayout refreshLayout;
 
@@ -42,6 +36,20 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_documents);
         setTitle("My Documents");
+
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 3000);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -116,13 +124,21 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent intent = new Intent(MyDocuments.this, MainActivity.class);
-            startActivity(intent);
+            if(adapter.getCheckedStatus()){
+                recyclerView.setAdapter(new DocumentsAdapter(this,data));
+                recyclerView.invalidate();
+            }
+            else{
+                Intent intent = new Intent(MyDocuments.this, MainActivity.class);
+                startActivity(intent);
+            }
+
         } else {
             if (adapter.getCheckedStatus()) {
-                Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Deleted.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MyDocuments.this, MyDocuments.class);
                 startActivity(intent);
+
             } else {
                 Intent intent = new Intent(MyDocuments.this, EditDocument.class);
                 startActivity(intent);
@@ -134,8 +150,8 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
     @Override
     public void onBackPressed() {
         if (adapter.getCheckedStatus()) {
-            Intent intent = new Intent(MyDocuments.this, MyDocuments.class);
-            startActivity(intent);
+            recyclerView.setAdapter(new DocumentsAdapter(this,data));
+            recyclerView.invalidate();
         }else{
             Intent intent = new Intent(MyDocuments.this, MainActivity.class);
             startActivity(intent);
