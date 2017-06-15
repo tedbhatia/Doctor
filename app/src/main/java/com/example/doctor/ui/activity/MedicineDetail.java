@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.MedicineDetailExpandableListAdapter;
+import com.example.doctor.ui.model.MedicineModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class MedicineDetail extends AppCompatActivity implements View.OnClickLis
     ExpandableListView expandable_list_view;
     List<String> listHeading;
     HashMap<String, String> listMap;
+    MedicineModel medicineModel;
     Button share;
 
     TextView usage_instructions, overdose_instructions, possible_side_effects, brand_names;
@@ -32,13 +34,19 @@ public class MedicineDetail extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine_detail);
         expandable_list_view = (ExpandableListView) findViewById(R.id.expandable_list_view);
+        if(getIntent().hasExtra("meds")){
+            medicineModel = (MedicineModel) getIntent().getSerializableExtra("meds");
+            bindView();
+        }
+
         prepareData();
         expandable_list_adapter = new MedicineDetailExpandableListAdapter(this, listHeading, listMap);
         expandable_list_view.setAdapter(expandable_list_adapter);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Orienoflobin");
-        bindView();
+        setTitle(medicineModel.getName());
+
+
 //        launch();
     }
 
@@ -50,10 +58,10 @@ public class MedicineDetail extends AppCompatActivity implements View.OnClickLis
         listHeading.add("Possible Side Effects");
         listHeading.add("Brand Names");
 
-        listMap.put(listHeading.get(0), "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.");
-        listMap.put(listHeading.get(1), "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.");
-        listMap.put(listHeading.get(2), "Welcome to Infibeam");
-        listMap.put(listHeading.get(3), "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.");
+        listMap.put(listHeading.get(0),medicineModel.getUsuage());
+        listMap.put(listHeading.get(1),medicineModel.getOverdose());
+        listMap.put(listHeading.get(2),medicineModel.getSide_effects());
+        listMap.put(listHeading.get(3),medicineModel.getBrand_names());
 
 
     }

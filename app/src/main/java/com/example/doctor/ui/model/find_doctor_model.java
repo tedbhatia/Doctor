@@ -1,9 +1,37 @@
 package com.example.doctor.ui.model;
 
 
-public class find_doctor_model {
-    String name, brief_info, phone_number;
-    int id;
+import java.io.Serializable;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class find_doctor_model implements Serializable{
+    private String name, description, mobile_number, speciality, address, timings;
+    private int id;
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTimings() {
+        return timings;
+    }
+
+    public void setTimings(String timings) {
+        this.timings = timings;
+    }
 
     public String getName() {
         return name;
@@ -13,20 +41,20 @@ public class find_doctor_model {
         this.name = name;
     }
 
-    public String getBrief_info() {
-        return brief_info;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBrief_info(String brief_info) {
-        this.brief_info = brief_info;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getMobile_number() {
+        return mobile_number;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setMobile_number(String mobile_number) {
+        this.mobile_number = mobile_number;
     }
 
     public int getId() {
@@ -37,10 +65,13 @@ public class find_doctor_model {
         this.id = id;
     }
 
-    public find_doctor_model(String name, String brief_info, int id, String phone_number) {
+    public find_doctor_model(String name, String description, String mobile_number, String speciality, String address, String timings, int id) {
         this.name = name;
-        this.brief_info = brief_info;
+        this.description = description;
+        this.mobile_number = mobile_number;
+        this.speciality = speciality;
+        this.address = address;
+        this.timings = timings;
         this.id = id;
-        this.phone_number = phone_number;
     }
 }

@@ -37,7 +37,7 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
         return new DataObjectHolder(view);
     }
 
-    public void setOnItemClickListener(FindDoctorAdapter.MyClickListener myClickListener) {
+    public void setOnItemClickListener(MyClickListener myClickListener) {
         FindDoctorAdapter.myClickListener = myClickListener;
     }
 
@@ -45,8 +45,8 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Picasso.with(context).load(models.get(position).getId()).into(holder.doctorImage);
         holder.name.setText(models.get(position).getName());
-        holder.phoneNumber.setText(models.get(position).getPhone_number());
-        holder.briefInfo.setText(models.get(position).getBrief_info());
+        holder.mobileNumber.setText(models.get(position).getMobile_number());
+        holder.speciality.setText(models.get(position).getSpeciality());
     }
 
     @Override
@@ -83,7 +83,7 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
     }
 
     public interface MyClickListener{
-        void onItemClick(int position,View v);
+        void onItemClick(int position, View v);
     }
 
     public List<find_doctor_model> getModels() {
@@ -106,7 +106,7 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
                 if(constraint!=null){
                     if(orig!=null && orig.size()>0){
                         for(final find_doctor_model g:orig){
-                            if(g.getName().toLowerCase().contains(constraint.toString().toLowerCase())||g.getBrief_info().toLowerCase().contains(constraint.toString().toLowerCase()))
+                            if(g.getName().toLowerCase().contains(constraint.toString().toLowerCase())||g.getDescription().toLowerCase().contains(constraint.toString().toLowerCase()))
                                 model.add(g);
                         }
                     }
@@ -126,8 +126,8 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
     public static class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView doctorImage;
         private TextView name;
-        private TextView phoneNumber;
-        private TextView briefInfo;
+        private TextView mobileNumber;
+        private TextView speciality;
         private LinearLayout llayout;
 
         public DataObjectHolder(View itemView) {
@@ -135,8 +135,8 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
 
             doctorImage = (ImageView) itemView.findViewById(R.id.doctor_image);
             name = (TextView) itemView.findViewById(R.id.name);
-            phoneNumber = (TextView) itemView.findViewById(R.id.phone_number);
-            briefInfo = (TextView) itemView.findViewById(R.id.brief_info);
+            mobileNumber = (TextView) itemView.findViewById(R.id.mobile_number);
+            speciality = (TextView) itemView.findViewById(R.id.speciality);
             llayout = (LinearLayout) itemView.findViewById(R.id.llayout);
 
             llayout.setOnClickListener(this);

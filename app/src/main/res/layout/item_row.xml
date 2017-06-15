@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="5dp"
+
     android:padding="10dp">
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/llayout"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/doctor_image"
@@ -35,13 +35,13 @@
                 android:text="Mr A K Singh" />
 
             <TextView
-                android:id="@+id/phone_number"
+                android:id="@+id/mobile_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="800485460" />
 
             <TextView
-                android:id="@+id/brief_info"
+                android:id="@+id/speciality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="He is a great doctor for cardiology.Specilist in all heart related surjery" />

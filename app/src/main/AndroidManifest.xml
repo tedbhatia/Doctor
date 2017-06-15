@@ -45,6 +45,7 @@
         <activity android:name=".ui.activity.MedicineDetail"/>
         <activity android:name=".ui.activity.ProcedureDetail"/>
         <activity android:name=".ui.activity.DiseaseDetail"/>
+        <activity android:name=".ui.activity.DoctorDetail"/>
         <activity android:name=".ui.activity.EditDiseases"></activity>
     </application>
 

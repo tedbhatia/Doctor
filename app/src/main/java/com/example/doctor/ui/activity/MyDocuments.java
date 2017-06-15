@@ -120,12 +120,8 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
         } else {
             if (adapter.getCheckedStatus()) {
                 Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
-                /*Intent intent = new Intent(MyDocuments.this, MyDocuments.class);
-                startActivity(intent);*/
-                adapter.notifyItemRangeChanged(0, adapter.getItemCount());
-                menu.clear();
-                getMenuInflater().inflate(R.menu.main, menu);
-                adapter.setCheckedStatus();
+                Intent intent = new Intent(MyDocuments.this, MyDocuments.class);
+                startActivity(intent);
             } else {
                 Intent intent = new Intent(MyDocuments.this, EditDocument.class);
                 startActivity(intent);
@@ -137,14 +133,11 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
     @Override
     public void onBackPressed() {
         if (adapter.getCheckedStatus()) {
-            /*Intent intent = new Intent(this, MyDocuments.class);
-            startActivity(intent);*/
-            adapter.notifyItemRangeChanged(0, adapter.getItemCount());
-            menu.clear();
-            getMenuInflater().inflate(R.menu.main, menu);
-            adapter.setCheckedStatus();
+            Intent intent = new Intent(MyDocuments.this, MyDocuments.class);
+            startActivity(intent);
         }else{
-            this.finish();
+            Intent intent = new Intent(MyDocuments.this, MainActivity.class);
+            startActivity(intent);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.doctor.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,14 +27,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 
 import com.example.doctor.R;
+import com.example.doctor.ui.activity.DoctorDetail;
 import com.example.doctor.ui.adapter.FindDoctorAdapter;
 import com.example.doctor.ui.model.find_doctor_model;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by tejas on 8/6/17.
  */
 
-public class FindDoctorsFragment extends android.support.v4.app.Fragment implements FindDoctorAdapter.MyClickListener, SearchView.OnQueryTextListener{
+public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.MyClickListener, SearchView.OnQueryTextListener{
 
     private RecyclerView recyclerView;
     private FindDoctorAdapter findDoctorAdapter;
@@ -74,40 +79,29 @@ public class FindDoctorsFragment extends android.support.v4.app.Fragment impleme
 
     private void prepareData(List<find_doctor_model> model) {
 
+//        String name, String description, String mobile_number, String speciality, String address, String timings, CircleImageView
+//        display_picture, int id) {
+        model.add(new find_doctor_model("Tejas", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Pankaj", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Aviral", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Shivika", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Bawlo", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Viral", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Shivli", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Panklo", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Jaillo", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Cutex", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
 
-        model.add(new find_doctor_model("Aviral"+"\n", " MD - Dermatology MBBS\n" +
-                "35 years experience\n" +
-                "Dermatologist .", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Seth"+"\n", " MBBS MS - General Surgery MCh - Urology\n" +
-                "15 years experience\n" +
-                "Urological Surgeon , Urologist.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Kamlesh"+"\n", " MBBS MS - General Surgery MCh - Neuro Surgery\n" +
-                "12 years experience\n" +
-                "Spine Surgeon , Neurosurgeon.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Pankaj"+"\n", " BDS MDS - Oral & Maxillofacial Surgery\n" +
-                "6 years experience\n" +
-                "Dentist.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Shrut"+"\n", " MBBS MCh - Cardio Thoracic and Vascular Surgery\n" +
-                "4 years experience\n" +
-                "Cardiothoracic and Vascular Surgeon.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Varun"+"\n", " MBBS MS - General Surgery DNB - Surgical Oncology\n" +
-                "10 years experience\n" +
-                "Surgical Oncologist.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Lakhan"+"\n", " MSc - Dietitics / Nutrition\n" +
-                "12 years experience\n" +
-                "Dietitian/Nutritionist.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Tejas"+"\n", " MBBS MS - Ophthalmology\n" +
-                "11 years experience\n" +
-                "Ophthalmologist/ Eye Surgeon.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Bhavesh"+"\n", " MBBS DNB - Obstetrics & Gynecology\n" +
-                "12 years experience\n" +
-                "Gynecologist.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Priyanshu"+"\n", " MBBS DNB - Obstetrics & Gynecology\n" +
-                "4 years experience\n" +
-                "Gynecologist , Obstetrician , Infertility Specialist.", R.drawable.doctor, "8004854630"+"\n"));
-        model.add(new find_doctor_model("Bajrang"+"\n", " MBBS DNB - General Medicine\n" +
-                "16 years experience\n" +
-                "General Physician.", R.drawable.doctor, "8004854630"+"\n"));
 
         findDoctorAdapter.addAll(model);
     }
@@ -126,7 +120,10 @@ public class FindDoctorsFragment extends android.support.v4.app.Fragment impleme
 
     @Override
     public void onItemClick(int position, View v) {
-        Toast.makeText(getActivity(), "Position : " + position, Toast.LENGTH_SHORT).show();
+          Intent intent = new Intent (getActivity(), DoctorDetail.class);
+          intent.putExtra("details", model.get(position));
+          startActivity(intent);
+//        Toast.makeText(getActivity(), "Position : " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
