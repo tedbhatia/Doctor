@@ -1,5 +1,6 @@
 package com.example.doctor.ui.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
@@ -18,6 +20,7 @@ import com.example.doctor.ui.adapter.Insurance_Adapter;
 import com.example.doctor.ui.adapter.MyDoctorAdapter;
 import com.example.doctor.ui.model.Doctor;
 import com.example.doctor.ui.model.Insurance;
+import com.example.doctor.ui.model.Measurement_Info;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 import com.baoyz.widget.PullRefreshLayout;
@@ -77,7 +80,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        Toast.makeText(MyDoctor.this, "View", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MyDoctor.this, "View", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -196,9 +199,17 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
 
     @Override
     public void onItemClick(int position, View v) {
-        Intent intent = new Intent(MyDoctor.this, EditDoctor.class);
-        intent.putExtra("doctor", data.get(position));
-        startActivity(intent);
+        if(v.getId()==R.id.requestButton){
+            Toast.makeText(this,"Request",Toast.LENGTH_SHORT).show();
+        }
+        else if(v.getId() == R.id.viewDetails){
+            details(position);
+        }
+        else {
+            Intent intent = new Intent(MyDoctor.this, EditDoctor.class);
+            intent.putExtra("doctor", data.get(position));
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -212,6 +223,22 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void details(int position) {
+        Doctor a = data.get(position);
+
+        //
+        Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
+        dialog.setContentView(R.layout.display_doctor);
+        //dialog.findViewById(R.id.imageZoom);
+        //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
+        ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getName());
+        ((TextView)dialog.findViewById(R.id.type_edit)).setText(a.getType());
+        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());
+        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getPhone());
+        ((TextView)dialog.findViewById(R.id.note_edit)).setText(a.getNotes());
+        dialog.show();
     }
 
 }

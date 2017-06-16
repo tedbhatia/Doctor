@@ -187,7 +187,7 @@
                     android:textSize="16sp"
                     android:textStyle="normal"/>
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/bloodPressure_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:text="Cholesterol"
                     android:textSize="16sp"
-                    android:textStyle="normal"/>
+                    android:textStyle="normal"/>-->
 
             </LinearLayout>
 

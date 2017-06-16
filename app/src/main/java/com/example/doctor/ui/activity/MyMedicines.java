@@ -1,5 +1,6 @@
 package com.example.doctor.ui.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +12,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.MedicinesAdapter;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
+import com.example.doctor.ui.model.Appointments;
 import com.example.doctor.ui.model.Medicines;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
@@ -92,7 +95,8 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        Toast.makeText(MyMedicines.this,"View",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MyMedicines.this,"View",Toast.LENGTH_SHORT).show();
+                        details(position);
                     }
 
                     @Override
@@ -209,4 +213,24 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void details(int position) {
+        Medicines a = listItems.get(position);
+
+        //
+        Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
+        dialog.setContentView(R.layout.display_medicines);
+        //dialog.findViewById(R.id.imageZoom);
+        //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
+        ((TextView)dialog.findViewById(R.id.med_name_edit)).setText(a.getMedName());
+        ((TextView)dialog.findViewById(R.id.dosage_amount_edit)).setText(a.getDosageAmount());
+        ((TextView)dialog.findViewById(R.id.unit_edit)).setText(a.getUnit());
+        ((TextView)dialog.findViewById(R.id.method_edit)).setText(a.getMethod());
+        ((TextView)dialog.findViewById(R.id.frequency_edit)).setText(a.getFrequency());
+        ((TextView)dialog.findViewById(R.id.date_edit)).setText(a.getDate());
+        ((TextView)dialog.findViewById(R.id.doctor_name_edit)).setText(a.getDoctorName());
+        ((TextView)dialog.findViewById(R.id.notes_edit)).setText(a.getNotes());
+        dialog.show();
+    }
+
 }

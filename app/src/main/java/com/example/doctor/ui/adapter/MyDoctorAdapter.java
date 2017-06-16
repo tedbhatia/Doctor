@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.doctor.R;
@@ -73,6 +74,7 @@ public class MyDoctorAdapter extends RecyclerView.Adapter<MyDoctorAdapter.MyView
         TextView phone;
         private ImageView edit;
         private Button request;
+        LinearLayout viewDetails;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -81,8 +83,11 @@ public class MyDoctorAdapter extends RecyclerView.Adapter<MyDoctorAdapter.MyView
             phone = (TextView) itemView.findViewById(R.id.phone_edit);
             edit = (ImageView) itemView.findViewById(R.id.editButton);
             request = (Button) itemView.findViewById(R.id.requestButton);
+            viewDetails = (LinearLayout) itemView.findViewById(R.id.viewDetails);
 
             edit.setOnClickListener(this);
+            request.setOnClickListener(this);
+            viewDetails.setOnClickListener(this);
         }
 
 

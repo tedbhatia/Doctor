@@ -1,5 +1,6 @@
 package com.example.doctor.ui.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
@@ -11,11 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.Measurement_Adapter;
+import com.example.doctor.ui.model.Appointments;
 import com.example.doctor.ui.model.Measurement_Info;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
@@ -75,7 +78,8 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        Toast.makeText(My_Measurements.this,"View",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(My_Measurements.this,"View",Toast.LENGTH_SHORT).show();
+                        details(position);
                     }
 
                     @Override
@@ -217,5 +221,22 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void details(int position) {
+        Measurement_Info a = listItems.get(position);
+
+        //
+        Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
+        dialog.setContentView(R.layout.display_measurements);
+        //dialog.findViewById(R.id.imageZoom);
+        //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
+        ((TextView)dialog.findViewById(R.id.date_edit)).setText(a.getDate());
+        ((TextView)dialog.findViewById(R.id.height_edit)).setText(a.getHeight());
+        ((TextView)dialog.findViewById(R.id.weight_edit)).setText(a.getWeight());
+        ((TextView)dialog.findViewById(R.id.bloodPressure_edit)).setText(a.getBloodPressure());
+        ((TextView)dialog.findViewById(R.id.bloodSugar_edit)).setText(a.getBloodSugar());
+        ((TextView)dialog.findViewById(R.id.cholesterol_edit)).setText(a.getCholesterol());
+        dialog.show();
     }
 }

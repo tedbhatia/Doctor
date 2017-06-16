@@ -1,9 +1,14 @@
 package com.example.doctor.ui.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +25,7 @@ import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
 import com.example.doctor.ui.model.Appointments;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +109,8 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        Toast.makeText(MyAppointments.this,"View",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MyAppointments.this,"View",Toast.LENGTH_SHORT).show();
+                        details(position);
                     }
 
                     @Override
@@ -223,6 +230,25 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         return super.onOptionsItemSelected(item);
 
+    }
+
+    private void details(int position) {
+        Appointments a = listItems.get(position);
+
+        //
+        Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
+        dialog.setContentView(R.layout.display_appointments);
+        //dialog.findViewById(R.id.imageZoom);
+        //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
+        ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getName());
+        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getPhone());
+        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());
+        ((TextView)dialog.findViewById(R.id.speciality_edit)).setText(a.getSpeciality());
+        ((TextView)dialog.findViewById(R.id.date_edit)).setText(a.getDate());
+        ((TextView)dialog.findViewById(R.id.time_edit)).setText(a.getTime());
+        ((TextView)dialog.findViewById(R.id.reason_edit)).setText(a.getReason());
+        ((TextView)dialog.findViewById(R.id.notes_edit)).setText(a.getNotes());
+        dialog.show();
     }
 
 }
