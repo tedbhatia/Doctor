@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
 
     <ScrollView
@@ -81,7 +83,8 @@
                 android:paddingBottom="10dp"
                 android:layout_marginRight="30dp"
                 android:text="Forgot Password ?"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"/>
 
 
             <LinearLayout
@@ -98,21 +101,23 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:background="@color/colorAccent"
+                    android:background="@drawable/transparent_button"
                     android:paddingBottom="0dp"
-                    android:text="Login" />
+                    android:text="Login"
+                    android:textColor="@color/colorAccent"/>
 
 
                 <Button
                     android:id="@+id/btn_signup"
                     android:layout_marginLeft="20dp"
-                    android:background="@color/colorAccent"
+                    android:background="@drawable/transparent_button"
                     style="@style/Button_text"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Sign up" />
+                    android:text="Sign up"
+                    android:textColor="@color/colorAccent"/>
 
             </LinearLayout>
 

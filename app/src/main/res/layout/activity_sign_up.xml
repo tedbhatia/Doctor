@@ -118,6 +118,9 @@
         android:layout_marginTop="20dp"
         android:onClick="onClick"
         android:text="Register"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:background="@drawable/transparent_button"
+        android:textSize="20dp"
+        android:textColor="@color/colorAccent"/>
 
 </LinearLayout>

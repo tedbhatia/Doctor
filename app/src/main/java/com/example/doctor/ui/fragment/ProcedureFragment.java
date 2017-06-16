@@ -73,6 +73,13 @@ public class ProcedureFragment extends android.support.v4.app.Fragment implement
         model.add(new ProcedureModel("Root Canal "));
         model.add(new ProcedureModel("Henria Fix "));
         model.add(new ProcedureModel("Colonoscopy "));
+        model.add(new ProcedureModel("Heart Surgery"));
+        model.add(new ProcedureModel("Dialysis"));
+        model.add(new ProcedureModel("Kidney Replacement "));
+        model.add(new ProcedureModel("Accupuncture "));
+        model.add(new ProcedureModel("Root Canal "));
+        model.add(new ProcedureModel("Henria Fix "));
+        model.add(new ProcedureModel("Colonoscopy "));
 
         procedureAdapter.addAll(model);
     }
