@@ -16,7 +16,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.activity.My_Insurance" />
         <activity android:name=".ui.activity.MyAppointments" />
         <activity android:name=".ui.activity.MyMedicines" />
@@ -25,28 +25,42 @@
         <activity android:name=".ui.activity.EditAppointments" />
         <activity android:name=".ui.activity.MeasurementsEdit" />
         <activity android:name=".ui.activity.EditMedicines" />
-        <activity android:name=".ui.activity.SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".ui.activity.SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activity.LoginScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.LoginScreen" />
         <activity android:name=".ui.activity.SignUp" />
         <activity android:name=".ui.activity.EditProfile" />
         <activity android:name=".ui.activity.ChangePassword" />
         <activity android:name=".ui.activity.MyDiseases" />
-        <activity android:name=".ui.activity.MyDocuments"/>
-        <activity android:name=".ui.activity.EditDocument"/>
-        <activity android:name=".ui.activity.EditDoctor"/>
-        <activity android:name=".ui.activity.MyDoctor"/>
-        <activity android:name=".ui.activity.MedicineDetail"/>
-        <activity android:name=".ui.activity.ProcedureDetail"/>
-        <activity android:name=".ui.activity.DiseaseDetail"/>
-        <activity android:name=".ui.activity.DoctorDetail"/>
-        <activity android:name=".ui.activity.EditDiseases"></activity>
+        <activity android:name=".ui.activity.MyDocuments" />
+        <activity android:name=".ui.activity.EditDocument" />
+        <activity android:name=".ui.activity.EditDoctor" />
+        <activity android:name=".ui.activity.MyDoctor" />
+        <activity android:name=".ui.activity.MedicineDetail" />
+        <activity android:name=".ui.activity.ProcedureDetail" />
+        <activity android:name=".ui.activity.DiseaseDetail" />
+        <activity android:name=".ui.activity.DoctorDetail" />
+        <activity android:name=".ui.activity.EditDiseases" />
+
+        <service android:name=".support.firebase.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/doctor" />
     </application>
 
 </manifest>

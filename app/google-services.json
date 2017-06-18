@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "754123980833",
+    "firebase_url": "https://infibeam-b2525.firebaseio.com",
+    "project_id": "infibeam-b2525",
+    "storage_bucket": "infibeam-b2525.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754123980833:android:353c116e90fb9b9e",
+        "android_client_info": {
+          "package_name": "com.example.doctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754123980833-02sn0d7snuov8thjtmfvd0anv5vftr9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3mJ_MOy8Km5BiKsVBG1havvy7WTbwWLs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

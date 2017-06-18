@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_margin="10dp"
             android:orientation="vertical"
             android:scrollbars="none">
 
@@ -206,6 +206,9 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="40dp">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
                 <Button
                     android:id="@+id/update_profile"
                     android:layout_width="wrap_content"
@@ -216,12 +219,16 @@
                     android:textAllCaps="false"
                     android:background="@drawable/transparent_button"
                     android:textSize="18dp"
-                    android:paddingLeft="1dp"
-                    android:paddingRight="1dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorAccent"/>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
                 <Button
-                    android:layout_marginLeft="20dp"
                     android:id="@+id/change_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -231,9 +238,10 @@
                     android:textAllCaps="false"
                     android:background="@drawable/transparent_button"
                     android:textSize="18dp"
-                    android:paddingLeft="1dp"
-                    android:paddingRight="1dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorAccent"/>
+
+                    </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
