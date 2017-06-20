@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:orientation="vertical"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
 
     <ScrollView
@@ -41,9 +41,9 @@
                         android:id="@+id/input_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
                         android:hint="Username"
-                        android:imeOptions="actionNext" />
+                        android:imeOptions="actionNext"
+                        android:inputType="text" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -53,9 +53,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp">
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal">
 
 
                 <android.support.design.widget.TextInputLayout
@@ -80,11 +80,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:paddingBottom="10dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="Forgot Password ?"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"/>
+                android:textSize="15dp" />
 
 
             <LinearLayout
@@ -100,24 +100,24 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
                     android:background="@drawable/transparent_button"
+                    android:gravity="center"
                     android:paddingBottom="0dp"
                     android:text="Login"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/colorAccent" />
 
 
                 <Button
                     android:id="@+id/btn_signup"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/transparent_button"
                     style="@style/Button_text"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/transparent_button"
                     android:gravity="center"
                     android:text="Sign up"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/colorAccent" />
 
             </LinearLayout>
 
@@ -127,16 +127,26 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <ImageButton
+                <!--<ImageButton
                     android:id="@+id/icon_fb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
                     android:padding="10dp"
-                    android:src="@drawable/facebook" />
+                    android:src="@drawable/facebook" />-->
+
+                <com.facebook.login.widget.LoginButton
+                    android:gravity="center|bottom"
+                    android:id="@+id/facebook_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Facebook"
+                    android:padding="10dp"
+                    android:textSize="20dp"/>
 
                 <ImageButton
                     android:id="@+id/icon_google"
