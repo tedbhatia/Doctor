@@ -74,7 +74,8 @@ public class EditMedicines extends AppCompatActivity {
             }
         });
 
-        ((TextView)findViewById(R.id.MedicinesText)).setText("Add Medicine");
+//        ((TextView)findViewById(R.id.MedicinesText)).setText("Add Medicine");
+        setTitle("Add Medicine");
 
         if(getIntent().hasExtra("medicine")){
 
@@ -127,7 +128,8 @@ public class EditMedicines extends AppCompatActivity {
             ((EditText) findViewById(R.id.notes_edit)).setSelection(((EditText) findViewById(R.id.notes_edit)).length());
         }
 
-        ((TextView)findViewById(R.id.MedicinesText)).setText("Edit Medicine");
+//        ((TextView)findViewById(R.id.MedicinesText)).setText("Edit Medicine");
+        setTitle("Edit Medicine");
 
         button=(Button)findViewById(R.id.editButton);
         button.setText("SAVE CHANGES");

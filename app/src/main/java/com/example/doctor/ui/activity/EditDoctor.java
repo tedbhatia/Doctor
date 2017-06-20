@@ -50,8 +50,11 @@ public class EditDoctor extends AppCompatActivity {
             }
         });
 
-        ((TextView)findViewById(R.id.InsuranceText)).setText("Add Doctor");
+//        ((TextView)findViewById(R.id.InsuranceText)).setText("Add Doctor");
         //((TextView)findViewById(R.id.InsuranceText)).setText("Add Insurance");
+
+        setTitle("Add Doctor");
+
         if(getIntent().hasExtra("doctor")){
             doctor = (Doctor) getIntent().getSerializableExtra("doctor");
             bindView();
@@ -87,8 +90,9 @@ public class EditDoctor extends AppCompatActivity {
             ((EditText) findViewById(R.id.note_edit)).setText(doctor.getNotes());
             //((EditText) findViewById(R.id.note_edit)).setSelection(((EditText) findViewById(R.id.note_edit)).length());
         }
-        ((Button)findViewById(R.id.EditButton)).setText("SAVE");
-        ((TextView)findViewById(R.id.InsuranceText)).setText("Edit Doctor Details");
+        ((Button)findViewById(R.id.EditButton)).setText("SAVE CHANGES");
+//        ((TextView)findViewById(R.id.InsuranceText)).setText("Edit Doctor Details");
+        setTitle("Edit Doctor details");
     }
 
     @Override

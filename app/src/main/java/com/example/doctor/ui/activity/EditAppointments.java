@@ -97,7 +97,8 @@ public class EditAppointments extends AppCompatActivity {
             }
         });
 
-        ((TextView) findViewById(R.id.AppointmentText)).setText("Add Appointment");
+//        ((TextView) findViewById(R.id.AppointmentText)).setText("Add Appointment");
+        setTitle("Add Appointment");
 
         if (getIntent().hasExtra("appointment")) {
 
@@ -149,7 +150,8 @@ public class EditAppointments extends AppCompatActivity {
             ((EditText) findViewById(R.id.notes_edit)).setSelection(((EditText) findViewById(R.id.notes_edit)).length());
         }
 
-        ((TextView)findViewById(R.id.AppointmentText)).setText("Edit Appointment");
+//        ((TextView)findViewById(R.id.AppointmentText)).setText("Edit Appointment");
+        setTitle("Edit Appointment");
 
         button=(Button)findViewById(R.id.editButton);
         button.setText("SAVE CHANGES");

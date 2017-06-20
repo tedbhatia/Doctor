@@ -77,7 +77,7 @@ public class DiseaseDetail extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        // Listview Group collasped listener
+        // Listview Group collapsed listener
         expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
 
             @Override

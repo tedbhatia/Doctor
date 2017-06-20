@@ -73,7 +73,8 @@ public class EditDiseases extends AppCompatActivity {
             }
         });
 
-        ((TextView) findViewById(R.id.DiseaseText)).setText("Add Disease");
+        //((TextView) findViewById(R.id.DiseaseText)).setText("Add Disease");
+        setTitle("Add Disease");
 
         if (getIntent().hasExtra("disease")) {
 
@@ -101,7 +102,8 @@ public class EditDiseases extends AppCompatActivity {
             ((EditText) findViewById(R.id.notes_edit)).setSelection(((EditText) findViewById(R.id.notes_edit)).length());
         }
 
-        ((TextView) findViewById(R.id.DiseaseText)).setText("Edit Disease");
+        //((TextView) findViewById(R.id.DiseaseText)).setText("Edit Disease");
+        setTitle("Edit Disease");
 
         button = (Button) findViewById(R.id.editButton);
         button.setText("SAVE CHANGES");

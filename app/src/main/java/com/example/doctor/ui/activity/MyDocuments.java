@@ -75,7 +75,8 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
     }
 
     private void prepareData() {
-        String[] url = {"https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-0/p480x480/19060139_1470917992968342_4075432350527055133_n.jpg?oh=235194907e7d7966b5c8780221e97bcb&oe=59DD91C6", "https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-0/p480x480/19060139_1470917992968342_4075432350527055133_n.jpg?oh=235194907e7d7966b5c8780221e97bcb&oe=59DD91C6", "https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-0/p480x480/19060139_1470917992968342_4075432350527055133_n.jpg?oh=235194907e7d7966b5c8780221e97bcb&oe=59DD91C6", "https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-0/p480x480/19060139_1470917992968342_4075432350527055133_n.jpg?oh=235194907e7d7966b5c8780221e97bcb&oe=59DD91C6"};
+        String[] url={"http://www.psdgraphics.com/file/attachment-icon.jpg","http://www.psdgraphics.com/file/attachment-icon.jpg","http://www.psdgraphics.com/file/attachment-icon.jpg","http://www.psdgraphics.com/file/attachment-icon.jpg"};
+        //String[] url = {"https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-0/p480x480/19060139_1470917992968342_4075432350527055133_n.jpg?oh=235194907e7d7966b5c8780221e97bcb&oe=59DD91C6", "https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-0/p480x480/19060139_1470917992968342_4075432350527055133_n.jpg?oh=235194907e7d7966b5c8780221e97bcb&oe=59DD91C6", "https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-0/p480x480/19060139_1470917992968342_4075432350527055133_n.jpg?oh=235194907e7d7966b5c8780221e97bcb&oe=59DD91C6", "https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-0/p480x480/19060139_1470917992968342_4075432350527055133_n.jpg?oh=235194907e7d7966b5c8780221e97bcb&oe=59DD91C6"};
         String[] docName = {"Doc 1", "Doc 2", "Doc 3", "Doc 4"};
         for (int i = 0; i < url.length; i++) {
             Documents current = new Documents();
@@ -127,6 +128,9 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
             if(adapter.getCheckedStatus()){
                 recyclerView.setAdapter(new DocumentsAdapter(this,data));
                 recyclerView.invalidate();
+                menu.clear();
+                getMenuInflater().inflate(R.menu.main, menu);
+                adapter.setCheckedStatus();
             }
             else{
                 Intent intent = new Intent(MyDocuments.this, MainActivity.class);
@@ -138,6 +142,9 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
                 Toast.makeText(this, "Deleted.", Toast.LENGTH_SHORT).show();
                 recyclerView.setAdapter(new DocumentsAdapter(this,data));
                 recyclerView.invalidate();
+                menu.clear();
+                getMenuInflater().inflate(R.menu.main, menu);
+                adapter.setCheckedStatus();
 
             } else {
                 Intent intent = new Intent(MyDocuments.this, EditDocument.class);
@@ -152,6 +159,9 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
         if (adapter.getCheckedStatus()) {
             recyclerView.setAdapter(new DocumentsAdapter(this,data));
             recyclerView.invalidate();
+            menu.clear();
+            getMenuInflater().inflate(R.menu.main, menu);
+            adapter.setCheckedStatus();
         }else{
             Intent intent = new Intent(MyDocuments.this, MainActivity.class);
             startActivity(intent);

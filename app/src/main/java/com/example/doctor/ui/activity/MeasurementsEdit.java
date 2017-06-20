@@ -35,6 +35,8 @@ public class MeasurementsEdit extends AppCompatActivity {
             }
         });
 
+        setTitle("Add Measurement");
+
         if(getIntent().hasExtra("measurement")){
             measurement_info = (Measurement_Info) getIntent().getSerializableExtra("measurement");
             bindView();
@@ -75,8 +77,9 @@ public class MeasurementsEdit extends AppCompatActivity {
             ((EditText) findViewById(R.id.cholesterol_edit)).setSelection(((EditText) findViewById(R.id.cholesterol_edit)).length());
         }
 
-        ((Button)findViewById(R.id.EditButton2)).setText("SAVE");
-        ((TextView)findViewById(R.id.MeasurementText)).setText("Edit Measurement");
+        ((Button)findViewById(R.id.EditButton2)).setText("SAVE CHANGES");
+//        ((TextView)findViewById(R.id.MeasurementText)).setText("Edit Measurement");
+        setTitle("Edit Measurement");
     }
 
     @Override

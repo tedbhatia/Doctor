@@ -34,7 +34,10 @@ public class InsuranceEdit extends AppCompatActivity {
             }
         });
 
-        ((TextView)findViewById(R.id.InsuranceText)).setText("Add Insurance");
+//        ((TextView)findViewById(R.id.InsuranceText)).setText("Add Insurance");
+
+        setTitle("Add Insurance");
+
         if(getIntent().hasExtra("insurance")){
             insurance = (Insurance) getIntent().getSerializableExtra("insurance");
             bindView();
@@ -67,8 +70,9 @@ public class InsuranceEdit extends AppCompatActivity {
             ((EditText) findViewById(R.id.notes_edit)).setText(insurance.getNotes());
             ((EditText) findViewById(R.id.notes_edit)).setSelection(((EditText) findViewById(R.id.notes_edit)).length());
         }
-        ((Button)findViewById(R.id.EditButton)).setText("SAVE");
-        ((TextView)findViewById(R.id.InsuranceText)).setText("Edit Insurance");
+        ((Button)findViewById(R.id.EditButton)).setText("SAVE CHANGES");
+//        ((TextView)findViewById(R.id.InsuranceText)).setText("Edit Insurance");
+        setTitle("Edit Insurance");
     }
 
     @Override

@@ -58,13 +58,13 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-
                     Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
 
                     FragmentTransaction transaction=getFragmentManager().beginTransaction();
                     transaction.replace(R.id.content_frame,health_acc_fragment);
 
                     transaction.commit();
+
 
                     return true;
                 }

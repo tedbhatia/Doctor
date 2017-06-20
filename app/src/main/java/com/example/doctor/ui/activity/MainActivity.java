@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bindView();
+        setTitle("My Health Account");
 
     }
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame,new Health_Acc_Fragment()).commit();
@@ -74,7 +76,23 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you wish to exit?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
+                }
+            });
+            AlertDialog alertDialog=builder.create();
+            alertDialog.show();
         }
     }
 
@@ -137,38 +155,6 @@ public class MainActivity extends AppCompatActivity
             setTitle("My Profile");
             fm.beginTransaction().replace(R.id.content_frame,new MyProfileFragment()).commit();
             drawer.closeDrawers();
-    }
-
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-
-        if(keyCode==KeyEvent.KEYCODE_BACK){
-            exitByBackKey();
-            return true;
-        }
-        return super.onKeyDown(keyCode,event);
-
-    }
-
-    protected void exitByBackKey() {
-
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you wish to exit?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        AlertDialog alertDialog=builder.create();
-        alertDialog.show();
-
     }
 
 }
