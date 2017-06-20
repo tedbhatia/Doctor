@@ -27,6 +27,8 @@ import com.example.doctor.ui.model.My_Health_Acc_Info;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.doctor.ui.activity.LoginScreen.loggedIn;
+
 /**
  * Created by tejas on 1/6/17.
  */
@@ -74,39 +76,67 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
     @Override
     public void onItemClick(int position, View v) {
         if(position==0){
-            Toast.makeText(getActivity(),"My Doctor",Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(getActivity(),MyDoctor.class);
-            startActivity(intent);
+            if(loggedIn) {
+                Toast.makeText(getActivity(), "My Doctor", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), MyDoctor.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(getActivity(),"Please Register or Login to use this feature!",Toast.LENGTH_SHORT).show();
+            }
         }
         else if(position==1){
-            Toast.makeText(getActivity(),"My Diseases",Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(getActivity(),MyDiseases.class);
-            startActivity(intent);
+            if (loggedIn) {
+                Toast.makeText(getActivity(), "My Diseases", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), MyDiseases.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(getActivity(),"Please Register or Login to use this feature!",Toast.LENGTH_SHORT).show();
+            }
         }
         else if(position==2){
+            if (loggedIn){
             Toast.makeText(getActivity(),"My Appointments",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(),MyAppointments.class);
             startActivity(intent);
+            }else{
+                Toast.makeText(getActivity(),"Please Register or Login to use this feature!",Toast.LENGTH_SHORT).show();
+            }
         }
         else if(position==3){
+            if(loggedIn){
             Toast.makeText(getActivity(),"My Medicines",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(),MyMedicines.class);
             startActivity(intent);
+            }else{
+                Toast.makeText(getActivity(),"Please Register or Login to use this feature!",Toast.LENGTH_SHORT).show();
+            }
         }
         else if(position==4){
+            if(loggedIn){
             Toast.makeText(getActivity(),"My Documents",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(),MyDocuments.class);
             startActivity(intent);
+            }else{
+                Toast.makeText(getActivity(),"Please Register or Login to use this feature!",Toast.LENGTH_SHORT).show();
+            }
         }
         else if(position==5){
+            if (loggedIn){
             Toast.makeText(getActivity(),"My Insurance",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(),My_Insurance.class);
             startActivity(intent);
+            }else{
+                Toast.makeText(getActivity(),"Please Register or Login to use this feature!",Toast.LENGTH_SHORT).show();
+            }
         }
         else if(position==6){
+            if (loggedIn){
             Toast.makeText(getActivity(),"My Measurements",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(),My_Measurements.class);
             startActivity(intent);
+        }else{
+            Toast.makeText(getActivity(),"Please Register or Login to use this feature!",Toast.LENGTH_SHORT).show();
+        }
         }
     }
 }

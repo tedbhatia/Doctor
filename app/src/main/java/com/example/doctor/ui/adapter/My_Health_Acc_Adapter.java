@@ -23,6 +23,8 @@ import com.example.doctor.ui.model.My_Health_Acc_Info;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.doctor.ui.activity.LoginScreen.loggedIn;
+
 /**
  * Created by tejas on 1/6/17.
  */
@@ -33,6 +35,7 @@ public class My_Health_Acc_Adapter extends RecyclerView.Adapter<My_Health_Acc_Ad
     private LayoutInflater inflator;
     List<My_Health_Acc_Info> data = Collections.emptyList();
     private Context context;
+    private float aFloat = (float) 0.5;
 
     public My_Health_Acc_Adapter(Context context, List<My_Health_Acc_Info> data){
         inflator = LayoutInflater.from(context);
@@ -54,8 +57,9 @@ public class My_Health_Acc_Adapter extends RecyclerView.Adapter<My_Health_Acc_Ad
         final My_Health_Acc_Info current = data.get(position);
         holder.title.setText(current.getTitle());
         holder.icon.setImageResource(current.getIconId());
-
-
+        if(!loggedIn) {
+            holder.layout.setAlpha(aFloat);
+        }
     }
 
     @Override
