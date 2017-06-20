@@ -23,6 +23,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import static android.R.attr.data;
+import static android.R.attr.id;
 import com.example.doctor.ui.fragment.MyProfileFragment;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
@@ -33,12 +48,13 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private Button btnLogin;
     private Button btnSignup;
     private TextView forgotPassword;
-    private ImageButton iconFb;
+    private LoginButton iconFb;
     private ImageButton iconGoogle;
     private TextView termsConditions;
     private SharedPreferences sharedPreferences;
     public static final String MY_SHARED_PREFERENCES = "MyPrefs";
     private ProgressDialog progressDialog;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +101,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnSignup = (Button) findViewById(R.id.btn_signup);
         forgotPassword = (TextView) findViewById(R.id.forgot_password);
-        iconFb = (ImageButton) findViewById(R.id.icon_fb);
+        iconFb = (LoginButton) findViewById(R.id.facebook_login);
         iconGoogle = (ImageButton) findViewById(R.id.icon_google);
         termsConditions = (TextView) findViewById(R.id.terms_conditions);
         btnLogin.setOnClickListener(this);
@@ -149,7 +165,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             case R.id.btn_signup:
                 callingSignup();
                 break;
-            case R.id.icon_fb:
+            case R.id.facebook_login:
                 callingFb();
                 break;
             case R.id.icon_google:
@@ -196,6 +212,23 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     private void callingFb() {
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(LoginScreen.this, "Success", Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(LoginScreen.this, "Login Canceled", Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+
+            }
+        });
     }
 
     private void callingSignup() {
