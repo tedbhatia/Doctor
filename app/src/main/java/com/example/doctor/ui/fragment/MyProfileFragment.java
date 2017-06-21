@@ -25,6 +25,8 @@ import com.example.doctor.ui.activity.EditProfile;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.doctor.ui.activity.MainActivity.navigationView;
+
 /**
  * Created by tejas on 9/6/17.
  */
@@ -59,6 +61,8 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
 
                     Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
+
+                    navigationView.getMenu().getItem(0).setChecked(true);
 
                     FragmentTransaction transaction=getFragmentManager().beginTransaction();
                     transaction.replace(R.id.content_frame,health_acc_fragment);

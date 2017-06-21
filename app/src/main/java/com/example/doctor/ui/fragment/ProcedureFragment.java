@@ -3,9 +3,11 @@ package com.example.doctor.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +26,8 @@ import com.example.doctor.ui.model.ProcedureModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
 /**
  * Created by tejas on 13/6/17.
@@ -54,6 +58,30 @@ public class ProcedureFragment extends android.support.v4.app.Fragment implement
         initRecyclerView(rootView);
 
         prepareData();
+
+        rootView.setFocusableInTouchMode(true);
+        rootView.requestFocus();
+        rootView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+                    Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
+
+                    navigationView.getMenu().getItem(0).setChecked(true);
+
+                    FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.content_frame,health_acc_fragment);
+
+                    transaction.commit();
+
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         return rootView;
 
