@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,7 @@ import android.support.v7.widget.SearchView;
 import com.example.doctor.R;
 import com.example.doctor.ui.activity.DoctorDetail;
 import com.example.doctor.ui.activity.EditDoctor;
+import com.example.doctor.ui.activity.MapsActivity;
 import com.example.doctor.ui.activity.MyDoctor;
 import com.example.doctor.ui.adapter.FindDoctorAdapter;
 import com.example.doctor.ui.model.find_doctor_model;
@@ -145,7 +147,8 @@ public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.M
         int id = item.getItemId();
 
         if (id == R.id.g_search) {
-            Toast.makeText(getActivity(),"map",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Map",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), MapsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
