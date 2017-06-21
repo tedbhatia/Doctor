@@ -151,8 +151,8 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
         String[] date = {"23/05/2017", "23/05/2017", "25/05/2017", "30/05/2017", "30/05/2017","05/06/2017"};
         String[] height = {"5'6\"","5'6\"","5'6\"","5'6\"","5'6\"","5'6\""};
         String[] weight={"67 kg","68 kg","68 kg","65 kg","65 kg","64 kg"};
-        String[] bloodPressure={"xxx","yyy","zzz","aaa","bbb","ccc"};
-        String[] bloodSugar={"qwerty 1","qwerty 2","qwerty 3","qwerty 4","qwerty 5","qwerty 6"};
+        String[] bloodPressure={"120/80","120/80","120/80","120/80","120/80","120/80"};
+        String[] bloodSugar={"125","125","125","125","125","125"};
         String[] cholesterol={"111","222","333","444","555","666"};
 
         for (int i = 0; i < date.length; i++) {

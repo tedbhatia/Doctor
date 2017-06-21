@@ -76,11 +76,12 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         listItems=new ArrayList<>();
 
 
-        listItems.add(0,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
-        listItems.add(1,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
-        listItems.add(2,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
-        listItems.add(3,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
-        listItems.add(4,new Medicines("medName1","xxx","xxx","abc","yyy","12/12/12","qwerty","notes"));
+        listItems.add(0,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
+        listItems.add(1,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
+        listItems.add(2,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
+        listItems.add(3,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
+        listItems.add(4,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
+        listItems.add(5,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
 
         adapter=new MedicinesAdapter(this,listItems);
         recyclerView.setAdapter(adapter);

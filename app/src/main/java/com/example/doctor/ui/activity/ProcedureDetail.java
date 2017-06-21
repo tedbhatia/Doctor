@@ -52,11 +52,12 @@ public class ProcedureDetail extends AppCompatActivity implements View.OnClickLi
         listHeading.add("Help Line Numbers");
 
 
-        listMap.put(listHeading.get(0), "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.");
-        listMap.put(listHeading.get(1), "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.");
-        listMap.put(listHeading.get(2), "Welcome to Infibeam");
-        listMap.put(listHeading.get(3), "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.");
-
+        listMap.put(listHeading.get(0), "Surgery of Heart");
+        listMap.put(listHeading.get(1), "Dr Smith, Dr David, Dr John");
+        listMap.put(listHeading.get(2), "Complication with the valves");
+        listMap.put(listHeading.get(3), "");
+        listMap.put(listHeading.get(4), "Link1");
+        listMap.put(listHeading.get(5), "9876543210");
 
     }
 

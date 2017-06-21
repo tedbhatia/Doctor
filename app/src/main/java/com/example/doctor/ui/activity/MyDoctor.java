@@ -163,11 +163,11 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
     }
 
     private void prepareData() {
-        String[] name = {"Plan 1", "Plan 2", "Plan 3", "Plan 4", "Plan 5", "Plan 6", "Plan 7"};
-        String[] type = {"1 Month", "2 Month", "3 Month", "4 Month", "5 Month", "6 Month", "7 Month"};
+        String[] name = {"Dr Smith", "Dr Smith", "Dr Smith", "Dr Smith", "Dr Smith", "Dr Smith", "Dr Smith"};
+        String[] type = {"Heart Surgeon", "Heart Surgeon","Heart Surgeon","Heart Surgeon","Heart Surgeon", "Heart Surgeon", "Heart Surgeon"};
         String[] note = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
-        String[] address = {"01/01/2000", "01/01/2001", "01/01/2002", "01/01/2003", "01/01/2004", "01/01/2006", "01/01/2007"};
-        String[] phone = {"01/01/2000", "01/01/2001", "01/01/2002", "01/01/2003", "01/01/2004", "01/01/2006", "01/01/2007"};
+        String[] address = {"Ahmedabad","Ahmedabad","Ahmedabad","Ahmedabad","Ahmedabad","Ahmedabad","Ahmedabad"};
+        String[] phone = {"9876543210","9876543210","9876543210","9876543210","9876543210","9876543210","9876543210"};
 
         for (int i = 0; i < name.length && i < type.length && i < phone.length; i++) {
             Doctor current = new Doctor();

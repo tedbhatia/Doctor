@@ -101,8 +101,8 @@ public class NotificationsFragment extends Fragment implements My_Health_Acc_Ada
 
     private List<Notifications> getData() {
         List<Notifications> modelList = new ArrayList<>();
-        String[] title={"title 1","title 2","title 3","title 4","title 5","title 6","title 7"};
-        String[] desc={"qwerty 1","qwerty 2","qwerty 3","qwerty 4",""};
+        String[] title={"This is a notification","This is a notification","This is a notification","This is a notification","This is a notification"};
+        String[] desc={"Doctor Near You","Doctor Near You","Doctor Near You","Doctor Near You","Doctor Near You"};
 
         for (int i = 0; i < 3; i++) {
             modelList.add(new Notifications(title[i],desc[i]));

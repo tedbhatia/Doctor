@@ -73,11 +73,14 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Diseases("disease name 1","23/05/2017","notes"));
-        listItems.add(1,new Diseases("disease name 2","23/05/2017","notes"));
-        listItems.add(2,new Diseases("disease name 3","23/05/2017","notes"));
-        listItems.add(3,new Diseases("disease name 4","23/05/2017","notes"));
-        listItems.add(4,new Diseases("disease name 5","23/05/2017","notes"));
+        listItems.add(0,new Diseases("Asthama","23/05/2017","notes"));
+        listItems.add(1,new Diseases("Asthama","23/05/2017","notes"));
+        listItems.add(2,new Diseases("Asthama","23/05/2017","notes"));
+        listItems.add(3,new Diseases("Asthama","23/05/2017","notes"));
+        listItems.add(4,new Diseases("Asthama","23/05/2017","notes"));
+        listItems.add(5,new Diseases("Asthama","23/05/2017","notes"));
+        listItems.add(6,new Diseases("Asthama","23/05/2017","notes"));
+        listItems.add(7,new Diseases("Asthama","23/05/2017","notes"));
 
         adapter=new DiseasesAdapter(listItems,this);
         recyclerView.setAdapter(adapter);

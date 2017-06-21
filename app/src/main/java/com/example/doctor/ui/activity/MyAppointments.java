@@ -82,18 +82,13 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Appointments("aaa","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(1,new Appointments("bbb","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(2,new Appointments("ccc","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(3,new Appointments("ddd","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(4,new Appointments("eee","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(5,new Appointments("fff","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(6,new Appointments("ggg","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(7,new Appointments("hhh","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(8,new Appointments("iii","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(9,new Appointments("jjj","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(10,new Appointments("kkk","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
-        listItems.add(11,new Appointments("lll","999999999","address","speciality","qwerty","notes","23/05/17","12:00"));
+        listItems.add(0,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
+        listItems.add(1,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
+        listItems.add(2,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
+        listItems.add(3,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
+        listItems.add(4,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
+        listItems.add(5,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
+        listItems.add(6,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
 
 
         adapter=new AppointmentsAdapter(this,listItems);

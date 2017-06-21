@@ -98,9 +98,9 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
         email.setText("pankaj0010g@gmail.com");
         first_name.setText("Paankaj");
         last_name.setText("Kumar");
-        dob.setText("1.1.1");
-        address.setText("steerrt 5, db road, hello world, india");
-        mobile_number.setText("4325347");
+        dob.setText("01.01.2001");
+        address.setText("steerrt 5, db road, Ahmedabad, india");
+        mobile_number.setText("9994325347");
         blood_group.setText("B+");
         gender.setText("Male");
     }

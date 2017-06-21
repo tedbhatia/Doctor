@@ -113,25 +113,23 @@ public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.M
 
 //        String name, String description, String mobile_number, String speciality, String address, String timings, CircleImageView
 //        display_picture, int id) {
-        model.add(new find_doctor_model("Tejas", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Pankaj", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Aviral", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Shivika", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Bawlo", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Viral", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Shivli", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Panklo", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Jaillo", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Cutex", "Very good doctor, nice doctor, sweet doctor\n25 years experience\nVery good doctor",
+        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
                 "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
 
 
