@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity
         if (!loggedIn) {
             navigationView.getMenu().getItem(7).setVisible(false);
         }
+        else{
+            navigationView.getMenu().getItem(8).setVisible(false);
+        }
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame, new Health_Acc_Fragment()).commit();
@@ -157,6 +160,9 @@ public class MainActivity extends AppCompatActivity
             } else {
                 //Toast.makeText(MainActivity.this, "Log In First!", Toast.LENGTH_SHORT).show();
             }
+        } else if(id==R.id.sign){
+            Intent intent = new Intent(MainActivity.this, SignUp.class);
+            startActivity(intent);
         }
 
 

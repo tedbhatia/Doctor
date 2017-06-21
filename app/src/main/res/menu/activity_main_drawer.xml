@@ -38,6 +38,13 @@
             android:id="@+id/logout"
             android:icon="@drawable/logout"
             android:title="@string/logout" />
+
+        <item
+            android:id="@+id/sign"
+            android:icon="@drawable/logout"
+            android:title="Sign Up" />
+
+
     </group>
 
 

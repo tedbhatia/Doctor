@@ -146,6 +146,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 else if(!validEmail())  showToast("Enter valid email address");
                 else{
                     showToast("Registration Successful");
+                    Intent intent=new Intent(SignUp.this,LoginScreen.class);
+                    startActivity(intent);
                 }
 
                 break;
