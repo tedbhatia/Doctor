@@ -39,6 +39,9 @@ public class EmergencyContactsFragment extends Fragment implements View.OnClickL
 
         contactButton1.setOnClickListener(this);
         contactButton2.setOnClickListener(this);
+        emergencyContactNumber1.setOnClickListener(this);
+        emergencyContactNumber2.setOnClickListener(this);
+
 
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
@@ -71,6 +74,8 @@ public class EmergencyContactsFragment extends Fragment implements View.OnClickL
 
         switch (v.getId()){
 
+            case R.id.emergency_contact_number_1:
+
             case R.id.contact_button_1:{
 
                 String str=emergencyContactNumber1.getText().toString();
@@ -81,6 +86,8 @@ public class EmergencyContactsFragment extends Fragment implements View.OnClickL
 
             }break;
 
+            case R.id.emergency_contact_number_2:
+
             case R.id.contact_button_2:{
 
                 String str=emergencyContactNumber2.getText().toString();
@@ -90,6 +97,7 @@ public class EmergencyContactsFragment extends Fragment implements View.OnClickL
                 startActivity(phoneIntent);
 
             }break;
+
 
         }
 

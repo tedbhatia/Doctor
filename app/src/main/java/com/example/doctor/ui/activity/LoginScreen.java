@@ -51,8 +51,10 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private LoginButton iconFb;
     private ImageButton iconGoogle;
     private TextView termsConditions;
+    private TextView skip;
     private SharedPreferences sharedPreferences;
     public static final String MY_SHARED_PREFERENCES = "MyPrefs";
+    public static boolean loggedIn = false;
     private ProgressDialog progressDialog;
     CallbackManager callbackManager;
 
@@ -104,12 +106,14 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         iconFb = (LoginButton) findViewById(R.id.facebook_login);
         iconGoogle = (ImageButton) findViewById(R.id.icon_google);
         termsConditions = (TextView) findViewById(R.id.terms_conditions);
+        skip = (TextView) findViewById(R.id.skipText);
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         termsConditions.setOnClickListener(this);
         iconGoogle.setOnClickListener(this);
         iconFb.setOnClickListener(this);
+        skip.setOnClickListener(this);
 
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
@@ -171,6 +175,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             case R.id.icon_google:
                 callingGoogle();
                 break;
+            case R.id.skipText:
+                startActivity(new Intent(LoginScreen.this, MainActivity.class));
+
         }
 
     }
@@ -241,6 +248,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         editor.putString("password", password.getText().toString());
         editor.commit();
         Toast.makeText(this, "Logged in as " + username.getText().toString(), Toast.LENGTH_SHORT).show();
+        loggedIn = true;
         startActivity(new Intent(LoginScreen.this, MainActivity.class));
 
     }

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:orientation="vertical"
-    tools:context="com.example.doctor.ui.activity.EditProfile"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="com.example.doctor.ui.activity.EditProfile">
 
 
     <ScrollView
@@ -33,7 +33,7 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/health_acc"/>
+                    android:src="@drawable/health_acc" />
 
             </LinearLayout>
 
@@ -111,7 +111,11 @@
                     android:id="@+id/dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
                     android:hint="Date of Birth"
+                    android:imeOptions="actionNext"
+                    android:inputType="date"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -148,20 +152,29 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_password"
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/blood_group"
+                <TextView
+                    android:layout_width="200dp"
+                    android:textSize="15dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:text="Blood Group" />
+
+                <Spinner
+                    android:id="@+id/blood_group_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Blood Group"
-                    android:imeOptions="actionNext"
-                    android:singleLine="true" />
+                    android:dropDownWidth="130dp"
+                    android:entries="@array/blood_group">
 
-            </android.support.design.widget.TextInputLayout>
+                </Spinner>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -169,7 +182,7 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Gender"
                     android:textSize="15dp" />
@@ -203,24 +216,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="40dp">
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/update_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:onClick="onClick"
-                    android:text="Update Profile"
-                    android:textAllCaps="false"
-                    android:background="@drawable/transparent_button"
-                    android:textSize="18dp"
-                    android:padding="10dp"
-                    android:textColor="@color/colorAccent"/>
+
+                    <Button
+                        android:id="@+id/update_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/transparent_button"
+                        android:onClick="onClick"
+                        android:padding="10dp"
+                        android:text="Update Profile"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18dp" />
 
                 </LinearLayout>
 
@@ -228,20 +242,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
-                <Button
-                    android:id="@+id/change_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:onClick="onClick"
-                    android:text="Change Password"
-                    android:textAllCaps="false"
-                    android:background="@drawable/transparent_button"
-                    android:textSize="18dp"
-                    android:padding="10dp"
-                    android:textColor="@color/colorAccent"/>
 
-                    </LinearLayout>
+                    <Button
+                        android:id="@+id/change_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/transparent_button"
+                        android:onClick="onClick"
+                        android:padding="10dp"
+                        android:text="Change Password"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
