@@ -1,5 +1,6 @@
 package com.example.doctor.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -18,6 +20,10 @@ import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.fragment.MyProfileFragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +35,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     Button update_profile, change_password;
     EditText username,email,first_name,last_name,dob,address,mobile_number,blood_group;
     RadioButton rb_male,rb_female;
+    private int mYear,mMonth,mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         rb_female = (RadioButton) findViewById(R.id.rb_female);
         change_password.setOnClickListener(this);
         image.setOnClickListener(this);
+        dob.setOnClickListener(this);
     }
 
 //    public void onImageClick(View view) {
@@ -140,6 +148,30 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.image:
                 launchDialog();
+                break;
+            case R.id.dob:
+                final Calendar mCurrentDate=Calendar.getInstance();
+                mYear=mCurrentDate.get(Calendar.YEAR);
+                mMonth=mCurrentDate.get(Calendar.MONTH);
+                mDay=mCurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog mDatePicker=new DatePickerDialog(EditProfile.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                        mCurrentDate.set(Calendar.YEAR,year);
+                        mCurrentDate.set(Calendar.MONTH,month);
+                        mCurrentDate.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+                        String myFormat="dd/MM/yyyy";
+                        SimpleDateFormat sdf=new SimpleDateFormat(myFormat, Locale.ENGLISH);
+
+                        dob.setText(sdf.format(mCurrentDate.getTime()));
+
+                    }
+                },mYear,mMonth,mDay);
+//                mDatePicker.setTitle("Select Date");
+                mDatePicker.show();
                 break;
         }
     }
