@@ -3,10 +3,12 @@ package com.example.doctor.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ import com.example.doctor.ui.model.SwipeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
 /**
  * Created by SHIVIKA NAGPAL on 13-06-2017.
@@ -53,6 +57,29 @@ public class NotificationsFragment extends Fragment implements My_Health_Acc_Ada
                 },3000);
             }
         });
+
+        rootView.setFocusableInTouchMode(true);
+        rootView.requestFocus();
+        rootView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+                    Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
+
+                    navigationView.getMenu().getItem(0).setChecked(true);
+
+                    FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.content_frame,health_acc_fragment);
+
+                    transaction.commit();
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         return rootView;
 

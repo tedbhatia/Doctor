@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
     DrawerLayout drawer;
     MenuItem item;
+    public static NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +65,14 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
         if (!loggedIn) {
             navigationView.getMenu().getItem(7).setVisible(false);
+        }
+        else{
+            navigationView.getMenu().getItem(8).setVisible(false);
         }
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
@@ -156,6 +160,9 @@ public class MainActivity extends AppCompatActivity
             } else {
                 //Toast.makeText(MainActivity.this, "Log In First!", Toast.LENGTH_SHORT).show();
             }
+        } else if(id==R.id.sign){
+            Intent intent = new Intent(MainActivity.this, SignUp.class);
+            startActivity(intent);
         }
 
 

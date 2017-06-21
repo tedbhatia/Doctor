@@ -56,6 +56,7 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
 
         adapter.setOnItemClickListener(this);
 
+
         return rootView;
     }
 

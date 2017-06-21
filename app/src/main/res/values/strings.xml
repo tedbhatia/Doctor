@@ -15,6 +15,7 @@
     <string name="medicines">Medicines</string>
     <string name="procedure">Procedures</string>
     <string name="logout">Logout</string>
+    <string name="signUp">Sign Up</string>
 
     <!-- My Health Account Java -->
     <string name="my_doc">My Doctors</string>
