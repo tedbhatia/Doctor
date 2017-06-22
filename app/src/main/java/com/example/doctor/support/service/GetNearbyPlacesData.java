@@ -1,8 +1,14 @@
 package com.example.doctor.support.service;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import com.example.doctor.ui.activity.MapsActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -20,6 +26,13 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
     String googlePlacesData;
     GoogleMap mMap;
     String url;
+    /*ProgressBar progressBar;
+    //Context context;
+
+    public GetNearbyPlacesData(ProgressBar progressBar) {
+
+        this.progressBar = progressBar;
+    }*/
 
     @Override
     protected String doInBackground(Object... params) {
@@ -38,6 +51,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        /*progressBar.setVisibility(View.VISIBLE);*/
         Log.d("GooglePlacesReadTask", "onPostExecute Entered");
         List<HashMap<String, String>> nearbyPlacesList = null;
         DataParser dataParser = new DataParser();
