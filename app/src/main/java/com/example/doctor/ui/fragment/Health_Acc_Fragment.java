@@ -51,7 +51,7 @@ public class Health_Acc_Fragment extends android.support.v4.app.Fragment impleme
 
         getData(data);
         adapter = new My_Health_Acc_Adapter(getActivity(),data);
-
+        getActivity().setTitle("My Health Account");
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(this);

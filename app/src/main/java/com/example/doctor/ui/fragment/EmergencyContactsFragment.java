@@ -52,11 +52,10 @@ public class EmergencyContactsFragment extends Fragment implements View.OnClickL
 
                     Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
                     navigationView.getMenu().getItem(0).setChecked(true);
+
                     FragmentTransaction transaction=getFragmentManager().beginTransaction();
                     transaction.replace(R.id.content_frame,health_acc_fragment);
-
                     transaction.commit();
-
 
                     return true;
                 }

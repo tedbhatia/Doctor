@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         bindView();
         setTitle("My Health Account");
-
     }
 
     private void bindView() {
