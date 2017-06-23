@@ -2,76 +2,91 @@ package com.example.doctor.ui.model;
 
 
 import java.io.Serializable;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.List;
 
 public class find_doctor_model implements Serializable{
-    private String name, description, mobile_number, speciality, address, timings;
-    private int id;
 
-    public String getSpeciality() {
-        return speciality;
+    /**
+     * doctor_name : Dr 1
+     * doctor_phone_number :
+     * doctor_description : Cardio
+     * doctor_address : a,A
+     * doctor_speciality : CARDIOLOGIST
+     * doctor_timings : 06 AM to 06 PM
+     * doctor_pic : http://192.168.10.25:8000/doctors_api/doctors/Arp4x.jpg
+     * user : [2]
+     */
+
+    private String doctor_name;
+    private String doctor_phone_number;
+    private String doctor_description;
+    private String doctor_address;
+    private String doctor_speciality;
+    private String doctor_timings;
+    private String doctor_pic;
+    private List<Integer> user;
+
+    public String getDoctor_name() {
+        return doctor_name;
     }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+    public void setDoctor_name(String doctor_name) {
+        this.doctor_name = doctor_name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDoctor_phone_number() {
+        return doctor_phone_number;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDoctor_phone_number(String doctor_phone_number) {
+        this.doctor_phone_number = doctor_phone_number;
     }
 
-    public String getTimings() {
-        return timings;
+    public String getDoctor_description() {
+        return doctor_description;
     }
 
-    public void setTimings(String timings) {
-        this.timings = timings;
+    public void setDoctor_description(String doctor_description) {
+        this.doctor_description = doctor_description;
     }
 
-    public String getName() {
-        return name;
+    public String getDoctor_address() {
+        return doctor_address;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDoctor_address(String doctor_address) {
+        this.doctor_address = doctor_address;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDoctor_speciality() {
+        return doctor_speciality;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDoctor_speciality(String doctor_speciality) {
+        this.doctor_speciality = doctor_speciality;
     }
 
-    public String getMobile_number() {
-        return mobile_number;
+    public String getDoctor_timings() {
+        return doctor_timings;
     }
 
-    public void setMobile_number(String mobile_number) {
-        this.mobile_number = mobile_number;
+    public void setDoctor_timings(String doctor_timings) {
+        this.doctor_timings = doctor_timings;
     }
 
-    public int getId() {
-        return id;
+    public String getDoctor_pic() {
+        return doctor_pic;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDoctor_pic(String doctor_pic) {
+        this.doctor_pic = doctor_pic;
     }
 
-    public find_doctor_model(String name, String description, String mobile_number, String speciality, String address, String timings, int id) {
-        this.name = name;
-        this.description = description;
-        this.mobile_number = mobile_number;
-        this.speciality = speciality;
-        this.address = address;
-        this.timings = timings;
-        this.id = id;
+    public List<Integer> getUser() {
+        return user;
+    }
+
+    public void setUser(List<Integer> user) {
+        this.user = user;
     }
 }

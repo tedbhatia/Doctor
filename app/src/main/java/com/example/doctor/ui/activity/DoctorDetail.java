@@ -1,5 +1,7 @@
 package com.example.doctor.ui.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,6 +11,11 @@ import android.widget.TextView;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.model.find_doctor_model;
+import com.squareup.picasso.Picasso;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,25 +39,42 @@ public class DoctorDetail extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setDummyData() {
-        doctorDetailModel.setName("Dr. Him Pass");
-        doctorDetailModel.setMobile_number("46848435\n687684");
-        doctorDetailModel.setSpeciality("Dentist");
-        doctorDetailModel.setAddress("23 CP Street,\nCouunaight Place,\nDelhi-828888");
-        doctorDetailModel.setTimings("8.00 AM - 2.00 PM\n5.00 PM - 9.30 PM");
-        doctorDetailModel.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-    }
+//    private void setDummyData() {
+//        doctorDetailModel.setDoctor_name("Dr. Him Pass");
+//        doctorDetailModel.set("46848435\n687684");
+//        doctorDetailModel.setSpeciality("Dentist");
+//        doctorDetailModel.setAddress("23 CP Street,\nCouunaight Place,\nDelhi-828888");
+//        doctorDetailModel.setTimings("8.00 AM - 2.00 PM\n5.00 PM - 9.30 PM");
+//        doctorDetailModel.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+//    }
 
     private void setData() {
-        setTitle(doctorDetailModel.getName());
-        name.setText(doctorDetailModel.getName());
-        mobile_number.setText(doctorDetailModel.getMobile_number());
-        speciality.setText(doctorDetailModel.getSpeciality());
-        address.setText(doctorDetailModel.getAddress());
-        timings.setText(doctorDetailModel.getTimings());
-        description.setText(doctorDetailModel.getDescription());
-        display_picture.setImageResource(doctorDetailModel.getId());
+        setTitle(doctorDetailModel.getDoctor_name());
+        name.setText(doctorDetailModel.getDoctor_name());
+        mobile_number.setText(doctorDetailModel.getDoctor_phone_number());
+        speciality.setText(doctorDetailModel.getDoctor_speciality());
+        address.setText(doctorDetailModel.getDoctor_address());
+        timings.setText(doctorDetailModel.getDoctor_timings());
+        description.setText(doctorDetailModel.getDoctor_description());
+//        display_picture.setImageBitmap(getBitmapfromUrl(doctorDetailModel.getDoctor_pic()));
+        Picasso.with(getApplicationContext()).load(doctorDetailModel.getDoctor_pic()).into(display_picture);
+    }
+    public Bitmap getBitmapfromUrl(String imageUrl) {
+        try {
+            URL url = new URL(imageUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap bitmap = BitmapFactory.decodeStream(input);
+            return bitmap;
 
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

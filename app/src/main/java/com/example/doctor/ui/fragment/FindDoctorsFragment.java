@@ -30,6 +30,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.activity.DoctorDetail;
 import com.example.doctor.ui.activity.EditDoctor;
 import com.example.doctor.ui.activity.MapsActivity;
@@ -38,6 +40,9 @@ import com.example.doctor.ui.adapter.FindDoctorAdapter;
 import com.example.doctor.ui.model.find_doctor_model;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
@@ -66,7 +71,8 @@ public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.M
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
 
         initRecyclerView();  //initialising RecyclerView
-        prepareData(model);
+//        prepareData(model);
+       loadJSON();
 
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
@@ -95,6 +101,31 @@ public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.M
         return rootView;
     }
 
+   //Load Json
+
+    private void loadJSON(){
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<find_doctor_model>> call = request.getJSON();
+        call.enqueue(new Callback<List<find_doctor_model>>() {
+            @Override
+            public void onResponse(Call<List<find_doctor_model>> call, Response<List<find_doctor_model>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    model = response.body();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                findDoctorAdapter = new FindDoctorAdapter(getContext(),model);
+                recyclerView.setAdapter(findDoctorAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<find_doctor_model>> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -109,32 +140,32 @@ public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.M
 
     }
 
-    private void prepareData(List<find_doctor_model> model) {
-
-//        String name, String description, String mobile_number, String speciality, String address, String timings, CircleImageView
-//        display_picture, int id) {
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-
-
-        findDoctorAdapter.addAll(model);
-    }
+//    private void prepareData(List<find_doctor_model> model) {
+//
+////        String name, String description, String mobile_number, String speciality, String address, String timings, CircleImageView
+////        display_picture, int id) {
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
+//                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+//
+//
+//        findDoctorAdapter.addAll(model);
+//    }
 
     private void initRecyclerView() {
 

@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.ProcedureDetailExpandableListAdapter;
+import com.example.doctor.ui.model.MedicineModel;
+import com.example.doctor.ui.model.ProcedureModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +24,7 @@ public class ProcedureDetail extends AppCompatActivity implements View.OnClickLi
     ExpandableListView expandable_list_view;
     List<String> listHeading;
     HashMap<String, String> listMap;
+    ProcedureModel procedureModel;
     Button share;
 
     TextView usage_instructions, overdose_instructions, possible_side_effects, brand_names;
@@ -31,6 +34,11 @@ public class ProcedureDetail extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_procedure_detail);
         expandable_list_view = (ExpandableListView) findViewById(R.id.expandable_list_view);
+        if(getIntent().hasExtra("procs")){
+            procedureModel = (ProcedureModel) getIntent().getSerializableExtra("procs");
+            bindView();
+        }
+
         prepareData();
         expandable_list_adapter = new ProcedureDetailExpandableListAdapter(this, listHeading, listMap);
         expandable_list_view.setAdapter(expandable_list_adapter);
@@ -45,19 +53,16 @@ public class ProcedureDetail extends AppCompatActivity implements View.OnClickLi
         listHeading = new ArrayList<String>();
         listMap = new HashMap<String, String>();
         listHeading.add("Description");
-        listHeading.add("Specialist");
         listHeading.add("Possible Complication");
-        listHeading.add("Images");
-        listHeading.add("Videos");
-        listHeading.add("Help Line Numbers");
+        listHeading.add("Specialist");
+        listHeading.add("Body Parts");
+        listHeading.add("Sysmtom");
+        listHeading.add("Medicines");
 
 
-        listMap.put(listHeading.get(0), "Surgery of Heart");
-        listMap.put(listHeading.get(1), "Dr Smith, Dr David, Dr John");
-        listMap.put(listHeading.get(2), "Complication with the valves");
-        listMap.put(listHeading.get(3), "");
-        listMap.put(listHeading.get(4), "Link1");
-        listMap.put(listHeading.get(5), "9876543210");
+        listMap.put(listHeading.get(0), procedureModel.getProcedure_description());
+        listMap.put(listHeading.get(1), procedureModel.getPossible_complication());
+        listMap.put(listHeading.get(2), procedureModel.getDoctor().get(0).toString());
 
     }
 

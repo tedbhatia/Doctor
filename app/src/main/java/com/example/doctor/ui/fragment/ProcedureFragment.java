@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.activity.MedicineDetail;
 import com.example.doctor.ui.activity.ProcedureDetail;
 import com.example.doctor.ui.adapter.MedicineAdapter;
@@ -26,6 +28,10 @@ import com.example.doctor.ui.model.ProcedureModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
@@ -57,7 +63,8 @@ public class ProcedureFragment extends android.support.v4.app.Fragment implement
         bindViews(rootView);
         initRecyclerView(rootView);
 
-        prepareData();
+        loadJSON();
+
 
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
@@ -87,12 +94,35 @@ public class ProcedureFragment extends android.support.v4.app.Fragment implement
 
     }
 
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<ProcedureModel>> call = request.getJSONproc();
+        call.enqueue(new Callback<List<ProcedureModel>>() {
+            @Override
+            public void onResponse(Call<List<ProcedureModel>> call, Response<List<ProcedureModel>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    model = response.body();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                procedureAdapter = new ProcedureAdapter(getContext(),model);
+                recyclerView.setAdapter(procedureAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ProcedureModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void bindViews(View rootView) {
         username=(TextView)rootView.findViewById(R.id.username);
         email=(TextView)rootView.findViewById(R.id.email);
     }
 
-    private void prepareData() {
+    /*private void prepareData() {
 
         model.add(new ProcedureModel("Heart Surgery"));
         model.add(new ProcedureModel("Dialysis"));
@@ -111,7 +141,7 @@ public class ProcedureFragment extends android.support.v4.app.Fragment implement
 
         procedureAdapter.addAll(model);
     }
-
+*/
 
     private void initRecyclerView(View rootView) {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);

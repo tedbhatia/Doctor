@@ -46,7 +46,7 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Data
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.procedure.setText(models.get(position).getName());
+        holder.procedure.setText(models.get(position).getProcedure_name());
     }
 
     public void addAll(List<ProcedureModel> models) {
@@ -77,7 +77,7 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Data
                 if(constraint!=null){
                     if(orig!=null && orig.size()>0) {
                         for (final ProcedureModel g : orig) {
-                            if (g.getName().toLowerCase().contains(constraint.toString().toLowerCase()))
+                            if (g.getProcedure_name().toLowerCase().contains(constraint.toString().toLowerCase()))
                                 model.add(g);
 
                         }

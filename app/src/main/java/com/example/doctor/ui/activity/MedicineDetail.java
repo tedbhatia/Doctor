@@ -44,7 +44,7 @@ public class MedicineDetail extends AppCompatActivity implements View.OnClickLis
         expandable_list_view.setAdapter(expandable_list_adapter);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(medicineModel.getName());
+        setTitle(medicineModel.getMedicine_name());
 
 
 //        launch();
@@ -58,9 +58,9 @@ public class MedicineDetail extends AppCompatActivity implements View.OnClickLis
         listHeading.add("Possible Side Effects");
         listHeading.add("Brand Names");
 
-        listMap.put(listHeading.get(0),medicineModel.getUsuage());
-        listMap.put(listHeading.get(1),medicineModel.getOverdose());
-        listMap.put(listHeading.get(2),medicineModel.getSide_effects());
+        listMap.put(listHeading.get(0),medicineModel.getUsage_instructions());
+        listMap.put(listHeading.get(1),medicineModel.getOverdose_instructions());
+        listMap.put(listHeading.get(2),medicineModel.getPossible_sideeffects());
         listMap.put(listHeading.get(3),medicineModel.getBrand_names());
 
 

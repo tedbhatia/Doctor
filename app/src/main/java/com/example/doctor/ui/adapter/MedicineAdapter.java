@@ -45,7 +45,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.DataOb
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.medicine.setText(models.get(position).getName());
+        holder.medicine.setText(models.get(position).getMedicine_name());
     }
 
     public void addAll(List<MedicineModel> models) {
@@ -76,7 +76,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.DataOb
                 if(constraint!=null){
                     if(orig!=null && orig.size()>0) {
                         for (final MedicineModel g : orig) {
-                            if (g.getName().toLowerCase().contains(constraint.toString().toLowerCase()))
+                            if (g.getMedicine_name().toLowerCase().contains(constraint.toString().toLowerCase()))
                                 model.add(g);
 
                         }
