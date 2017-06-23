@@ -21,11 +21,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|right"
-            android:gravity="end|right"
-            android:text="Skip for now"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:textSize="15dp"/>
+            android:gravity="end|right"
+            android:text="Skip for now"
+            android:textSize="15dp" />
     </LinearLayout>
 
 
@@ -157,24 +157,21 @@
                     android:src="@drawable/facebook" />-->
 
                 <com.facebook.login.widget.LoginButton
-                    android:gravity="center|bottom"
                     android:id="@+id/facebook_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Facebook"
+                    android:gravity="center|bottom"
                     android:padding="10dp"
-                    android:textSize="20dp"/>
+                    android:text="Facebook"
+                    android:textSize="20dp" />
 
-                <ImageButton
-                    android:id="@+id/icon_google"
-
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/google_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:padding="10dp"
-                    android:src="@drawable/google" />
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
 

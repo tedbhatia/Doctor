@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,17 +32,19 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.net.Authenticator;
 
-import static android.R.attr.data;
-import static android.R.attr.id;
-import com.example.doctor.ui.fragment.MyProfileFragment;
-
-public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
+public class LoginScreen extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private TextView emailText;
     private EditText username;
     private TextView passwordText;
@@ -57,6 +61,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     public static boolean loggedIn = false;
     private ProgressDialog progressDialog;
     CallbackManager callbackManager;
+    private GoogleApiClient mGoogleApiClient;
+    private SignInButton googleSigninButton;
+    private Authenticator pAuth;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +101,10 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             }
         }
 
+        mAuth = FirebaseAuth.getInstance();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.Google_id)).requestEmail().build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(LoginScreen.this, LoginScreen.this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+
         bindViews();
 
 
@@ -104,18 +117,18 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         btnSignup = (Button) findViewById(R.id.btn_signup);
         forgotPassword = (TextView) findViewById(R.id.forgot_password);
         iconFb = (LoginButton) findViewById(R.id.facebook_login);
-        iconGoogle = (ImageButton) findViewById(R.id.icon_google);
+        googleSigninButton = (SignInButton) findViewById(R.id.google_login);
         termsConditions = (TextView) findViewById(R.id.terms_conditions);
         skip = (TextView) findViewById(R.id.skipText);
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         termsConditions.setOnClickListener(this);
-        iconGoogle.setOnClickListener(this);
+        googleSigninButton.setOnClickListener(this);
         iconFb.setOnClickListener(this);
         skip.setOnClickListener(this);
 
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.isIndeterminate();
@@ -172,7 +185,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             case R.id.facebook_login:
                 callingFb();
                 break;
-            case R.id.icon_google:
+            case R.id.google_login:
                 callingGoogle();
                 break;
             case R.id.skipText:
@@ -216,7 +229,35 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     private void callingGoogle() {
+        Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(intent, 400);
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 400) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()) {
+            goMainScreen();
+
+        } else {
+            Toast.makeText(LoginScreen.this, "Login Failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void goMainScreen() {
+        //  Intent intent=new Intent(this,Screen2.class);
+        //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //startActivity(intent);
+    }
+
 
     private void callingFb() {
         callbackManager = CallbackManager.Factory.create();
@@ -275,19 +316,19 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private void termsandconditions() {
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event){
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if(keyCode==KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitByBackKey();
             return true;
         }
-        return super.onKeyDown(keyCode,event);
+        return super.onKeyDown(keyCode, event);
 
     }
 
     protected void exitByBackKey() {
 
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you wish to exit?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -302,10 +343,17 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
             }
         });
-        AlertDialog alertDialog=builder.create();
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
     }
 
+    private void initializeGPlusSettings() {
 
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }
