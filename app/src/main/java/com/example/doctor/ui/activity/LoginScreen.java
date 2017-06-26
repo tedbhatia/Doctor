@@ -44,6 +44,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.net.Authenticator;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private TextView emailText;
     private EditText username;
@@ -291,7 +295,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         Toast.makeText(this, "Logged in as " + username.getText().toString(), Toast.LENGTH_SHORT).show();
         loggedIn = true;
         startActivity(new Intent(LoginScreen.this, MainActivity.class));
-
     }
 
     private void forgotpassword() {
