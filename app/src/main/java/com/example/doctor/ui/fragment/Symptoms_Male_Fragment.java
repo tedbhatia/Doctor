@@ -65,9 +65,9 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
         DiseasesList handpain6 = new DiseasesList("Contracture",description,tests,videos);
         DiseasesList handpain7 = new DiseasesList("Nerve injury",description,tests,videos);
 
-        Body_Parts hand = new Body_Parts("hand", Arrays.asList(handpain, handpain1, handpain2, handpain3));
-        Body_Parts hand1 = new Body_Parts("hand", Arrays.asList(handpain, handpain1, handpain4, handpain5));
-        Body_Parts hand2 = new Body_Parts("hand", Arrays.asList(handpain, handpain1, handpain6, handpain7));
+        Body_Parts hand = new Body_Parts("Hand", Arrays.asList(handpain, handpain1, handpain2, handpain3,handpain4,handpain5,handpain6));
+        Body_Parts hand1 = new Body_Parts("Chest", Arrays.asList(handpain, handpain1, handpain4, handpain5));
+        Body_Parts hand2 = new Body_Parts("Leg", Arrays.asList(handpain, handpain1, handpain6, handpain7));
         body_parts = Arrays.asList(hand, hand1, hand2);
     }
 

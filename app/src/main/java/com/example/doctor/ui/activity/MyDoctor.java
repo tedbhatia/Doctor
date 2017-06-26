@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -163,13 +164,13 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
     }
 
     private void prepareData() {
-        String[] name = {"Dr Smith", "Dr Smith", "Dr Smith", "Dr Smith", "Dr Smith", "Dr Smith", "Dr Smith"};
-        String[] type = {"Heart Surgeon", "Heart Surgeon","Heart Surgeon","Heart Surgeon","Heart Surgeon", "Heart Surgeon", "Heart Surgeon"};
-        String[] note = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
-        String[] address = {"Ahmedabad","Ahmedabad","Ahmedabad","Ahmedabad","Ahmedabad","Ahmedabad","Ahmedabad"};
-        String[] phone = {"9876543210","9876543210","9876543210","9876543210","9876543210","9876543210","9876543210"};
+        String[] name = {"Dr Olga Malkin(DDS - Dentistry and Prosthodontics)", "Dr Alison M Maresh (MD - Ear, Nose, and Throat)","Dr Martin Quirno(MD - Orthopedic Suregery)"};
+        String[] type = {"Dentistry","ENT Specialist","Orthopedic"};
+        String[] note = {"Dr. Olga Malkin is a dentistry and prosthodontics doctor with offices in New York, New York.", "Dr. Alison M Maresh is an ear, nose, and throat (ent) doctor with offices in New York, New York.", "Dr. Martin Quirno is an orthopedic surgery doctor with offices in New York, New York."};
+        String[] address = {"23 Warren Street, Suite 10, New York, NY 10007","156 William Street, New York, NY 10038","281, Broadway, 2nd Floor, New York, NY 10007"};
+        String[] phone = {"212-355-4510","646-962-2225","646-596-7386"};
 
-        for (int i = 0; i < name.length && i < type.length && i < phone.length; i++) {
+        for (int i = 0; i < name.length; i++) {
             Doctor current = new Doctor();
             current.setName(name[i]);
             current.setType(type[i]);
@@ -232,7 +233,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
         dialog.setContentView(R.layout.display_doctor);
         //dialog.findViewById(R.id.imageZoom);
-        //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
+        ((ImageView)dialog.findViewById(R.id.display_picture)).setImageResource(R.drawable.doctor4);
         ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getName());
         ((TextView)dialog.findViewById(R.id.type_edit)).setText(a.getType());
         ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());

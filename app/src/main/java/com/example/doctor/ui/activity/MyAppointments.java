@@ -82,14 +82,9 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
-        listItems.add(1,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
-        listItems.add(2,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
-        listItems.add(3,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
-        listItems.add(4,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
-        listItems.add(5,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
-        listItems.add(6,new Appointments("Dr Smith","999999999","Ahmedabad","Heart Surgeon","Checkup","notes","23/05/17","12:00"));
-
+        listItems.add(0,new Appointments("Dr Olga Malkin","212-355-4510","23 Warren Street, Suite 10, New York, NY 10007","Dentistry and Prosthodontics","Regular Checkup","","01/07/2017","1100 hours"));
+        listItems.add(1,new Appointments("Dr Alison M Maresh","646-962-2225","156 William Street, New York, NY 10038","Ear, Nose, and Throat","Regular Checkup","","03/07/17","1230 hours"));
+        listItems.add(2,new Appointments("Dr Dr Martin Quirno","646-596-7386","281, Broadway, 2nd Floor, New York, NY 10007","Orthopedic Suregery","Regular Checkup","","04/07/17","1230 hours"));
 
         adapter=new AppointmentsAdapter(this,listItems);
         recyclerView.setAdapter(adapter);

@@ -33,12 +33,12 @@ public class DoctorDetail extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setDummyData() {
-        doctorDetailModel.setName("Dr. Him Pass");
-        doctorDetailModel.setMobile_number("46848435\n687684");
-        doctorDetailModel.setSpeciality("Dentist");
-        doctorDetailModel.setAddress("23 CP Street,\nCouunaight Place,\nDelhi-828888");
+        doctorDetailModel.setName("Dr Olga Malkin");
+        doctorDetailModel.setMobile_number("212-355-4510");
+        doctorDetailModel.setSpeciality("Dentistry");
+        doctorDetailModel.setAddress("23 Warren Street, Suite 10, New York, NY 10007");
         doctorDetailModel.setTimings("8.00 AM - 2.00 PM\n5.00 PM - 9.30 PM");
-        doctorDetailModel.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+        doctorDetailModel.setDescription("Dr. Olga Malkin is a dentistry and prosthodontics doctor with offices in New York, New York.");
     }
 
     private void setData() {

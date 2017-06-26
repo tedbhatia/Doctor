@@ -98,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:imeOptions="actionNext"
+                    android:maxLines="7"
                     android:inputType="textPostalAddress"
                     android:textSize="20dp" />
 

@@ -98,20 +98,16 @@ public class EditMedicines extends AppCompatActivity {
             ((EditText) findViewById(R.id.dosage_amount_edit)).setSelection(((EditText) findViewById(R.id.dosage_amount_edit)).length());
         }
 
-        if(!(medicine.getUnit().equals(""))) {
-            ((EditText) findViewById(R.id.unit_edit)).setText(medicine.getUnit());
-            ((EditText) findViewById(R.id.unit_edit)).setSelection(((EditText) findViewById(R.id.unit_edit)).length());
-        }
 
         if(!(medicine.getMethod().equals(""))) {
             ((EditText) findViewById(R.id.method_edit)).setText(medicine.getMethod());
             ((EditText) findViewById(R.id.method_edit)).setSelection(((EditText) findViewById(R.id.method_edit)).length());
         }
 
-        if(!(medicine.getFrequency().equals(""))) {
-            ((EditText) findViewById(R.id.frequency_edit)).setText(medicine.getFrequency());
+
+            ((EditText) findViewById(R.id.frequency_edit)).setText(String.valueOf(medicine.getFrequency()));
             ((EditText) findViewById(R.id.frequency_edit)).setSelection(((EditText) findViewById(R.id.frequency_edit)).length());
-        }
+
 
         if(!(medicine.getDate().equals(""))) {
             ((EditText) findViewById(R.id.date_edit)).setText(medicine.getDate());

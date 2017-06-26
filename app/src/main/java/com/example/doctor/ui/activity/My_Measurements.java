@@ -148,7 +148,7 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
 
     private void prepareData() {
 
-        String[] date = {"23/05/2017", "23/05/2017", "25/05/2017", "30/05/2017", "30/05/2017","05/06/2017"};
+        String[] date = {"23/06/2016", "01/07/2016", "15/07/2016", "01/08/2016", "15/08/2016","01/09/2016"};
         String[] height = {"5'6\"","5'6\"","5'6\"","5'6\"","5'6\"","5'6\""};
         String[] weight={"67 kg","68 kg","68 kg","65 kg","65 kg","64 kg"};
         String[] bloodPressure={"120/80","120/80","120/80","120/80","120/80","120/80"};

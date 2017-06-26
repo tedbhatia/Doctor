@@ -113,24 +113,35 @@ public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.M
 
 //        String name, String description, String mobile_number, String speciality, String address, String timings, CircleImageView
 //        display_picture, int id) {
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
-        model.add(new find_doctor_model("Dr. Smith", "Reputed heart surgeon \n25 years experience\nHighly Recomended",
-                "8004854630","Dermatologist","local street, mumbai","10 AM - 5 PM" ,R.drawable.doctor));
+
+        model.add(new find_doctor_model("Dr. Dennis F. Moore", "Oncologist \n25 years experience\nHighly Recomended",
+                "620-251-1200\n","Oncologist","1400 West 4th Street\n" +
+                "Coffeyville, KANSAS 67337","10 AM - 5 PM" ,R.drawable.doctor1));
+        model.add(new find_doctor_model("Dr. David C Andersen", "Reputed Denstistry Surgeon \n25 years experience\nHighly Recomended",
+                "620-252-6989","Dentist",
+                "102 Cline Road Coffeyville, KANSAS 67337","10 AM - 5 PM" ,R.drawable.femaledoctor1));
+        model.add(new find_doctor_model("Dr. Garrick A. Rettele", "Reputed Opthamology Doctor \n15 years experience\nHighly Recomended",
+                "620-251-3235","Dermatologist","1411 West 4th Street Coffeyville, KANSAS 67337\n","10 AM - 5 PM" ,R.drawable.doctor));
+        model.add(new find_doctor_model("Dr. James Howard Swann", "Reputed Dermatology Doctor \n25 years experience\nHighly Recomended",
+                "620-252-1501","Dermatologist","1400 West 4th Street\n" +
+                "COFFEYVILLE, KANSAS 67337","10 AM - 5 PM" ,R.drawable.femaledoctor2));
+        model.add(new find_doctor_model("Dr. Premal A. Khetia", "Reputed ENT surgeon \n25 years experience\nHighly Recomended",
+                "620-331-8877\n","ENT Specialist","900 W Myrtle\n" +
+                "Ste 102\n" +
+                "Independence, KANSAS 67301","10 AM - 5 PM" ,R.drawable.doctor2));
+        model.add(new find_doctor_model("Dr. Marvin R. Allen", "Gastroenterology \n25 years experience\nHighly Recomended",
+                "620-331-2200","Gastroenterologist","800 West Myrtle Street\n" +
+                "Independence, KANSAS 67301\n","10 AM - 5 PM" ,R.drawable.doctor3));
+        model.add(new find_doctor_model("Dr. Alexander David Mih", "Reputed Hand Surgeon \n25 years experience\nHighly Recomended",
+                "620-432-5775","Hand Surgeon","629 South Plummer Avenue\n" +
+                "Chanute, KANSAS 66720","10 AM - 5 PM" ,R.drawable.doctor4));
+        model.add(new find_doctor_model("Dr. Stephen Alexander Purvis", "Reputed Joint Replacement surgeon \n25 years experience\nHighly Recomended",
+                "417-625-2278","Joint Replacement Surgeon","3126 South Jackson Avenue\n" +
+                "Suite 200\n" +
+                "Joplin, MISSOURI 64804","10 AM - 5 PM" ,R.drawable.femaledoctor3));
+        model.add(new find_doctor_model("Dr. Sydney R. Nichols", "Pediatrics \n25 years experience\nHighly Recomended",
+                "620-688-6566","Paediarician","801 West 8th Street\n" +
+                "Coffeyville, KANSAS 67337","10 AM - 5 PM" ,R.drawable.doctor5));
 
 
         findDoctorAdapter.addAll(model);

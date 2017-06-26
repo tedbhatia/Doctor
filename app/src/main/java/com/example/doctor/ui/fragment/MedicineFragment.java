@@ -95,18 +95,18 @@ public class MedicineFragment extends android.support.v4.app.Fragment implements
 
     private void prepareData() {
 
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
-        model.add(new MedicineModel("Combiflam","2 doses daily","Not more than 2 a day.","Hair loss","Himalaya"));
+        model.add(new MedicineModel("Abacavir","2 doses daily","Not more than 2 a day.","Headache","Ziagen"));
+        model.add(new MedicineModel("Balsalazide","3 doses daily","Not more than 3 a day.","Diarrhea","Colazal"));
+        model.add(new MedicineModel("Banophen","2 doses daily","Not more than 2 a day.","Dizziness","Banzel"));
+        model.add(new MedicineModel("Calcid","3 doses daily","Not more than 4 a day.","Belching","Miralac"));
+        model.add(new MedicineModel("Ceftin","2 doses daily","Not more than 2 a day.","Vomiting","Ceftin"));
+        model.add(new MedicineModel("Derifenacin","1 doses daily","Not more than 1 a day.","Constipation","Enablex"));
+        model.add(new MedicineModel("Ecotrin","4 doses daily","Not more than 6 a day.","Nausea","Acuprin"));
+        model.add(new MedicineModel("Ganciclovir","3 doses daily","Not more than 6 a day.","Mouth Sores","Cytovene"));
+        model.add(new MedicineModel("Ibuprofen","3 doses daily","Not more than 4 a day.","Unexplained weight gain","Addaprin"));
+        model.add(new MedicineModel("Karidium","1 doses daily","Not more than 1 a day.","Seizures","ACT"));
+        model.add(new MedicineModel("Magnaprin","3 doses daily","Not more than 4 a day.","Nausea","Empirin"));
+        model.add(new MedicineModel("Paliperidone","1 doses daily","Not more than 1 a day.","Increased Saliva","Invega"));
 
         medicineAdapter.addAll(model);
     }

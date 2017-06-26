@@ -52,9 +52,8 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
         Medicines listItem=grid.get(position);
 
         holder.med_name.setText(listItem.getMedName());
-        holder.unit.setText(listItem.getUnit());
         holder.method.setText(listItem.getMethod());
-        holder.frequency.setText(listItem.getFrequency());
+        holder.frequency.setText(String.valueOf(listItem.getFrequency()));
 
     }
 

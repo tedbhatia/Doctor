@@ -75,13 +75,9 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
 
         listItems=new ArrayList<>();
 
-
-        listItems.add(0,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
-        listItems.add(1,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
-        listItems.add(2,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
-        listItems.add(3,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
-        listItems.add(4,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
-        listItems.add(5,new Medicines("Paracetamol","Once a Day","2","Oral","Twice","12/12/12","Dr Smith","notes"));
+        listItems.add(0,new Medicines("Erythromycin","1 tablet","Tablet",3,"2017/06/22","Dr Olga Malkin",""));
+        listItems.add(1,new Medicines("Nasonex","1 spray","Inhaler",1,"2017/06/22","","Dr Alison M Maresh"));
+        listItems.add(2,new Medicines("Minocin","1 tablet","Tablet",2,"2017/06/22","Dr Martin Quirno",""));
 
         adapter=new MedicinesAdapter(this,listItems);
         recyclerView.setAdapter(adapter);
@@ -225,9 +221,8 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
         ((TextView)dialog.findViewById(R.id.med_name_edit)).setText(a.getMedName());
         ((TextView)dialog.findViewById(R.id.dosage_amount_edit)).setText(a.getDosageAmount());
-        ((TextView)dialog.findViewById(R.id.unit_edit)).setText(a.getUnit());
         ((TextView)dialog.findViewById(R.id.method_edit)).setText(a.getMethod());
-        ((TextView)dialog.findViewById(R.id.frequency_edit)).setText(a.getFrequency());
+        ((TextView)dialog.findViewById(R.id.frequency_edit)).setText(String.valueOf(a.getFrequency()));
         ((TextView)dialog.findViewById(R.id.date_edit)).setText(a.getDate());
         ((TextView)dialog.findViewById(R.id.doctor_name_edit)).setText(a.getDoctorName());
         ((TextView)dialog.findViewById(R.id.notes_edit)).setText(a.getNotes());
