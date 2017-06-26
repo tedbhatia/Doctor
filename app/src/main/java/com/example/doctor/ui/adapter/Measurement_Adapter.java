@@ -51,8 +51,8 @@ public class Measurement_Adapter extends RecyclerView.Adapter<Measurement_Adapte
 
         final Measurement_Info current = data.get(position);
         holder.date.setText(current.getDate());
-        holder.height.setText(current.getHeight());
-        holder.weight.setText(current.getWeight());
+        holder.height.setText(String.valueOf(current.getHeight()));
+        holder.weight.setText(String.valueOf(current.getWeight()));
         /*holder.bloodPressure.setText(current.getBloodPressure());
         holder.bloodSugar.setText(current.getBloodSugar());
         holder.cholesterol.setText(current.getCholesterol());*/
