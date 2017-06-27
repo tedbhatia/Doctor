@@ -29,7 +29,7 @@ public class InsuranceEdit extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(InsuranceEdit.this,"Insurance Added",Toast.LENGTH_SHORT).show();
+                Toast.makeText(InsuranceEdit.this, "Insurance Added", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -38,7 +38,7 @@ public class InsuranceEdit extends AppCompatActivity {
 
         setTitle("Add Insurance");
 
-        if(getIntent().hasExtra("insurance")){
+        if (getIntent().hasExtra("insurance")) {
             insurance = (Insurance) getIntent().getSerializableExtra("insurance");
             bindView();
         }
@@ -50,27 +50,31 @@ public class InsuranceEdit extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(InsuranceEdit.this,"Insurance Edited",Toast.LENGTH_SHORT).show();
+                Toast.makeText(InsuranceEdit.this, "Insurance Edited", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
-        if(!(insurance.getPlan().equals(""))) {
-            ((EditText) findViewById(R.id.plan_edit)).setText(insurance.getPlan());
+        if (!(insurance.getInsurance_plan().equals(""))) {
+            ((EditText) findViewById(R.id.plan_edit)).setText(insurance.getInsurance_plan());
             ((EditText) findViewById(R.id.plan_edit)).setSelection(((EditText) findViewById(R.id.plan_edit)).length());
         }
-        if(!(insurance.getDate().equals(""))) {
-            ((EditText) findViewById(R.id.date_edit)).setText(insurance.getDate());
+        if (!(insurance.getStart_date().equals(""))) {
+            ((EditText) findViewById(R.id.date_edit)).setText(insurance.getStart_date());
             ((EditText) findViewById(R.id.date_edit)).setSelection(((EditText) findViewById(R.id.date_edit)).length());
         }
-        if(insurance.getDuration()!=null) {
-            ((EditText) findViewById(R.id.duration_edit)).setText(insurance.getDuration());
-            ((EditText) findViewById(R.id.duration_edit)).setSelection(((EditText) findViewById(R.id.duration_edit)).length());
+        if (!insurance.getExpiry_date().equals("")) {
+            ((EditText) findViewById(R.id.expiry_edit)).setText(insurance.getExpiry_date());
+            ((EditText) findViewById(R.id.expiry_edit)).setSelection(((EditText) findViewById(R.id.expiry_edit)).length());
         }
-        if(!(insurance.getNotes().equals(""))) {
+        if (!String.valueOf(insurance.getPremium()).equals("")) {
+            ((EditText) findViewById(R.id.premium_edit)).setText(String.valueOf(insurance.getPremium()));
+            ((EditText) findViewById(R.id.premium_edit)).setSelection(((EditText) findViewById(R.id.premium_edit)).length());
+        }
+        if (!(insurance.getNotes().equals(""))) {
             ((EditText) findViewById(R.id.notes_edit)).setText(insurance.getNotes());
             ((EditText) findViewById(R.id.notes_edit)).setSelection(((EditText) findViewById(R.id.notes_edit)).length());
         }
-        ((Button)findViewById(R.id.EditButton)).setText("SAVE CHANGES");
+        ((Button) findViewById(R.id.EditButton)).setText("SAVE CHANGES");
 //        ((TextView)findViewById(R.id.InsuranceText)).setText("Edit Insurance");
         setTitle("Edit Insurance");
     }
@@ -79,7 +83,7 @@ public class InsuranceEdit extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == android.R.id.home){
+        if (id == android.R.id.home) {
             this.finish();
         }
         return super.onOptionsItemSelected(item);

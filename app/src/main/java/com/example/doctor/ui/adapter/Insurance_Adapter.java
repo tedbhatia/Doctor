@@ -49,8 +49,8 @@ public class Insurance_Adapter extends RecyclerView.Adapter<Insurance_Adapter.My
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         final Insurance current = data.get(position);
-        holder.plan.setText(current.getPlan());
-        holder.duration.setText(current.getDuration());
+        holder.plan.setText(current.getInsurance_plan());
+        holder.duration.setText(String.valueOf(current.getPremium()));
         holder.notes.setText(current.getNotes());
     }
 

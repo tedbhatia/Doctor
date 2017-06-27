@@ -2,6 +2,8 @@ package com.example.doctor.support.service;
 
 
 import com.example.doctor.ui.model.Appointments;
+import com.example.doctor.ui.model.Insurance;
+import com.example.doctor.ui.model.Measurement_Info;
 import com.example.doctor.ui.model.MedicineModel;
 import com.example.doctor.ui.model.ProcedureModel;
 import com.example.doctor.ui.model.find_doctor_model;
@@ -31,4 +33,10 @@ public interface RequestInterface {
     @GET("appointments_api/?format=json")
     Call<List<Appointments>> getAppointment();
 
+
+    @GET("insurances_api/?format=json")
+    Call<List<Insurance>> getJSONinsurance();
+
+    @GET("measurements_api/?format=json")
+    Call<List<Measurement_Info>> getJSONmeas();
 }
