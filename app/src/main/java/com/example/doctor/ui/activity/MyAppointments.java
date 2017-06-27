@@ -20,7 +20,10 @@ import android.view.View;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.adapter.AppointmentsAdapter;
+import com.example.doctor.ui.adapter.FindDoctorAdapter;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
 import com.example.doctor.ui.model.Appointments;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
@@ -31,13 +34,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private AppointmentsAdapter adapter;
 
-    private List<Appointments> listItems;
+    private List<Appointments> model;
     private Appointments listItem;
 
     private ProgressDialog progressDialog;
@@ -53,10 +60,21 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointments);
 
-
         setTitle("My Appointments");
 
+        model=new ArrayList<>();
+        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MyAppointments.this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new AppointmentsAdapter(MyAppointments.this, model);
+        adapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(adapter);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        loadJSON();
 
 //        progressDialog=new ProgressDialog(this);
 //        progressDialog.setMessage("Loading...");
@@ -72,27 +90,15 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 //            }
 //        }, 3000);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        linearLayoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        listItems=new ArrayList<>();
-
-        listItems.add(0,new Appointments("Dr Olga Malkin","212-355-4510","23 Warren Street, Suite 10, New York, NY 10007","Dentistry and Prosthodontics","Regular Checkup","","01/07/2017","1100 hours"));
-        listItems.add(1,new Appointments("Dr Alison M Maresh","646-962-2225","156 William Street, New York, NY 10038","Ear, Nose, and Throat","Regular Checkup","","03/07/17","1230 hours"));
-        listItems.add(2,new Appointments("Dr Dr Martin Quirno","646-596-7386","281, Broadway, 2nd Floor, New York, NY 10007","Orthopedic Suregery","Regular Checkup","","04/07/17","1230 hours"));
-
-        adapter=new AppointmentsAdapter(this,listItems);
-        recyclerView.setAdapter(adapter);
+//        listItems=new ArrayList<>();
+//
+//        listItems.add(0,new Appointments("Dr Olga Malkin","212-355-4510","23 Warren Street, Suite 10, New York, NY 10007","Dentistry and Prosthodontics","Regular Checkup","","01/07/2017","1100 hours"));
+//        listItems.add(1,new Appointments("Dr Alison M Maresh","646-962-2225","156 William Street, New York, NY 10038","Ear, Nose, and Throat","Regular Checkup","","03/07/17","1230 hours"));
+//        listItems.add(2,new Appointments("Dr Dr Martin Quirno","646-596-7386","281, Broadway, 2nd Floor, New York, NY 10007","Orthopedic Suregery","Regular Checkup","","04/07/17","1230 hours"));
 
         adapter.setOnItemClickListener(this);
-
         onTouchListener=new RecyclerTouchListener(this,recyclerView);
-
         onTouchListener
                 .setIndependentViews(R.id.editButton)
                 .setViewsToFade(R.id.editButton)
@@ -159,6 +165,29 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
     }
 
+    private void loadJSON(){
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<Appointments>> call = request.getAppointment();
+        call.enqueue(new Callback<List<Appointments>>() {
+            @Override
+            public void onResponse(Call<List<Appointments>> call, Response<List<Appointments>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    model = response.body();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                adapter = new AppointmentsAdapter(MyAppointments.this,model);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Appointments>> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -173,7 +202,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     @Override
     public void onItemClick(int position, View v) {
 
-        listItem=listItems.get(position);
+        listItem=model.get(position);
 
         Intent intent=new Intent(MyAppointments.this,EditAppointments.class);
         intent.putExtra("appointment",listItem);
@@ -223,17 +252,17 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     }
 
     private void details(int position) {
-        Appointments a = listItems.get(position);
+        Appointments a = model.get(position);
 
         //
         Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
         dialog.setContentView(R.layout.display_appointments);
         //dialog.findViewById(R.id.imageZoom);
         //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
-        ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getName());
-        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getPhone());
-        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());
-        ((TextView)dialog.findViewById(R.id.speciality_edit)).setText(a.getSpeciality());
+//        ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getName());
+//        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getPhone());
+//        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());
+//        ((TextView)dialog.findViewById(R.id.speciality_edit)).setText(a.getSpeciality());
         ((TextView)dialog.findViewById(R.id.date_edit)).setText(a.getDate());
         ((TextView)dialog.findViewById(R.id.time_edit)).setText(a.getTime());
         ((TextView)dialog.findViewById(R.id.reason_edit)).setText(a.getReason());
