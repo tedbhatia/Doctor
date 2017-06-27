@@ -48,7 +48,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     private AppointmentsAdapter adapter;
 
     private List<Appointments> model;
-    private Appointments listItem;
+    private AppointmentSuper listItem;
     private List<find_doctor_model> doc;
     private List<AppointmentSuper> hybrid;
 
@@ -83,9 +83,23 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 3000);
+
         loadJSON();
         loadJSON1();
-        doSomething();
+   //     doSomething();
 
 //        progressDialog=new ProgressDialog(this);
 //        progressDialog.setMessage("Loading...");
@@ -177,15 +191,11 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     }
 
     private void doSomething() {
-        for(int i=0;i<model.size();i++){
-            hybrid.get(i).setDocsName(doc.get(model.get(i).getDoctor()).getDoctor_name());
-            hybrid.get(i).setPhone(doc.get(model.get(i).getDoctor()).getDoctor_phone_number());
-            hybrid.get(i).setAddress(doc.get(model.get(i).getDoctor()).getDoctor_address());
-            hybrid.get(i).setSpec(doc.get(model.get(i).getDoctor()).getDoctor_speciality());
-            hybrid.get(i).setDate(model.get(i).getDate());
-            hybrid.get(i).setTime(model.get(i).getTime());
-            hybrid.get(i).setReason(model.get(i).getReason());
-            hybrid.get(i).setNotes(model.get(i).getNotes());
+        for(int i=0;i<model.size()&& doc.size()!=0;i++){
+            hybrid.add(i,new AppointmentSuper(doc.get(model.get(i).getDoctor()-1).getDoctor_name(),
+                    doc.get(model.get(i).getDoctor()-1).getDoctor_phone_number(),doc.get(model.get(i).getDoctor()-1).getDoctor_address(),
+                    doc.get(model.get(i).getDoctor()-1).getDoctor_speciality(),model.get(i).getDate(),model.get(i).getTime(),
+                    model.get(i).getReason(),model.get(i).getNotes()));
         }
         adapter = new AppointmentsAdapter(MyAppointments.this, hybrid);
         recyclerView.setAdapter(adapter);
@@ -203,6 +213,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+     //           doSomething();
                 /*adapter = new AppointmentsAdapter(MyAppointments.this, model);
                 recyclerView.setAdapter(adapter);*/
             }
@@ -226,6 +237,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                doSomething();
                 /*adapter = new AppointmentsAdapter(MyAppointments.this, model);
                 recyclerView.setAdapter(adapter);*/
             }
@@ -254,7 +266,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     @Override
     public void onItemClick(int position, View v) {
 
-        listItem = model.get(position);
+        listItem = hybrid.get(position);
 
         Intent intent = new Intent(MyAppointments.this, EditAppointments.class);
         intent.putExtra("appointment", listItem);
@@ -300,17 +312,17 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     }
 
     private void details(int position) {
-        Appointments a = model.get(position);
+        AppointmentSuper a = hybrid.get(position);
 
         //
         Dialog dialog = new Dialog(this, R.style.Theme_AppCompat_DialogWhenLarge);
         dialog.setContentView(R.layout.display_appointments);
         //dialog.findViewById(R.id.imageZoom);
         //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
-//        ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getName());
-//        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getPhone());
-//        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());
-//        ((TextView)dialog.findViewById(R.id.speciality_edit)).setText(a.getSpeciality());
+        ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getDocsName());
+        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getPhone());
+        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());
+        ((TextView)dialog.findViewById(R.id.speciality_edit)).setText(a.getSpec());
         ((TextView) dialog.findViewById(R.id.date_edit)).setText(a.getDate());
         ((TextView) dialog.findViewById(R.id.time_edit)).setText(a.getTime());
         ((TextView) dialog.findViewById(R.id.reason_edit)).setText(a.getReason());
