@@ -110,25 +110,25 @@ public class EditAppointments extends AppCompatActivity {
 
     private void bindView(){
 
-        if(!(appointment.getName().equals(""))) {
-            ((EditText) findViewById(R.id.name_edit)).setText(appointment.getName());
-            ((EditText) findViewById(R.id.name_edit)).setSelection(((EditText) findViewById(R.id.name_edit)).length());
-        }
-
-        if(!(appointment.getPhone().equals(""))) {
-            ((EditText) findViewById(R.id.phone_edit)).setText(appointment.getPhone());
-            ((EditText) findViewById(R.id.phone_edit)).setSelection(((EditText) findViewById(R.id.phone_edit)).length());
-        }
-
-        if(!(appointment.getAddress().equals(""))) {
-            ((EditText) findViewById(R.id.address_edit)).setText(appointment.getAddress());
-            ((EditText) findViewById(R.id.address_edit)).setSelection(((EditText) findViewById(R.id.address_edit)).length());
-        }
-
-        if(!(appointment.getSpeciality().equals(""))) {
-            ((EditText) findViewById(R.id.speciality_edit)).setText(appointment.getSpeciality());
-            ((EditText) findViewById(R.id.speciality_edit)).setSelection(((EditText) findViewById(R.id.speciality_edit)).length());
-        }
+//        if(!(appointment.getName().equals(""))) {
+//            ((EditText) findViewById(R.id.name_edit)).setText(appointment.getName());
+//            ((EditText) findViewById(R.id.name_edit)).setSelection(((EditText) findViewById(R.id.name_edit)).length());
+//        }
+//
+//        if(!(appointment.getPhone().equals(""))) {
+//            ((EditText) findViewById(R.id.phone_edit)).setText(appointment.getPhone());
+//            ((EditText) findViewById(R.id.phone_edit)).setSelection(((EditText) findViewById(R.id.phone_edit)).length());
+//        }
+//
+//        if(!(appointment.getAddress().equals(""))) {
+//            ((EditText) findViewById(R.id.address_edit)).setText(appointment.getAddress());
+//            ((EditText) findViewById(R.id.address_edit)).setSelection(((EditText) findViewById(R.id.address_edit)).length());
+//        }
+//
+//        if(!(appointment.getSpeciality().equals(""))) {
+//            ((EditText) findViewById(R.id.speciality_edit)).setText(appointment.getSpeciality());
+//            ((EditText) findViewById(R.id.speciality_edit)).setSelection(((EditText) findViewById(R.id.speciality_edit)).length());
+//        }
 
         if(!(appointment.getDate().equals(""))) {
             ((EditText) findViewById(R.id.date_edit)).setText(appointment.getDate());

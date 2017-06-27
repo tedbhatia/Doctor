@@ -52,7 +52,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
         Appointments listItem=grid.get(position);
 
-        holder.name.setText(listItem.getName());
+//        holder.name.setText(listItem.getName());
         holder.date.setText(listItem.getDate());
         holder.time.setText(listItem.getTime());
         holder.reason.setText(listItem.getReason());
@@ -89,7 +89,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
             super(itemView);
 
-            name=(TextView)itemView.findViewById(R.id.name_edit);
+//            name=(TextView)itemView.findViewById(R.id.name_edit);
             date=(TextView)itemView.findViewById(R.id.date_edit);
             time=(TextView)itemView.findViewById(R.id.time_edit);
             reason=(TextView)itemView.findViewById(R.id.reason_edit);

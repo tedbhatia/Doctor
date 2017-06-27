@@ -142,7 +142,7 @@
                     android:clickable="true"
                     android:focusable="false"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textSize="20dp" />
 
             </LinearLayout>
