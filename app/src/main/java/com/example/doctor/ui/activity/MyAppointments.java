@@ -25,7 +25,10 @@ import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.adapter.AppointmentsAdapter;
 import com.example.doctor.ui.adapter.FindDoctorAdapter;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
+import com.example.doctor.ui.model.AppointmentSuper;
 import com.example.doctor.ui.model.Appointments;
+import com.example.doctor.ui.model.Doctor;
+import com.example.doctor.ui.model.find_doctor_model;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 import com.squareup.picasso.Picasso;
@@ -38,7 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
+public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -46,11 +49,15 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
     private List<Appointments> model;
     private Appointments listItem;
+    private List<find_doctor_model> doc;
+    private List<AppointmentSuper> hybrid;
 
     private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
     private RecyclerTouchListener onTouchListener;
+
+    public static final int idDoc = 0;
 
     PullRefreshLayout refreshLayout;
 
@@ -62,12 +69,14 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
         setTitle("My Appointments");
 
-        model=new ArrayList<>();
-        recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
+        model = new ArrayList<>();
+        doc = new ArrayList<>();
+        hybrid = new ArrayList<>();
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MyAppointments.this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new AppointmentsAdapter(MyAppointments.this, model);
+        adapter = new AppointmentsAdapter(MyAppointments.this, hybrid);
         adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
@@ -75,6 +84,8 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         loadJSON();
+        loadJSON1();
+        doSomething();
 
 //        progressDialog=new ProgressDialog(this);
 //        progressDialog.setMessage("Loading...");
@@ -98,7 +109,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 //        listItems.add(2,new Appointments("Dr Dr Martin Quirno","646-596-7386","281, Broadway, 2nd Floor, New York, NY 10007","Orthopedic Suregery","Regular Checkup","","04/07/17","1230 hours"));
 
         adapter.setOnItemClickListener(this);
-        onTouchListener=new RecyclerTouchListener(this,recyclerView);
+        onTouchListener = new RecyclerTouchListener(this, recyclerView);
         onTouchListener
                 .setIndependentViews(R.id.editButton)
                 .setViewsToFade(R.id.editButton)
@@ -111,13 +122,13 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
                     @Override
                     public void onIndependentViewClicked(int independentViewID, int position) {
-                        Toast.makeText(MyAppointments.this,"Button",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyAppointments.this, "Button", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
                     @Override
                     public void onRowLongClicked(int position) {
-                        Toast.makeText(MyAppointments.this,"View long clicked!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyAppointments.this, "View long clicked!", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setSwipeOptionViews(R.id.delete)
@@ -165,7 +176,22 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
     }
 
-    private void loadJSON(){
+    private void doSomething() {
+        for(int i=0;i<model.size();i++){
+            hybrid.get(i).setDocsName(doc.get(model.get(i).getDoctor()).getDoctor_name());
+            hybrid.get(i).setPhone(doc.get(model.get(i).getDoctor()).getDoctor_phone_number());
+            hybrid.get(i).setAddress(doc.get(model.get(i).getDoctor()).getDoctor_address());
+            hybrid.get(i).setSpec(doc.get(model.get(i).getDoctor()).getDoctor_speciality());
+            hybrid.get(i).setDate(model.get(i).getDate());
+            hybrid.get(i).setTime(model.get(i).getTime());
+            hybrid.get(i).setReason(model.get(i).getReason());
+            hybrid.get(i).setNotes(model.get(i).getNotes());
+        }
+        adapter = new AppointmentsAdapter(MyAppointments.this, hybrid);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void loadJSON() {
         final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
         Call<List<Appointments>> call = request.getAppointment();
         call.enqueue(new Callback<List<Appointments>>() {
@@ -177,8 +203,8 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                adapter = new AppointmentsAdapter(MyAppointments.this,model);
-                recyclerView.setAdapter(adapter);
+                /*adapter = new AppointmentsAdapter(MyAppointments.this, model);
+                recyclerView.setAdapter(adapter);*/
             }
 
             @Override
@@ -188,10 +214,36 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         });
     }
 
+    private void loadJSON1() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<find_doctor_model>> call = request.getJSON();
+        call.enqueue(new Callback<List<find_doctor_model>>() {
+            @Override
+            public void onResponse(Call<List<find_doctor_model>> call, Response<List<find_doctor_model>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    doc = response.body();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                /*adapter = new AppointmentsAdapter(MyAppointments.this, model);
+                recyclerView.setAdapter(adapter);*/
+            }
+
+            @Override
+            public void onFailure(Call<List<find_doctor_model>> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+
     @Override
     protected void onResume() {
         super.onResume();
-        recyclerView.addOnItemTouchListener(onTouchListener); }
+        recyclerView.addOnItemTouchListener(onTouchListener);
+    }
 
     @Override
     protected void onPause() {
@@ -202,10 +254,10 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     @Override
     public void onItemClick(int position, View v) {
 
-        listItem=model.get(position);
+        listItem = model.get(position);
 
-        Intent intent=new Intent(MyAppointments.this,EditAppointments.class);
-        intent.putExtra("appointment",listItem);
+        Intent intent = new Intent(MyAppointments.this, EditAppointments.class);
+        intent.putExtra("appointment", listItem);
         startActivity(intent);
 
     }
@@ -222,8 +274,6 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     }
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -234,15 +284,13 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId()==android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
 
             this.finish();
 
-        }
+        } else {
 
-        else{
-
-            Intent intent=new Intent(MyAppointments.this,EditAppointments.class);
+            Intent intent = new Intent(MyAppointments.this, EditAppointments.class);
             startActivity(intent);
 
         }
@@ -255,7 +303,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         Appointments a = model.get(position);
 
         //
-        Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
+        Dialog dialog = new Dialog(this, R.style.Theme_AppCompat_DialogWhenLarge);
         dialog.setContentView(R.layout.display_appointments);
         //dialog.findViewById(R.id.imageZoom);
         //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
@@ -263,10 +311,10 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 //        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getPhone());
 //        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());
 //        ((TextView)dialog.findViewById(R.id.speciality_edit)).setText(a.getSpeciality());
-        ((TextView)dialog.findViewById(R.id.date_edit)).setText(a.getDate());
-        ((TextView)dialog.findViewById(R.id.time_edit)).setText(a.getTime());
-        ((TextView)dialog.findViewById(R.id.reason_edit)).setText(a.getReason());
-        ((TextView)dialog.findViewById(R.id.notes_edit)).setText(a.getNotes());
+        ((TextView) dialog.findViewById(R.id.date_edit)).setText(a.getDate());
+        ((TextView) dialog.findViewById(R.id.time_edit)).setText(a.getTime());
+        ((TextView) dialog.findViewById(R.id.reason_edit)).setText(a.getReason());
+        ((TextView) dialog.findViewById(R.id.notes_edit)).setText(a.getNotes());
         dialog.show();
     }
 

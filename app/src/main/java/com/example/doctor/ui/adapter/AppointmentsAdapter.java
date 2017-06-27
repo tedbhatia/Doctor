@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.doctor.R;
+import com.example.doctor.ui.model.AppointmentSuper;
 import com.example.doctor.ui.model.Appointments;
 
 import java.util.List;
@@ -23,10 +24,10 @@ import java.util.List;
 public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapter.ViewHolder>{
 
     private static My_Health_Acc_Adapter.MyClickListener myClickListener;
-    private List<Appointments> grid;
+    private List<AppointmentSuper> grid;
     private Context context;
 
-    public AppointmentsAdapter(Context context, List<Appointments> grid) {
+    public AppointmentsAdapter(Context context, List<AppointmentSuper> grid) {
 
         this.context = context;
         this.grid = grid;
@@ -50,9 +51,9 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Appointments listItem=grid.get(position);
+        AppointmentSuper listItem=grid.get(position);
 
-//        holder.name.setText(listItem.getName());
+        holder.name.setText(listItem.getDocsName());
         holder.date.setText(listItem.getDate());
         holder.time.setText(listItem.getTime());
         holder.reason.setText(listItem.getReason());
@@ -89,7 +90,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
             super(itemView);
 
-//            name=(TextView)itemView.findViewById(R.id.name_edit);
+            name=(TextView)itemView.findViewById(R.id.name_edit);
             date=(TextView)itemView.findViewById(R.id.date_edit);
             time=(TextView)itemView.findViewById(R.id.time_edit);
             reason=(TextView)itemView.findViewById(R.id.reason_edit);
