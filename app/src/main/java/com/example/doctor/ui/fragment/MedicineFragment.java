@@ -19,14 +19,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.activity.EditProfile;
 import com.example.doctor.ui.activity.MedicineDetail;
 import com.example.doctor.ui.adapter.FindDoctorAdapter;
 import com.example.doctor.ui.adapter.MedicineAdapter;
 import com.example.doctor.ui.model.MedicineModel;
+import com.example.doctor.ui.model.find_doctor_model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
@@ -58,7 +65,8 @@ public class MedicineFragment extends android.support.v4.app.Fragment implements
         bindViews(rootView);
         initRecyclerView(rootView);
 
-        prepareData();
+        loadJSON();
+
 
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
@@ -88,12 +96,35 @@ public class MedicineFragment extends android.support.v4.app.Fragment implements
 
     }
 
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<MedicineModel>> call = request.getJSONmed();
+        call.enqueue(new Callback<List<MedicineModel>>() {
+            @Override
+            public void onResponse(Call<List<MedicineModel>> call, Response<List<MedicineModel>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    model = response.body();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                medicineAdapter = new MedicineAdapter(getContext(),model);
+                recyclerView.setAdapter(medicineAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<MedicineModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void bindViews(View rootView) {
         username=(TextView)rootView.findViewById(R.id.username);
         email=(TextView)rootView.findViewById(R.id.email);
     }
 
-    private void prepareData() {
+    /*private void prepareData() {
 
         model.add(new MedicineModel("Abacavir","2 doses daily","Not more than 2 a day.","Headache","Ziagen"));
         model.add(new MedicineModel("Balsalazide","3 doses daily","Not more than 3 a day.","Diarrhea","Colazal"));
@@ -109,7 +140,7 @@ public class MedicineFragment extends android.support.v4.app.Fragment implements
         model.add(new MedicineModel("Paliperidone","1 doses daily","Not more than 1 a day.","Increased Saliva","Invega"));
 
         medicineAdapter.addAll(model);
-    }
+    }*/
 
 
     private void initRecyclerView(View rootView) {

@@ -43,10 +43,10 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        Picasso.with(context).load(models.get(position).getId()).into(holder.doctorImage);
-        holder.name.setText(models.get(position).getName());
-        holder.mobileNumber.setText(models.get(position).getMobile_number());
-        holder.speciality.setText(models.get(position).getSpeciality());
+        Picasso.with(context).load(models.get(position).getDoctor_pic()).into(holder.doctorImage);
+        holder.name.setText(models.get(position).getDoctor_name());
+        holder.mobileNumber.setText(models.get(position).getDoctor_phone_number());
+        holder.speciality.setText(models.get(position).getDoctor_speciality());
     }
 
     @Override
@@ -106,7 +106,7 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
                 if(constraint!=null){
                     if(orig!=null && orig.size()>0){
                         for(final find_doctor_model g:orig){
-                            if(g.getName().toLowerCase().contains(constraint.toString().toLowerCase())||g.getDescription().toLowerCase().contains(constraint.toString().toLowerCase()))
+                            if(g.getDoctor_name().toLowerCase().contains(constraint.toString().toLowerCase())||g.getDoctor_speciality().toLowerCase().contains(constraint.toString().toLowerCase()))
                                 model.add(g);
                         }
                     }
