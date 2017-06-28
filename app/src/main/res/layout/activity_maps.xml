@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.doctor.ui.activity.MapsActivity">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        android:padding="5dp"
-        android:visibility="gone" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +17,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nearby Doctor" />
+
+        <Button
+            android:id="@+id/DocList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get List" />
 
     </LinearLayout>
 

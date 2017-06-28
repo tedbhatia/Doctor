@@ -117,6 +117,7 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
     public void onLongItemClick(int position, View v) {
         Toast.makeText(this, "Long click " + position, Toast.LENGTH_SHORT).show();
         menu.clear();
+        getMenuInflater().inflate(R.menu.share,menu);
         getMenuInflater().inflate(R.menu.bin, menu);
     }
 
@@ -139,12 +140,23 @@ public class MyDocuments extends AppCompatActivity implements DocumentsAdapter.M
 
         } else {
             if (adapter.getCheckedStatus()) {
-                Toast.makeText(this, "Deleted.", Toast.LENGTH_SHORT).show();
-                recyclerView.setAdapter(new DocumentsAdapter(this,data));
-                recyclerView.invalidate();
-                menu.clear();
-                getMenuInflater().inflate(R.menu.main, menu);
-                adapter.setCheckedStatus();
+                if(id == R.id.bin) {
+                    Toast.makeText(this, "Deleted.", Toast.LENGTH_SHORT).show();
+                    recyclerView.setAdapter(new DocumentsAdapter(this, data));
+                    recyclerView.invalidate();
+                    menu.clear();
+                    getMenuInflater().inflate(R.menu.main, menu);
+                    adapter.setCheckedStatus();
+                }
+                else{
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"emailaddress@example.com"});
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "This is Subject");
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+                }
 
             } else {
                 Intent intent = new Intent(MyDocuments.this, EditDocument.class);

@@ -142,7 +142,8 @@
                 android:text="Add to My Doctors"
                 android:background="@drawable/transparent_button"
                 android:textSize="20dp"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
     </ScrollView>
