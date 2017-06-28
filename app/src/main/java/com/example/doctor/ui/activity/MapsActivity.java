@@ -113,8 +113,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
@@ -143,9 +143,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Button btnRestaurant = (Button) findViewById(R.id.btnRestaurant);
             btnRestaurant.setOnClickListener(new View.OnClickListener() {
                 String Doctor = "doctor";
+
                 @Override
                 public void onClick(View v) {
-                    progressDialog=new ProgressDialog(MapsActivity.this);
+                    progressDialog = new ProgressDialog(MapsActivity.this);
                     progressDialog.setMessage("Loading...");
                     progressDialog.setCancelable(false);
                     progressDialog.isIndeterminate();
@@ -169,7 +170,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Log.d("onClick", url);
                     getNearbyPlacesData = new GetNearbyPlacesData();
                     getNearbyPlacesData.execute(DataTransfer);
-                    Toast.makeText(MapsActivity.this,"Nearby Doctor", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MapsActivity.this, "Nearby Doctor", Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -188,13 +189,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                     getNearbyPlacesData.execute(DataTransfer);*/
                     details();
-                    Toast.makeText(MapsActivity.this,"Get List", Toast.LENGTH_LONG).show();
                 }
             });
 
 
-        }
-        else {
+        } else {
             connected = false;
 
         }
@@ -262,9 +261,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-        Toast.makeText(MapsActivity.this,"Your Current Location", Toast.LENGTH_LONG).show();
+        Toast.makeText(MapsActivity.this, "Your Current Location", Toast.LENGTH_LONG).show();
 
-        Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
+        Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f", latitude, longitude));
 
         //stop location updates
         if (mGoogleApiClient != null) {
@@ -281,7 +280,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    public boolean checkLocationPermission(){
+
+    public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -358,9 +358,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void details() {
         //Doctor a = data.get(position);
-        List<MapsDoctorModel> listDetails = getNearbyPlacesData.GetPlacesList();
-        Intent intent = new Intent(this, MapsList.class);
-        intent.putExtra("list",(ArrayList<MapsDoctorModel>)listDetails);
-        startActivity(intent);
+        if (getNearbyPlacesData != null) {
+            Toast.makeText(MapsActivity.this, "Get List", Toast.LENGTH_LONG).show();
+            List<MapsDoctorModel> listDetails = getNearbyPlacesData.GetPlacesList();
+            Intent intent = new Intent(this, MapsList.class);
+            intent.putExtra("list", (ArrayList<MapsDoctorModel>) listDetails);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Data Not Available\nClick on 'Nearby Doctor'", Toast.LENGTH_SHORT).show();
+        }
     }
 }
