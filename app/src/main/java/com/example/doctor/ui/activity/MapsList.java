@@ -4,17 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.doctor.R;
-import com.example.doctor.support.service.GetNearbyPlacesData;
-import com.example.doctor.ui.adapter.FindDoctorAdapter;
 import com.example.doctor.ui.adapter.MapDoctorAdapter;
-import com.example.doctor.ui.adapter.MapsDoctorModel;
-import com.example.doctor.ui.model.Diseases;
-import com.example.doctor.ui.model.find_doctor_model;
+import com.example.doctor.ui.model.MapsDoctorModel;
 
 import java.util.ArrayList;
 import java.util.List;

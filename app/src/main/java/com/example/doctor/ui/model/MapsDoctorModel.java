@@ -1,4 +1,4 @@
-package com.example.doctor.ui.adapter;
+package com.example.doctor.ui.model;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by tejas on 28/6/17.
  */
 
-public class MapsDoctorModel implements Serializable{
+public class MapsDoctorModel implements Serializable {
 
     public MapsDoctorModel(String name, String address) {
         this.name = name;
