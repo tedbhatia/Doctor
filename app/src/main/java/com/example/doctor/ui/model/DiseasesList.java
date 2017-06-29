@@ -3,6 +3,8 @@ package com.example.doctor.ui.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.doctor.ui.activity.MedicineDetail;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,46 +15,56 @@ import java.util.List;
 public class DiseasesList implements Serializable {
 
     private String disease_name;
-    private List<String> disease_desc;
-    private List<String> disease_tests;
-    private List<String> disease_video;
+    private List<String> disease_description;
+    private List<String> disease_medicine;
+    private List<String> disease_symptoms;
+    private List<String> disease_procedure;
 
-    public DiseasesList(String disease_name, List<String> disease_desc, List<String> disease_tests, List<String> disease_video) {
+    public DiseasesList(String disease_name, List<String> disease_description, List<String> disease_medicine, List<String> disease_symptoms, List<String> disease_procedure) {
         this.disease_name = disease_name;
-        this.disease_desc = disease_desc;
-        this.disease_tests = disease_tests;
-        this.disease_video = disease_video;
+        this.disease_description = disease_description;
+        this.disease_medicine = disease_medicine;
+        this.disease_symptoms = disease_symptoms;
+        this.disease_procedure = disease_procedure;
     }
 
-    public List<String> getDisease_desc() {
-        return disease_desc;
-    }
-
-    public void setDisease_desc(List<String> disease_desc) {
-        this.disease_desc = disease_desc;
-    }
-
-    public List<String> getDisease_tests() {
-        return disease_tests;
-    }
-
-    public void setDisease_tests(List<String> disease_tests) {
-        this.disease_tests = disease_tests;
-    }
-
-    public List<String> getDisease_video() {
-        return disease_video;
-    }
-
-    public void setDisease_video(List<String> disease_video) {
-        this.disease_video = disease_video;
-    }
-
-    public String getName() {
+    public String getDisease_name() {
         return disease_name;
     }
 
-    public void setName(String name) {
-        this.disease_name = name;
+    public void setDisease_name(String disease_name) {
+        this.disease_name = disease_name;
+    }
+
+    public List<String> getDisease_description() {
+        return disease_description;
+    }
+
+    public void setDisease_description(List<String> disease_description) {
+        this.disease_description = disease_description;
+    }
+
+    public List<String> getDisease_medicine() {
+        return disease_medicine;
+    }
+
+    public void setDisease_medicine(List<String> disease_medicine) {
+        this.disease_medicine = disease_medicine;
+    }
+
+    public List<String> getDisease_symptoms() {
+        return disease_symptoms;
+    }
+
+    public void setDisease_symptoms(List<String> disease_symptoms) {
+        this.disease_symptoms = disease_symptoms;
+    }
+
+    public List<String> getDisease_procedure() {
+        return disease_procedure;
+    }
+
+    public void setDisease_procedure(List<String> disease_procedure) {
+        this.disease_procedure = disease_procedure;
     }
 }

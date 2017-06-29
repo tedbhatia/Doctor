@@ -34,6 +34,6 @@ public class Diseases_ViewHolder extends ChildViewHolder {
         disease_name = (TextView) itemView.findViewById(R.id.disease_name);
     }
     public void bind(DiseasesList diseases){
-        disease_name.setText(diseases.getName());
+        disease_name.setText(diseases.getDisease_name());
     }
 }

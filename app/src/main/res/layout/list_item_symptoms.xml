@@ -6,7 +6,7 @@
     android:id="@+id/disease_layout">
 
     <TextView
-        android:id="@+id/disease_name"
+        android:id="@+id/symptom_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"

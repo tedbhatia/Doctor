@@ -13,12 +13,15 @@ import android.widget.Toast;
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 import com.example.doctor.R;
 import com.example.doctor.ui.activity.DiseaseDetail;
+import com.example.doctor.ui.activity.SymptomDetail;
 import com.example.doctor.ui.model.Body_Parts;
 import com.example.doctor.ui.adapter.Body_Parts_Adapter;
 import com.example.doctor.ui.model.Diseases;
 import com.example.doctor.ui.model.DiseasesList;
+import com.example.doctor.ui.model.SymptomModel;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,26 +59,30 @@ public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment im
         List<String> videos = new ArrayList<String>();
         videos.add("Video_link1");
         videos.add("Video_link2");
-
-        DiseasesList handpain = new DiseasesList("handpain",description,tests,videos);
-        DiseasesList handpain1 = new DiseasesList("Swelling",description,tests,videos);
-        DiseasesList handpain2 = new DiseasesList("Bone fracture",description,tests,videos);
-        DiseasesList handpain3 = new DiseasesList("handpain",description,tests,videos);
-        DiseasesList handpain4 = new DiseasesList("Paralysis",description,tests,videos);
-        DiseasesList handpain5 = new DiseasesList("handpain",description,tests,videos);
-        DiseasesList handpain6 = new DiseasesList("Contracture",description,tests,videos);
-        DiseasesList handpain7 = new DiseasesList("Nerve injury",description,tests,videos);
+        List<String> diseasesList = new ArrayList<String>();
+        diseasesList.add("Cancer");
+        diseasesList.add("TB");
+        SymptomModel handpain = new SymptomModel("handpain",description,tests,videos, diseasesList);
+        SymptomModel handpain1 = new SymptomModel("Swelling",description,tests,videos, diseasesList);
+        SymptomModel handpain2 = new SymptomModel("Bone fracture",description,tests,videos, diseasesList);
+        SymptomModel handpain3 = new SymptomModel("handpain",description,tests,videos, diseasesList);
+        SymptomModel handpain4 = new SymptomModel("Paralysis",description,tests,videos, diseasesList);
+        SymptomModel handpain5 = new SymptomModel("handpain",description,tests,videos, diseasesList);
+        SymptomModel handpain6 = new SymptomModel("Contracture",description,tests,videos, diseasesList);
+        SymptomModel handpain7 = new SymptomModel("Nerve injury",description,tests,videos, diseasesList);
 
         Body_Parts hand = new Body_Parts("hand", Arrays.asList(handpain, handpain1, handpain2, handpain3));
-        Body_Parts hand1 = new Body_Parts("hand", Arrays.asList(handpain, handpain1, handpain4, handpain5));
-        Body_Parts hand2 = new Body_Parts("hand", Arrays.asList(handpain, handpain1, handpain6, handpain7));
-        body_parts = Arrays.asList(hand, hand1, hand2);
+        Body_Parts hand1 = new Body_Parts("leg", Arrays.asList(handpain, handpain1, handpain4, handpain5));
+        Body_Parts hand2 = new Body_Parts("breast", Arrays.asList(handpain, handpain1, handpain6, handpain7));
+        Body_Parts hand3 = new Body_Parts("joint", Arrays.asList(handpain, handpain1, handpain6, handpain7));
+        body_parts = Arrays.asList(hand, hand1, hand2, hand3);
     }
 
     @Override
     public void onChildClickListener(int parent_positon, int child_position, View v) {
-        Intent intent = new Intent(getActivity(),DiseaseDetail.class);
-        intent.putExtra("diseasedetail",body_parts.get(parent_positon).getChildList().get(child_position));
+        Intent intent = new Intent(getActivity(),SymptomDetail.class);
+//        intent.putExtra("symptomdetail",body_parts.get(parent_positon).getChildList().get(child_position));
+        intent.putExtra("symptomdetail", (Serializable) body_parts.get(parent_positon).getChildList().get(child_position));
         startActivity(intent);
     }
 }
