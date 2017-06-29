@@ -8,12 +8,12 @@ import java.io.Serializable;
 
 public class Medicines implements Serializable {
 
-    String medName,dosageAmount,unit,method,frequency,date,doctorName,notes;
+    String medName,dosageAmount,method,date,doctorName,notes;
+    int frequency;
 
-    public Medicines(String medName, String dosageAmount, String unit, String method, String frequency, String date, String doctorName, String notes) {
+    public Medicines(String medName, String dosageAmount, String method, int frequency, String date, String doctorName, String notes) {
         this.medName = medName;
         this.dosageAmount = dosageAmount;
-        this.unit = unit;
         this.method = method;
         this.frequency = frequency;
         this.date = date;
@@ -37,14 +37,6 @@ public class Medicines implements Serializable {
         this.dosageAmount = dosageAmount;
     }
 
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
     public String getMethod() {
         return method;
     }
@@ -53,11 +45,11 @@ public class Medicines implements Serializable {
         this.method = method;
     }
 
-    public String getFrequency() {
+    public int getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(String frequency) {
+    public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
 

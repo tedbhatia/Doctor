@@ -73,14 +73,9 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Diseases("Asthama","23/05/2017","notes"));
-        listItems.add(1,new Diseases("Asthama","23/05/2017","notes"));
-        listItems.add(2,new Diseases("Asthama","23/05/2017","notes"));
-        listItems.add(3,new Diseases("Asthama","23/05/2017","notes"));
-        listItems.add(4,new Diseases("Asthama","23/05/2017","notes"));
-        listItems.add(5,new Diseases("Asthama","23/05/2017","notes"));
-        listItems.add(6,new Diseases("Asthama","23/05/2017","notes"));
-        listItems.add(7,new Diseases("Asthama","23/05/2017","notes"));
+        listItems.add(0,new Diseases("Periodontitis (gum inflammation)","23/05/2017","Periodontitis is a condition that involves inflammation of the gums and other structures that support the teeth. Periodontitis is caused by a bacterial infection. The body's attempt to fight the infection results in damage to the jaw bone and the ligament around the teeth. Pockets form between the teeth and gums. Teeth may become loose and even fall out. Older adults, people with diabetes, and people who smoke are more likely to get periodontitis."));
+        listItems.add(1,new Diseases("Rhinitis (nasal inflammation)","23/05/2017","Inflammation of the mucus membranes of the nose and upper respiratory tract can occur in response to an irritant. In allergic rhinitis, the immune system in the nose reacts strongly to irritants called airborne allergens. This is a common disorder, affecting at least a quarter of the population."));
+        listItems.add(2,new Diseases("Arthritis","01/06/2018","Inflammation of a single joint or multiple joints. There are many causes including infection, and inflammatory conditions such as: osteoarthritis, gout, pseudogout, rheumatoid arthritis, lupus, ankylosing spondylitis, and psoriasis."));
 
         adapter=new DiseasesAdapter(listItems,this);
         recyclerView.setAdapter(adapter);

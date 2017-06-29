@@ -1,6 +1,8 @@
 package com.example.doctor.support.service;
 
 
+import com.example.doctor.ui.model.Appointments;
+import com.example.doctor.ui.model.Doctor;
 import com.example.doctor.ui.model.Insurance;
 import com.example.doctor.ui.model.Measurement_Info;
 import com.example.doctor.ui.model.MedicineModel;
@@ -12,6 +14,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
+import static com.example.doctor.ui.activity.MyAppointments.idDoc;
 import static com.facebook.HttpMethod.GET;
 
 /**
@@ -29,9 +32,14 @@ public interface RequestInterface {
     @GET("procedures_api/?format=json")
     Call<List<ProcedureModel>> getJSONproc();
 
+    @GET("appointments_api/?format=json")
+    Call<List<Appointments>> getAppointment();
+
+
     @GET("insurances_api/?format=json")
     Call<List<Insurance>> getJSONinsurance();
 
     @GET("measurements_api/?format=json")
     Call<List<Measurement_Info>> getJSONmeas();
+
 }

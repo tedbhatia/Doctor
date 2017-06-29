@@ -24,6 +24,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/display_picture"
+                    android:src="@drawable/doctor4"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center" />
@@ -43,6 +44,7 @@
 
                 <TextView
                     android:id="@+id/name"
+                    android:maxLines="2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -140,7 +142,8 @@
                 android:text="Add to My Doctors"
                 android:background="@drawable/transparent_button"
                 android:textSize="20dp"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
     </ScrollView>

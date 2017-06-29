@@ -15,6 +15,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.ui.model.AppointmentSuper;
 import com.example.doctor.ui.model.Appointments;
 
 import java.text.SimpleDateFormat;
@@ -25,7 +26,7 @@ import java.util.Locale;
 public class EditAppointments extends AppCompatActivity {
 
     private Button button;
-    private Appointments appointment;
+    private AppointmentSuper appointment;
     private EditText date_edit,time_edit;
     private int mYear,mMonth,mDay;
 
@@ -102,7 +103,7 @@ public class EditAppointments extends AppCompatActivity {
 
         if (getIntent().hasExtra("appointment")) {
 
-            appointment = (Appointments) getIntent().getSerializableExtra("appointment");
+            appointment = (AppointmentSuper) getIntent().getSerializableExtra("appointment");
             bindView();
 
         }
@@ -110,12 +111,12 @@ public class EditAppointments extends AppCompatActivity {
 
     private void bindView(){
 
-        if(!(appointment.getName().equals(""))) {
-            ((EditText) findViewById(R.id.name_edit)).setText(appointment.getName());
+        if(!(appointment.getDocsName().equals(""))) {
+            ((EditText) findViewById(R.id.name_edit)).setText(appointment.getDocsName());
             ((EditText) findViewById(R.id.name_edit)).setSelection(((EditText) findViewById(R.id.name_edit)).length());
         }
 
-        if(!(appointment.getPhone().equals(""))) {
+        if(appointment.getPhone()!=null) {
             ((EditText) findViewById(R.id.phone_edit)).setText(appointment.getPhone());
             ((EditText) findViewById(R.id.phone_edit)).setSelection(((EditText) findViewById(R.id.phone_edit)).length());
         }
@@ -125,8 +126,8 @@ public class EditAppointments extends AppCompatActivity {
             ((EditText) findViewById(R.id.address_edit)).setSelection(((EditText) findViewById(R.id.address_edit)).length());
         }
 
-        if(!(appointment.getSpeciality().equals(""))) {
-            ((EditText) findViewById(R.id.speciality_edit)).setText(appointment.getSpeciality());
+        if(!(appointment.getSpec().equals(""))) {
+            ((EditText) findViewById(R.id.speciality_edit)).setText(appointment.getSpec());
             ((EditText) findViewById(R.id.speciality_edit)).setSelection(((EditText) findViewById(R.id.speciality_edit)).length());
         }
 

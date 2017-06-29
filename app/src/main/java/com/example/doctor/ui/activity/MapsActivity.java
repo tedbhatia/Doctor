@@ -3,13 +3,14 @@ package com.example.doctor.ui.activity;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -17,14 +18,12 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.support.service.GetNearbyPlacesData;
+import com.example.doctor.ui.model.MapsDoctorModel;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -39,7 +38,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -55,16 +54,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-    ProgressBar progressBar;
     boolean connected = false;
+    private GetNearbyPlacesData getNearbyPlacesData;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBar.setIndeterminate(true);
 /*
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -115,12 +113,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             connected = true;
-            progressBar.setVisibility(View.GONE);
             mMap = googleMap;
             mMap.clear();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -146,8 +143,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Button btnRestaurant = (Button) findViewById(R.id.btnRestaurant);
             btnRestaurant.setOnClickListener(new View.OnClickListener() {
                 String Doctor = "doctor";
+
                 @Override
                 public void onClick(View v) {
+                    progressDialog = new ProgressDialog(MapsActivity.this);
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.isIndeterminate();
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.show();
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            progressDialog.dismiss();
+                        }
+                    }, 3000);
+
+                    //Wait
                     Log.d("onClick", "Button is Clicked");
                     mMap.clear();
                     String url = getUrl(latitude, longitude, Doctor);
@@ -155,16 +168,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     DataTransfer[0] = mMap;
                     DataTransfer[1] = url;
                     Log.d("onClick", url);
-                    GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                    getNearbyPlacesData = new GetNearbyPlacesData();
                     getNearbyPlacesData.execute(DataTransfer);
-                    Toast.makeText(MapsActivity.this,"Nearby Doctor", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MapsActivity.this, "Nearby Doctor", Toast.LENGTH_LONG).show();
                 }
             });
 
-        }
-        else {
+            Button list = (Button) findViewById(R.id.DocList);
+            list.setOnClickListener(new View.OnClickListener() {
+                //String Doctor = "doctor";
+                @Override
+                public void onClick(View v) {
+                    /*Log.d("onClick", "Button is Clicked");
+                    mMap.clear();
+                    String url = getUrl(latitude, longitude, Doctor);
+                    Object[] DataTransfer = new Object[2];
+                    DataTransfer[0] = mMap;
+                    DataTransfer[1] = url;
+                    Log.d("onClick", url);
+                    GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                    getNearbyPlacesData.execute(DataTransfer);*/
+                    details();
+                }
+            });
+
+
+        } else {
             connected = false;
-            progressBar.setVisibility(View.VISIBLE);
 
         }
 
@@ -231,9 +261,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-        Toast.makeText(MapsActivity.this,"Your Current Location", Toast.LENGTH_LONG).show();
+        Toast.makeText(MapsActivity.this, "Your Current Location", Toast.LENGTH_LONG).show();
 
-        Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
+        Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f", latitude, longitude));
 
         //stop location updates
         if (mGoogleApiClient != null) {
@@ -250,7 +280,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    public boolean checkLocationPermission(){
+
+    public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -322,6 +353,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else {
             GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
             return false;
+        }
+    }
+
+    private void details() {
+        //Doctor a = data.get(position);
+        if (getNearbyPlacesData != null) {
+            Toast.makeText(MapsActivity.this, "Get List", Toast.LENGTH_LONG).show();
+            List<MapsDoctorModel> listDetails = getNearbyPlacesData.GetPlacesList();
+            Intent intent = new Intent(this, MapsList.class);
+            intent.putExtra("list", (ArrayList<MapsDoctorModel>) listDetails);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Data Not Available\nClick on 'Nearby Doctor'", Toast.LENGTH_SHORT).show();
         }
     }
 }
