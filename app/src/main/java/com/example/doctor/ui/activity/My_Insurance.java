@@ -56,19 +56,19 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
         setContentView(R.layout.activity_my_insurance);
         setTitle("My Insurance");
 //
-//        progressDialog=new ProgressDialog(this);
-//        progressDialog.setMessage("Loading...");
-//        progressDialog.setCancelable(false);
-//        progressDialog.isIndeterminate();
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.show();
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
-//                progressDialog.dismiss();
-//            }
-//        }, 3000);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 3000);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

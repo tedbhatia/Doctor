@@ -9,26 +9,6 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:gravity="right">
-
-        <TextView
-            android:id="@+id/skipText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|right"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="end|right"
-            android:text="Skip for now"
-            android:textSize="15dp" />
-    </LinearLayout>
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -93,17 +73,34 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/forgot_password"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Forgot Password ?"
-                android:textSize="15dp" />
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/skipText"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="left"
+                    android:padding="20dp"
+                    android:text="Skip for now"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/forgot_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="20dp"
+                    android:gravity="right"
+                    android:padding="20dp"
+                    android:text="Forgot Password ?"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -175,13 +172,17 @@
 
             </LinearLayout>
 
+
+
+
             <TextView
                 android:id="@+id/terms_conditions"
-                style="@style/TextStyle"
+                android:textSize="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:paddingTop="25dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="20dp"
                 android:text="Terms and Conditions" />
 
         </LinearLayout>

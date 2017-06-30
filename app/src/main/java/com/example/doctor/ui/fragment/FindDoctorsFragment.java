@@ -180,9 +180,9 @@ public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.M
     }
 
     @Override
-    public void onItemClick(int position, View v) {
+    public void onItemClick(int position, View v, List<find_doctor_model> searchList) {
           Intent intent = new Intent (getActivity(), DoctorDetail.class);
-          intent.putExtra("details", model.get(position));
+          intent.putExtra("details", searchList.get(position));
           startActivity(intent);
 //        Toast.makeText(getActivity(), "Position : " + position, Toast.LENGTH_SHORT).show();
     }

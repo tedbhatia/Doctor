@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ParentViewHolder;
 import com.example.doctor.R;
+import com.example.doctor.ui.model.BodyPartSuper;
 import com.example.doctor.ui.model.Body_Parts;
 
 /**
@@ -65,8 +66,8 @@ public class Body_Parts_Viewholder extends ParentViewHolder {
             }
         });
     }
-    public void bind(Body_Parts body_parts){
-        male_body_parts_names.setText(body_parts.getName());
+    public void bind(BodyPartSuper body_parts){
+        male_body_parts_names.setText(body_parts.getBody_part_name());
     }
 
     @Override

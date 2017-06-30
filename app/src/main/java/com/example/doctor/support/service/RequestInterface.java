@@ -2,11 +2,13 @@ package com.example.doctor.support.service;
 
 
 import com.example.doctor.ui.model.Appointments;
+import com.example.doctor.ui.model.Body_Parts;
 import com.example.doctor.ui.model.Doctor;
 import com.example.doctor.ui.model.Insurance;
 import com.example.doctor.ui.model.Measurement_Info;
 import com.example.doctor.ui.model.MedicineModel;
 import com.example.doctor.ui.model.ProcedureModel;
+import com.example.doctor.ui.model.SymptomModel;
 import com.example.doctor.ui.model.find_doctor_model;
 
 import java.util.List;
@@ -23,23 +25,29 @@ import static com.facebook.HttpMethod.GET;
 
 public interface RequestInterface {
 
-    @GET("doctors_api/?format=json")
+    @GET("api/doctor_list")
     Call<List<find_doctor_model>> getJSON();
 
-    @GET("medicines_api/?format=json")
+    @GET("api/medicine_list")
     Call<List<MedicineModel>> getJSONmed();
 
-    @GET("procedures_api/?format=json")
+    @GET("api/procedure_list")
     Call<List<ProcedureModel>> getJSONproc();
 
-    @GET("appointments_api/?format=json")
+    @GET("api/appointment_list")
     Call<List<Appointments>> getAppointment();
 
 
-    @GET("insurances_api/?format=json")
+    @GET("api/insurance_list")
     Call<List<Insurance>> getJSONinsurance();
 
-    @GET("measurements_api/?format=json")
+    @GET("api/measurement_list")
     Call<List<Measurement_Info>> getJSONmeas();
+
+    @GET("api/bodypart_list")
+    Call<List<Body_Parts>> getBODY();
+
+    @GET("api/symptom_list")
+    Call<List<SymptomModel>> getSymptoms();
 
 }

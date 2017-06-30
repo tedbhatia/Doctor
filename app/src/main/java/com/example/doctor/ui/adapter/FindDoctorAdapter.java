@@ -83,7 +83,7 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
     }
 
     public interface MyClickListener{
-        void onItemClick(int position, View v);
+        void onItemClick(int position, View v, List<find_doctor_model> models);
     }
 
     public List<find_doctor_model> getModels() {
@@ -123,7 +123,7 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
         };
     }
 
-    public static class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView doctorImage;
         private TextView name;
         private TextView mobileNumber;
@@ -146,7 +146,7 @@ public class FindDoctorAdapter extends RecyclerView.Adapter<FindDoctorAdapter.Da
         @Override
         public void onClick(View v) {
             if (myClickListener != null) {
-                myClickListener.onItemClick(getLayoutPosition(), v);
+                myClickListener.onItemClick(getLayoutPosition(), v,models);
             }
         }
     }

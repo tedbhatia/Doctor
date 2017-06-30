@@ -60,6 +60,8 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     public static final int idDoc = 0;
 
     PullRefreshLayout refreshLayout;
+    private int flag1;
+    private int flag2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +92,12 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
-        Handler handler = new Handler();
+        /*Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 progressDialog.dismiss();
             }
-        }, 3000);
+        }, 3000);*/
 
         loadJSON();
         loadJSON1();
@@ -121,6 +123,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 //        listItems.add(0,new Appointments("Dr Olga Malkin","212-355-4510","23 Warren Street, Suite 10, New York, NY 10007","Dentistry and Prosthodontics","Regular Checkup","","01/07/2017","1100 hours"));
 //        listItems.add(1,new Appointments("Dr Alison M Maresh","646-962-2225","156 William Street, New York, NY 10038","Ear, Nose, and Throat","Regular Checkup","","03/07/17","1230 hours"));
 //        listItems.add(2,new Appointments("Dr Dr Martin Quirno","646-596-7386","281, Broadway, 2nd Floor, New York, NY 10007","Orthopedic Suregery","Regular Checkup","","04/07/17","1230 hours"));
+
 
         adapter.setOnItemClickListener(this);
         onTouchListener = new RecyclerTouchListener(this, recyclerView);
@@ -191,6 +194,9 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     }
 
     private void doSomething() {
+        if(flag1!=0 && flag2!=0){
+            progressDialog.dismiss();
+        }
         for(int i=0;i<model.size()&& doc.size()!=0;i++){
             hybrid.add(i,new AppointmentSuper(doc.get(model.get(i).getDoctor()-1).getDoctor_name(),
                     doc.get(model.get(i).getDoctor()-1).getDoctor_phone_number(),doc.get(model.get(i).getDoctor()-1).getDoctor_address(),
@@ -210,6 +216,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                 try {
 //                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
                     model = response.body();
+                    flag1 = 1;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -234,6 +241,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
                 try {
 //                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
                     doc = response.body();
+                    flag2 = 1;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -116,10 +116,10 @@ public class SymptomDetail extends AppCompatActivity implements View.OnClickList
         listDataHeader.add("Tests");
         listDataHeader.add("Related Videos");
         listDataHeader.add("Possible Diseases");
-        listDataChild.put(listDataHeader.get(0), symptoms.getSymptom_description()); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), symptoms.getSymptom_tests());
-        listDataChild.put(listDataHeader.get(2), symptoms.getSymptom_videos());
-        listDataChild.put(listDataHeader.get(3), symptoms.getPossible_diseases());
+//        listDataChild.put(listDataHeader.get(0), symptoms.getSymptom_description()); // Header, Child data
+//        listDataChild.put(listDataHeader.get(1), symptoms.getTests());
+//        listDataChild.put(listDataHeader.get(2), symptoms.getSymptom_videos());
+//        listDataChild.put(listDataHeader.get(3), symptoms.getPossible_diseases());
     }
 
     @Override

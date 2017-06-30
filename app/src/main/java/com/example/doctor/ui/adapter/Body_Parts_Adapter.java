@@ -12,6 +12,7 @@ import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 import com.example.doctor.R;
 import com.example.doctor.ui.activity.DiseaseDetail;
 import com.example.doctor.ui.fragment.Symptoms_Male_Fragment;
+import com.example.doctor.ui.model.BodyPartSuper;
 import com.example.doctor.ui.model.Body_Parts;
 import com.example.doctor.ui.model.DiseasesList;
 import com.example.doctor.ui.model.SymptomModel;
@@ -23,10 +24,10 @@ import java.util.List;
  * Created by Aviral on 12-06-2017.
  */
 
-public class Body_Parts_Adapter extends ExpandableRecyclerAdapter<Body_Parts,SymptomModel,Body_Parts_Viewholder,Symptom_ViewHolder> {
+public class Body_Parts_Adapter extends ExpandableRecyclerAdapter<BodyPartSuper,SymptomModel,Body_Parts_Viewholder,Symptom_ViewHolder> {
 
     private Context context;
-    List <Body_Parts> groups;
+    List <BodyPartSuper> groups;
     private LayoutInflater layoutInflater;
     public MyChildClickListener myClickListener;
     /**
@@ -45,7 +46,7 @@ public class Body_Parts_Adapter extends ExpandableRecyclerAdapter<Body_Parts,Sym
      * @param parentList List of all parents to be displayed in the RecyclerView that this
      *                   adapter is linked to
      */
-    public Body_Parts_Adapter(Context context,@NonNull List<Body_Parts> parentList) {
+    public Body_Parts_Adapter(Context context,@NonNull List<BodyPartSuper> parentList) {
         super(parentList);
         layoutInflater=LayoutInflater.from(context);
         this.context=context;
@@ -74,7 +75,7 @@ public class Body_Parts_Adapter extends ExpandableRecyclerAdapter<Body_Parts,Sym
     }
 
     @Override
-    public void onBindParentViewHolder(@NonNull Body_Parts_Viewholder parentViewHolder, final int parentPosition, @NonNull Body_Parts parent) {
+    public void onBindParentViewHolder(@NonNull Body_Parts_Viewholder parentViewHolder, final int parentPosition, @NonNull BodyPartSuper parent) {
         parentViewHolder.bind(parent);
     }
 
