@@ -1,12 +1,17 @@
 package com.example.doctor.ui.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +45,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.MainActivity.navigationView;
+
 /**
  * Created by Aviral on 09-06-2017.
  */
@@ -51,6 +58,8 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
     private List<SymptomModel> symptoms;
     private List<BodyPartSuper> bodyPartSupers;
     private ProgressDialog progressDialog;
+    public FragmentManager fm;
+//    public transient Context mContext=getActivity();
 
 
     @Nullable
@@ -63,18 +72,73 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
         body_parts = new ArrayList<>();
         symptoms = new ArrayList<>();
         bodyPartSupers = new ArrayList<>();
+        final Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.symptoms_recycler);
         mRecyclerView.setHasFixedSize(true);
-        bodyPartsAdapter = new Body_Parts_Adapter(getContext(),bodyPartSupers);
+        bodyPartsAdapter = new Body_Parts_Adapter(getContext(), bodyPartSupers);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(bodyPartsAdapter);
 
-        progressDialog=new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.isIndeterminate();
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Toast.makeText(getContext(), "Poor Connection, Try Again", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
+
+                navigationView.getMenu().getItem(0).setChecked(true);
+
+                FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_frame,health_acc_fragment);
+
+                transaction.commit();
+            }
+        }, 20000);
+
+        /*progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if(keyCode==KeyEvent.KEYCODE_BACK && !event.isCanceled()) {
+                    if(progressDialog.isShowing()) {
+                        //your logic here for back button pressed event
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });*/
+
+//        rootView.setFocusableInTouchMode(true);
+//        rootView.requestFocus();
+//        rootView.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//
+//                    progressDialog.dismiss();
+//
+//                    Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
+//
+//                    navigationView.getMenu().getItem(0).setChecked(true);
+//
+//                    FragmentTransaction transaction=getFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.content_frame,health_acc_fragment);
+//
+//                    transaction.commit();
+//
+//
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
         /*Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -85,8 +149,9 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
 
         loadJSON();
         loadJSON1();
-//        bodyPartsAdapter.setOnChildClickListener(this);
         return rootView;
+
+
     }
 
     /*public void get_Body_Parts() {
@@ -120,8 +185,8 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
     @Override
     public void onChildClickListener(int parent_positon, int child_position, View v) {
 
-        Intent intent = new Intent(getActivity(),SymptomDetail.class);
-        intent.putExtra("symptomdetail", (Serializable) bodyPartSupers.get(parent_positon).getChildList().get(child_position));
+        Intent intent = new Intent(getContext(), SymptomDetail.class);
+        intent.putExtra("symptomdetail", bodyPartSupers.get(parent_positon).getChildList().get(child_position));
         startActivity(intent);
     }
 
@@ -173,30 +238,31 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
     }
 
     private void doSomething() {
-        if(body_parts.size()!=0 && symptoms.size()!=0){
+        if (body_parts.size() != 0 && symptoms.size() != 0) {
             progressDialog.dismiss();
         }
-        for(int i=0;i<body_parts.size() && symptoms.size()!=0;i++){
+        for (int i = 0; i < body_parts.size() && symptoms.size() != 0; i++) {
             /*hybrid.add(i,new AppointmentSuper(doc.get(model.get(i).getDoctor()-1).getDoctor_name(),
                     doc.get(model.get(i).getDoctor()-1).getDoctor_phone_number(),doc.get(model.get(i).getDoctor()-1).getDoctor_address(),
                     doc.get(model.get(i).getDoctor()-1).getDoctor_speciality(),model.get(i).getDate(),model.get(i).getTime(),
                     model.get(i).getReason(),model.get(i).getNotes()));*/
             List<SymptomModel> SymList = new ArrayList<>();
             List<Integer> list = body_parts.get(i).getBPsymptom();
-            for(int j=0;j<list.size();j++){
+            for (int j = 0; j < list.size(); j++) {
 
-                SymList.add(j,symptoms.get(list.get(j)-1));
+                SymList.add(j, symptoms.get(list.get(j) - 1));
                 //SymList.add(j,symptoms.get(findbyID(list.get(j))));
             }
-            bodyPartSupers.add(i,new BodyPartSuper(body_parts.get(i).getBodypart(),SymList));
+            bodyPartSupers.add(i, new BodyPartSuper(body_parts.get(i).getBodypart(), SymList));
         }
         bodyPartsAdapter = new Body_Parts_Adapter(getContext(), bodyPartSupers);
+        bodyPartsAdapter.setOnChildClickListener(this);
         mRecyclerView.setAdapter(bodyPartsAdapter);
     }
 
     private int findbyID(Integer integer) {
-        for(int k=0;k<symptoms.size();k++){
-            if(symptoms.get(k).getId()==integer){
+        for (int k = 0; k < symptoms.size(); k++) {
+            if (symptoms.get(k).getId() == integer) {
                 return k;
             }
         }

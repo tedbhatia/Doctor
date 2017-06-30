@@ -2,13 +2,14 @@ package com.example.doctor.ui.model;
 
 import com.bignerdranch.expandablerecyclerview.model.Parent;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Pankaj on 6/29/2017.
  */
 
-public class BodyPartSuper implements Parent<SymptomModel> {
+public class BodyPartSuper implements Parent<SymptomModel>, Serializable {
     private String body_part_name;
     private List<SymptomModel> symptomModels;
 

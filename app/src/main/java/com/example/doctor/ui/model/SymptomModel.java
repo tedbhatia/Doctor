@@ -22,7 +22,7 @@ public class SymptomModel implements Serializable {
     private String symptom_name;
     private String symptom_description;
     private String tests;
-    private List<BodypartBean> bodypart;
+    private List<Body_Parts> bodypart;
 
     public int getId() {
         return id;
@@ -56,37 +56,37 @@ public class SymptomModel implements Serializable {
         this.tests = tests;
     }
 
-    public List<BodypartBean> getBodypart() {
+    public List<Body_Parts> getBodypart() {
         return bodypart;
     }
 
-    public void setBodypart(List<BodypartBean> bodypart) {
+    public void setBodypart(List<Body_Parts> bodypart) {
         this.bodypart = bodypart;
     }
 
-    public static class BodypartBean {
-        /**
-         * bodypart : hands
-         * BPsymptom : [1,2]
-         */
-
-        private String bodypart;
-        private List<Integer> BPsymptom;
-
-        public String getBodypart() {
-            return bodypart;
-        }
-
-        public void setBodypart(String bodypart) {
-            this.bodypart = bodypart;
-        }
-
-        public List<Integer> getBPsymptom() {
-            return BPsymptom;
-        }
-
-        public void setBPsymptom(List<Integer> BPsymptom) {
-            this.BPsymptom = BPsymptom;
-        }
-    }
+//    public static class BodypartBean {
+//        /**
+//         * bodypart : hands
+//         * BPsymptom : [1,2]
+//         */
+//
+//        private String bodypart;
+//        private List<Integer> BPsymptom;
+//
+//        public String getBodypart() {
+//            return bodypart;
+//        }
+//
+//        public void setBodypart(String bodypart) {
+//            this.bodypart = bodypart;
+//        }
+//
+//        public List<Integer> getBPsymptom() {
+//            return BPsymptom;
+//        }
+//
+//        public void setBPsymptom(List<Integer> BPsymptom) {
+//            this.BPsymptom = BPsymptom;
+//        }
+//    }
 }

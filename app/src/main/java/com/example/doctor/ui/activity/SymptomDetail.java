@@ -27,7 +27,7 @@ public class SymptomDetail extends AppCompatActivity implements View.OnClickList
     ExpandableListView expListView;
     List<String> listDataHeader;
     SymptomModel symptoms;
-    HashMap<String, List<String>> listDataChild;
+    HashMap<String, String> listDataChild;
     TextView share;
 
     @Override
@@ -111,15 +111,15 @@ public class SymptomDetail extends AppCompatActivity implements View.OnClickList
 
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+        listDataChild = new HashMap<String, String>();
         listDataHeader.add("Description");
         listDataHeader.add("Tests");
-        listDataHeader.add("Related Videos");
-        listDataHeader.add("Possible Diseases");
-//        listDataChild.put(listDataHeader.get(0), symptoms.getSymptom_description()); // Header, Child data
-//        listDataChild.put(listDataHeader.get(1), symptoms.getTests());
-//        listDataChild.put(listDataHeader.get(2), symptoms.getSymptom_videos());
-//        listDataChild.put(listDataHeader.get(3), symptoms.getPossible_diseases());
+        /*listDataHeader.add("Related Videos");
+        listDataHeader.add("Possible Diseases");*/
+        listDataChild.put(listDataHeader.get(0), symptoms.getSymptom_description()); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), symptoms.getTests());
+        /*listDataChild.put(listDataHeader.get(2), symptoms.getSymptom_videos());
+        listDataChild.put(listDataHeader.get(3), symptoms.getPossible_diseases());*/
     }
 
     @Override
