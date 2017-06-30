@@ -9,14 +9,14 @@ import java.util.List;
  * Created by Aviral on 15-06-2017.
  */
 
-public class Body_Parts implements Parent<DiseasesList> {
+public class Body_Parts implements Parent<SymptomModel> {
 
     private String name;
-    List<DiseasesList> diseasesList;
+    List<SymptomModel> symptomList;
 
-    public Body_Parts(String name,List<DiseasesList> diseasesList) {
+    public Body_Parts(String name,List<SymptomModel> symptomList) {
         this.name=name;
-        this.diseasesList = diseasesList;
+        this.symptomList = symptomList;
     }
 
     public String getName() {
@@ -27,18 +27,18 @@ public class Body_Parts implements Parent<DiseasesList> {
         this.name = name;
     }
 
-    public DiseasesList getDiseases(int position){
-        return diseasesList.get(position);
+    public SymptomModel getSymptom(int position){
+        return symptomList.get(position);
     }
 
-    public DiseasesList setDiseases(int position){
-        return diseasesList.get(position);
+    public SymptomModel setSymptom(int position){
+        return symptomList.get(position);
     }
 
 
     @Override
-    public List<DiseasesList> getChildList() {
-        return diseasesList;
+    public List<SymptomModel> getChildList() {
+        return symptomList;
     }
 
     @Override

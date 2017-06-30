@@ -14,6 +14,7 @@ import com.example.doctor.ui.activity.DiseaseDetail;
 import com.example.doctor.ui.fragment.Symptoms_Male_Fragment;
 import com.example.doctor.ui.model.Body_Parts;
 import com.example.doctor.ui.model.DiseasesList;
+import com.example.doctor.ui.model.SymptomModel;
 
 
 import java.util.List;
@@ -22,13 +23,12 @@ import java.util.List;
  * Created by Aviral on 12-06-2017.
  */
 
-public class Body_Parts_Adapter extends ExpandableRecyclerAdapter<Body_Parts,DiseasesList,Body_Parts_Viewholder,Diseases_ViewHolder> {
+public class Body_Parts_Adapter extends ExpandableRecyclerAdapter<Body_Parts,SymptomModel,Body_Parts_Viewholder,Symptom_ViewHolder> {
 
     private Context context;
     List <Body_Parts> groups;
     private LayoutInflater layoutInflater;
     public MyChildClickListener myClickListener;
-
     /**
      * Primary constructor. Sets up {@link #mParentList} and {@link #mFlatItemList}.
      * <p>
@@ -54,6 +54,7 @@ public class Body_Parts_Adapter extends ExpandableRecyclerAdapter<Body_Parts,Dis
     public void setOnChildClickListener(MyChildClickListener myClickListener){
         this.myClickListener = myClickListener;
     }
+
     public interface MyChildClickListener{
         void onChildClickListener(int parent_positon, int child_position, View v);
     }
@@ -67,21 +68,21 @@ public class Body_Parts_Adapter extends ExpandableRecyclerAdapter<Body_Parts,Dis
 
     @NonNull
     @Override
-    public Diseases_ViewHolder onCreateChildViewHolder(@NonNull ViewGroup childViewGroup, int viewType) {
-        View diseases = layoutInflater.inflate(R.layout.list_item_diseases, childViewGroup, false);
-        return new Diseases_ViewHolder(diseases);
+    public Symptom_ViewHolder onCreateChildViewHolder(@NonNull ViewGroup childViewGroup, int viewType) {
+        View diseases = layoutInflater.inflate(R.layout.list_item_symptoms, childViewGroup, false);
+        return new Symptom_ViewHolder(diseases);
     }
 
     @Override
-    public void onBindParentViewHolder(@NonNull Body_Parts_Viewholder parentViewHolder, int parentPosition, @NonNull Body_Parts parent) {
+    public void onBindParentViewHolder(@NonNull Body_Parts_Viewholder parentViewHolder, final int parentPosition, @NonNull Body_Parts parent) {
         parentViewHolder.bind(parent);
     }
 
     @Override
-    public void onBindChildViewHolder(@NonNull Diseases_ViewHolder childViewHolder, final int parentPosition, final int childPosition, @NonNull final DiseasesList child) {
+    public void onBindChildViewHolder(@NonNull Symptom_ViewHolder childViewHolder, final int parentPosition, final int childPosition, @NonNull final SymptomModel child) {
 
         childViewHolder.bind(child);
-        childViewHolder.getDisease_name().setOnClickListener(new View.OnClickListener() {
+        childViewHolder.getSymptom_name().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(myClickListener!=null){

@@ -1,31 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="5dp"
-    android:padding="10dp">
+>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
-            <TextView
-                android:id="@+id/parent_list_item_male_bodyparts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Hand"
-                android:layout_weight="80"
-                android:textStyle="bold" />
+            android:background="#EDEDED"
+            android:padding="0dp">
 
             <ImageButton
-                android:id="@+id/male_expand_arrow"
+                android:paddingRight="20dp"
+                android:paddingLeft="10dp"
+                android:id="@+id/expand_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|right"
-                android:layout_margin="8dp"
-                android:src="@android:drawable/arrow_down_float"/>
+                android:paddingBottom="10dp"
+                android:paddingTop="24dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/expand_button"/>
+
+
+            <TextView
+                android:id="@+id/parent_list_item_male_bodyparts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hand"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+            android:background="#EDEDED"
+            android:textSize="20dp"
+            android:layout_weight="80"
+            android:textStyle="bold" />
+
+
+
+
+
         </LinearLayout>
 
-</android.support.v7.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A9A9A9"/>
+
+</LinearLayout>

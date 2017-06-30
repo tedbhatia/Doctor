@@ -1,11 +1,9 @@
 package com.example.doctor.ui.activity;
 
-
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -15,30 +13,32 @@ import android.widget.Toast;
 import com.example.doctor.R;
 import com.example.doctor.ui.adapter.ExpandableListAdapter;
 import com.example.doctor.ui.model.DiseasesList;
+import com.example.doctor.ui.model.SymptomModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DiseaseDetail extends AppCompatActivity implements View.OnClickListener {
+public class SymptomDetail extends AppCompatActivity implements View.OnClickListener, Serializable {
+
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
-    DiseasesList diseases;
+    SymptomModel symptoms;
     HashMap<String, List<String>> listDataChild;
     TextView share;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.disease_detail);
-        setTitle("Disease Details");
-
+        setContentView(R.layout.activity_symptom_detail);
+        setTitle("Symptom Detail");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(getIntent().hasExtra("diseasedetail")){
-            diseases = (DiseasesList) getIntent().getSerializableExtra("diseasedetail");
+        if (getIntent().hasExtra("symptomdetail")) {
+            symptoms = (SymptomModel) getIntent().getSerializableExtra("symptomdetail");
             prepareListData();
         }
 
@@ -54,6 +54,9 @@ public class DiseaseDetail extends AppCompatActivity implements View.OnClickList
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
+                // Toast.makeText(getApplicationContext(),
+                // "Group Clicked " + listDataHeader.get(groupPosition),
+                // Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -89,6 +92,18 @@ public class DiseaseDetail extends AppCompatActivity implements View.OnClickList
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=9E0xxCROnqY")));
                     }
                 }
+
+                if (groupPosition == 3) {
+                    if (childPosition == 0) {
+                        Intent intent = new Intent(SymptomDetail.this,DiseaseDetail.class);
+                        List sampleData= new ArrayList();
+                        sampleData.add("Dummy text");
+                        intent.putExtra("diseasedetail", new DiseasesList("Cancer", sampleData, sampleData, sampleData, sampleData));
+                        startActivity(intent);
+                    } else if (childPosition == 1) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=9E0xxCROnqY")));
+                    }
+                }
                 return true;
             }
         });
@@ -98,13 +113,13 @@ public class DiseaseDetail extends AppCompatActivity implements View.OnClickList
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
         listDataHeader.add("Description");
-        listDataHeader.add("Medicines");
-        listDataHeader.add("Symptoms");
-        listDataHeader.add("Procedures");
-        listDataChild.put(listDataHeader.get(0), diseases.getDisease_description()); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), diseases.getDisease_medicine());
-        listDataChild.put(listDataHeader.get(2), diseases.getDisease_symptoms());
-        listDataChild.put(listDataHeader.get(2), diseases.getDisease_procedure());
+        listDataHeader.add("Tests");
+        listDataHeader.add("Related Videos");
+        listDataHeader.add("Possible Diseases");
+        listDataChild.put(listDataHeader.get(0), symptoms.getSymptom_description()); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), symptoms.getSymptom_tests());
+        listDataChild.put(listDataHeader.get(2), symptoms.getSymptom_videos());
+        listDataChild.put(listDataHeader.get(3), symptoms.getPossible_diseases());
     }
 
     @Override
@@ -132,4 +147,3 @@ public class DiseaseDetail extends AppCompatActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 }
-
