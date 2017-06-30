@@ -1,8 +1,11 @@
 package com.example.doctor.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +15,11 @@ import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.activity.DiseaseDetail;
 import com.example.doctor.ui.activity.SymptomDetail;
+import com.example.doctor.ui.model.BodyPartSuper;
 import com.example.doctor.ui.model.Body_Parts;
 import com.example.doctor.ui.adapter.Body_Parts_Adapter;
 import com.example.doctor.ui.model.Diseases;
@@ -26,6 +32,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by Aviral on 09-06-2017.
  */
@@ -34,20 +44,50 @@ public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment im
     private RecyclerView mRecyclerView;
     public Body_Parts_Adapter bodyPartsAdapter;
     private List<Body_Parts> body_parts;
+    private List<SymptomModel> symptoms;
+    private List<BodyPartSuper> bodyPartSupers;
+    private ProgressDialog progressDialog;
+    public FragmentManager fm;
+    private int flag = 0;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View roootView = inflater.inflate(R.layout.symptoms_child, container, false);
+        //View roootView = inflater.inflate(R.layout.symptoms_child, container, false);
+        View rootView = inflater.inflate(R.layout.symptoms_child, container, false);
+        //get_Body_Parts();
 
-        mRecyclerView = (RecyclerView) roootView.findViewById(R.id.symptoms_recycler);
-//        getMale_Body_Parts();
-//        bodyPartsAdapter = new Body_Parts_Adapter(getContext(), body_parts);
+        body_parts = new ArrayList<>();
+        symptoms = new ArrayList<>();
+        bodyPartSupers = new ArrayList<>();
+        final Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.symptoms_recycler);
+        mRecyclerView.setHasFixedSize(true);
+        bodyPartsAdapter = new Body_Parts_Adapter(getContext(), bodyPartSupers);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(bodyPartsAdapter);
-        bodyPartsAdapter.setOnChildClickListener(this);
-        return roootView;
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if (flag == 0) {
+                    Toast.makeText(getContext(), "Poor Connection, Try Again", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+        }, 20000);
+
+        loadJSON();
+        loadJSON1();
+        return rootView;
     }
 
 //    public void getMale_Body_Parts() {
@@ -80,10 +120,90 @@ public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment im
 
     @Override
     public void onChildClickListener(int parent_positon, int child_position, View v) {
-        Intent intent = new Intent(getActivity(),SymptomDetail.class);
-//        intent.putExtra("symptomdetail",body_parts.get(parent_positon).getChildList().get(child_position));
-//        intent.putExtra("symptomdetail", (Serializable) body_parts.get(parent_positon).getChildList().get(child_position));
+
+        Intent intent = new Intent(getContext(), SymptomDetail.class);
+        intent.putExtra("symptomdetail", bodyPartSupers.get(parent_positon).getChildList().get(child_position));
         startActivity(intent);
+    }
+
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<Body_Parts>> call = request.getBODY();
+        call.enqueue(new Callback<List<Body_Parts>>() {
+            @Override
+            public void onResponse(Call<List<Body_Parts>> call, Response<List<Body_Parts>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    body_parts = response.body();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+               /* bodyPartsAdapter = new Body_Parts_Adapter(getContext(),bodyPartSupers);
+                mRecyclerView.setAdapter(bodyPartsAdapter);*/
+            }
+
+            @Override
+            public void onFailure(Call<List<Body_Parts>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void loadJSON1() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<SymptomModel>> call = request.getSymptoms();
+        call.enqueue(new Callback<List<SymptomModel>>() {
+            @Override
+            public void onResponse(Call<List<SymptomModel>> call, Response<List<SymptomModel>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    symptoms = response.body();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                doSomething();
+                /*adapter = new AppointmentsAdapter(MyAppointments.this, model);
+                recyclerView.setAdapter(adapter);*/
+            }
+
+            @Override
+            public void onFailure(Call<List<SymptomModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void doSomething() {
+        if (body_parts.size() != 0 && symptoms.size() != 0) {
+            flag = 1;
+            progressDialog.dismiss();
+        }
+        for (int i = 0; i < body_parts.size() && symptoms.size() != 0; i++) {
+            /*hybrid.add(i,new AppointmentSuper(doc.get(model.get(i).getDoctor()-1).getDoctor_name(),
+                    doc.get(model.get(i).getDoctor()-1).getDoctor_phone_number(),doc.get(model.get(i).getDoctor()-1).getDoctor_address(),
+                    doc.get(model.get(i).getDoctor()-1).getDoctor_speciality(),model.get(i).getDate(),model.get(i).getTime(),
+                    model.get(i).getReason(),model.get(i).getNotes()));*/
+            List<SymptomModel> SymList = new ArrayList<>();
+            List<Integer> list = body_parts.get(i).getBPsymptom();
+            for (int j = 0; j < list.size(); j++) {
+
+                SymList.add(j, symptoms.get(list.get(j) - 1));
+                //SymList.add(j,symptoms.get(findbyID(list.get(j))));
+            }
+            bodyPartSupers.add(i, new BodyPartSuper(body_parts.get(i).getBodypart(), SymList));
+        }
+        bodyPartsAdapter = new Body_Parts_Adapter(getContext(), bodyPartSupers);
+        bodyPartsAdapter.setOnChildClickListener(this);
+        mRecyclerView.setAdapter(bodyPartsAdapter);
+    }
+
+    private int findbyID(Integer integer) {
+        for (int k = 0; k < symptoms.size(); k++) {
+            if (symptoms.get(k).getId() == integer) {
+                return k;
+            }
+        }
+        return -1;
     }
 }
 

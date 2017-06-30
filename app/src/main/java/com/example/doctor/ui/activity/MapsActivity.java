@@ -152,12 +152,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progressDialog.show();
 
-                    Handler handler = new Handler();
+                    /*Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             progressDialog.dismiss();
                         }
-                    }, 3000);
+                    }, 3000);*/
 
                     //Wait
                     Log.d("onClick", "Button is Clicked");
@@ -167,7 +167,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     DataTransfer[0] = mMap;
                     DataTransfer[1] = url;
                     Log.d("onClick", url);
-                    getNearbyPlacesData = new GetNearbyPlacesData();
+                    getNearbyPlacesData = new GetNearbyPlacesData(progressDialog);
                     getNearbyPlacesData.execute(DataTransfer);
                     Toast.makeText(MapsActivity.this, "Nearby Doctor", Toast.LENGTH_LONG).show();
                 }

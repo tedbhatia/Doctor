@@ -1,7 +1,9 @@
 package com.example.doctor.support.service;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.example.doctor.ui.model.MapsDoctorModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,6 +25,12 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
     GoogleMap mMap;
     String url;
     List<MapsDoctorModel> nearbyList = new ArrayList<>();
+    ProgressDialog progressDialog;
+
+    public GetNearbyPlacesData(ProgressDialog progressDialog) {
+        this.progressDialog = progressDialog;
+    }
+
     /*ProgressBar progressBar;
     //Context context;
 
@@ -78,6 +86,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
         }
+        progressDialog.dismiss();
     }
 
     public List<MapsDoctorModel> GetPlacesList() {

@@ -24,6 +24,7 @@ import static com.example.doctor.ui.activity.MainActivity.navigationView;
 public class Symptoms_Fragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     android.support.v4.app.FragmentManager fm;
+    public static int gender = 0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

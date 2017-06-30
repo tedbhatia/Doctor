@@ -59,6 +59,7 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
     private List<BodyPartSuper> bodyPartSupers;
     private ProgressDialog progressDialog;
     public FragmentManager fm;
+    private int flag = 0;
 //    public transient Context mContext=getActivity();
 
 
@@ -89,16 +90,10 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                Toast.makeText(getContext(), "Poor Connection, Try Again", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-                Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
-
-                navigationView.getMenu().getItem(0).setChecked(true);
-
-                FragmentTransaction transaction=getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_frame,health_acc_fragment);
-
-                transaction.commit();
+                if (flag == 0) {
+                    Toast.makeText(getContext(), "Poor Connection, Try Again", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
             }
         }, 20000);
 
@@ -239,6 +234,7 @@ public class Symptoms_Male_Fragment extends android.support.v4.app.Fragment impl
 
     private void doSomething() {
         if (body_parts.size() != 0 && symptoms.size() != 0) {
+            flag = 1;
             progressDialog.dismiss();
         }
         for (int i = 0; i < body_parts.size() && symptoms.size() != 0; i++) {
