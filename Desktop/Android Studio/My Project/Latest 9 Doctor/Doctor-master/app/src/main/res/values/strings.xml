@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Doctor</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Navigation Menu -->
+    <string name="health_account">My Health Account</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="find_docs">Find Doctors</string>
+    <string name="emergency">Emergency Contacts</string>
+    <string name="notifications">Notifications</string>
+    <string name="medicines">Medicines</string>
+    <string name="procedure">Procedures</string>
+    <string name="logout">Logout</string>
+    <string name="signUp">Sign Up</string>
+
+    <!-- My Health Account Java -->
+    <string name="my_doc">My Doctors</string>
+    <string name="my_diseases">My Diseases</string>
+    <string name="my_appointments">My Appointments</string>
+    <string name="my_meds">My Medicines</string>
+    <string name="my_docs">My Documents</string>
+    <string name="my_insurance">My Insurance</string>
+    <string name="my_measurements">My Measurements</string>
+
+    <!-- Main Fragment -->
+    <string name="welcome">Welcome</string>
+
+    <!-- Login screen -->
+    <string name="str_login">enter Id</string>
+    <string name="facebook_id">1906128449675401</string>
+    <string name="Google_id">878351889678-n8d8qr9cvfn8tbsoj20n9ca65bvdi2ad.apps.googleusercontent.com</string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="blood_group">
+        <item>None</item>
+        <item>AB-</item>
+        <item>AB+</item>
+        <item>A-</item>
+        <item>A+</item>
+        <item>B-</item>
+        <item>B+</item>
+        <item>O-</item>
+        <item>O+</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
+</resources>
