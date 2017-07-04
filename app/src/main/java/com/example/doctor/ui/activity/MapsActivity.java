@@ -63,18 +63,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-/*
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkLocationPermission();
+        if (ContextCompat.checkSelfPermission(MapsActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MapsActivity.this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(MapsActivity.this,
+                        new String[]{Manifest.permission.CAMERA}, 400);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
         }
-        //Check if Google Play Services Available or not
-        if (!CheckGooglePlayServices()) {
-            Log.d("onCreate", "Finishing test case since Google Play Services are not available");
-            finish();
-        }
-        else {
-            Log.d("onCreate","Google Play Services available.");
-        }*/
 
         if (!isGooglePlayServicesAvailable()) {
             finish();
@@ -315,7 +327,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
+            case 400: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -344,6 +356,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // You can add here other case statements according to your requirement.
         }
     }
+
 
     private boolean isGooglePlayServicesAvailable() {
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
