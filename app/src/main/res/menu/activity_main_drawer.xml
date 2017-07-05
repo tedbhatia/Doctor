@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/find_docs"
+            android:icon="@drawable/find_docs"
+            android:title="@string/find_docs" />
         <item
             android:id="@+id/health_acc"
             android:icon="@drawable/health_acc"
@@ -10,10 +15,7 @@
             android:id="@+id/symptoms"
             android:icon="@drawable/symptoms"
             android:title="@string/symptoms" />
-        <item
-            android:id="@+id/find_docs"
-            android:icon="@drawable/find_docs"
-            android:title="@string/find_docs" />
+
         <item
             android:id="@+id/emergency"
             android:icon="@drawable/emergency"

@@ -197,22 +197,22 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
     }
 
 
-  /*  private void prepareData() {
-        String[] plan = {"Plan 1", "Plan 2", "Plan 3", "Plan 4", "Plan 5", "Plan 6", "Plan 7"};
-        String[] duration = {"1 Month", "2 Month", "3 Month", "4 Month", "5 Month", "6 Month", "7 Month"};
-        String[] note = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
-        String[] date = {"01/01/2000", "01/01/2001", "01/01/2002", "01/01/2003", "01/01/2004", "01/01/2006", "01/01/2007"};
-
-        for (int i = 0; i < plan.length && i < duration.length && i < note.length; i++) {
-            Insurance current = new Insurance();
-            current.setPlan(plan[i]);
-            current.setDuration(duration[i]);
-            current.setNotes(note[i]);
-            current.setDate(date[i]);
-            data.add(current);
-        }
-        adapter = new Insurance_Adapter(My_Insurance.this, data);
-    }*/
+//    private void prepareData() {
+//        String[] plan = {"Plan 1", "Plan 2", "Plan 3", "Plan 4", "Plan 5", "Plan 6", "Plan 7"};
+//        String[] duration = {"1 Month", "2 Month", "3 Month", "4 Month", "5 Month", "6 Month", "7 Month"};
+//        String[] note = {"My Doctors", "My Diseases", "My Appointments", "My Medicines", "My Documents", "My Insurance", "My Measurements"};
+//        String[] date = {"01/01/2000", "01/01/2001", "01/01/2002", "01/01/2003", "01/01/2004", "01/01/2006", "01/01/2007"};
+//
+//        for (int i = 0; i < plan.length && i < duration.length && i < note.length; i++) {
+//            Insurance current = new Insurance();
+//            current.setPlan(plan[i]);
+//            current.setDuration(duration[i]);
+//            current.setNotes(note[i]);
+//            current.setDate(date[i]);
+//            data.add(current);
+//        }
+//        adapter = new Insurance_Adapter(My_Insurance.this, data);
+//    }
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
