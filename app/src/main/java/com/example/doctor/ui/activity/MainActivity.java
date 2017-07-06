@@ -25,6 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.fragment.EmergencyContactsFragment;
 import com.example.doctor.ui.fragment.FindDoctorsFragment;
 import com.example.doctor.ui.fragment.Health_Acc_Fragment;
@@ -33,6 +35,11 @@ import com.example.doctor.ui.fragment.MyProfileFragment;
 import com.example.doctor.ui.fragment.NotificationsFragment;
 import com.example.doctor.ui.fragment.ProcedureFragment;
 import com.example.doctor.ui.fragment.Symptoms_Fragment;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.doctor.ui.activity.LoginScreen.MY_SHARED_PREFERENCES;
 import static com.example.doctor.ui.activity.LoginScreen.loggedIn;
@@ -154,8 +161,9 @@ public class MainActivity extends AppCompatActivity
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("password");
                 editor.commit();
-                Intent intent = new Intent(MainActivity.this, LoginScreen.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(MainActivity.this, LoginScreen.class);
+                startActivity(intent);*/
+                loadJSON();
             } else {
                 //Toast.makeText(MainActivity.this, "Log In First!", Toast.LENGTH_SHORT).show();
             }
@@ -168,6 +176,31 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<ResponseBody> call = request.logout();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    Toast.makeText(MainActivity.this, "User Logged Out", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, LoginScreen.class);
+                    startActivity(intent);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(MainActivity.this,"Failure",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     @Override
