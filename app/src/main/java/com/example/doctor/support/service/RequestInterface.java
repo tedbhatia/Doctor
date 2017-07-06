@@ -42,6 +42,7 @@ public interface RequestInterface {
     Call<List<Appointments>> getAppointment();
 
 
+
     @GET("api/insurance_list")
     Call<List<Insurance>> getJSONinsurance();
 
@@ -55,9 +56,9 @@ public interface RequestInterface {
     Call<List<SymptomModel>> getSymptoms();
 
     @FormUrlEncoded
-    @POST("api/21/")
+    @POST("api/login/")
     Call<ResponseBody> login(@Field("username") String username, @Field("password") String password);
 
-    @GET("api/22/")
+    @GET("api/logout/")
     Call<ResponseBody> logout();
 }
