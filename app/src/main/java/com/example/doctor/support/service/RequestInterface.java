@@ -13,8 +13,12 @@ import com.example.doctor.ui.model.find_doctor_model;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 import static com.example.doctor.ui.activity.MyAppointments.idDoc;
 import static com.facebook.HttpMethod.GET;
@@ -50,4 +54,10 @@ public interface RequestInterface {
     @GET("api/symptom_list")
     Call<List<SymptomModel>> getSymptoms();
 
+    @FormUrlEncoded
+    @POST("api/21/")
+    Call<ResponseBody> login(@Field("username") String username, @Field("password") String password);
+
+    @GET("api/22/")
+    Call<ResponseBody> logout();
 }

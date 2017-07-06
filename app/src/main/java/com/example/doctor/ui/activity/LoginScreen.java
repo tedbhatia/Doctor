@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -44,6 +46,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.net.Authenticator;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,7 +72,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private SignInButton googleSigninButton;
     private Authenticator pAuth;
     private FirebaseAuth mAuth;
-
+    public int userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -292,9 +295,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         editor.putString("username", username.getText().toString());
         editor.putString("password", password.getText().toString());
         editor.commit();
-        Toast.makeText(this, "Logged in as " + username.getText().toString(), Toast.LENGTH_SHORT).show();
-        loggedIn = true;
-        startActivity(new Intent(LoginScreen.this, MainActivity.class));
+        String user = username.getText().toString();
+        String pass = password.getText().toString();
+        loadJSON(user,pass);
     }
 
     private void forgotpassword() {
@@ -357,6 +360,39 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    private void loadJSON(String user, String pass) {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<ResponseBody> call = request.login(user,pass);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String body = response.body().string();
+                    if(body.equals("Wrong Username or Password")) {
+                        Toast.makeText(LoginScreen.this,body,Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        userid=Integer.valueOf(body);
+                        Toast.makeText(LoginScreen.this, "Logged in as " + body, Toast.LENGTH_SHORT).show();
+                        loggedIn = true;
+                        startActivity(new Intent(LoginScreen.this, MainActivity.class));
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(LoginScreen.this,"Failure",Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 }
