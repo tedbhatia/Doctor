@@ -257,8 +257,6 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         });
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
