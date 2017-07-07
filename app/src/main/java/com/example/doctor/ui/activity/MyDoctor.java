@@ -17,8 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.adapter.Insurance_Adapter;
 import com.example.doctor.ui.adapter.MyDoctorAdapter;
+import com.example.doctor.ui.fragment.Symptoms_Male_Fragment;
+import com.example.doctor.ui.model.Body_Parts;
 import com.example.doctor.ui.model.Doctor;
 import com.example.doctor.ui.model.Insurance;
 import com.example.doctor.ui.model.Measurement_Info;
@@ -30,14 +34,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private MyDoctorAdapter adapter;
-    private List<Doctor> data;
-
+    private List<Doctor> data, fData;
+    private int flag = 0;
     private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
@@ -51,24 +59,30 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         setContentView(R.layout.activity_my_doctor);
         setTitle("My Doctor");
 
-//        progressDialog=new ProgressDialog(this);
-//        progressDialog.setMessage("Loading...");
-//        progressDialog.setCancelable(false);
-//        progressDialog.isIndeterminate();
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.show();
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
-//                progressDialog.dismiss();
-//            }
-//        }, 3000);
+        /*progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if (flag == 0) {
+                    Toast.makeText(getApplicationContext(), "Poor Connection, Try Again", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+        }, 20000);
+
+        loadJSON();*/
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         data = new ArrayList<>();
+        fData = new ArrayList<>();
 
         prepareData();
         initRecyclerView();
@@ -162,6 +176,31 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
     public void setOnActivityTouchListener(OnActivityTouchListener listener) {
         this.touchListener = listener;
     }
+
+  /*  private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<Doctor>> call = request.getMYDoctor();
+        call.enqueue(new Callback<List<Doctor>>() {
+            @Override
+            public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    data = response.body();
+                    flag = 1;
+                    progressDialog.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+               *//* bodyPartsAdapter = new Body_Parts_Adapter(getContext(),bodyPartSupers);
+                mRecyclerView.setAdapter(bodyPartsAdapter);*//*
+            }
+
+            @Override
+            public void onFailure(Call<List<Doctor>> call, Throwable t) {
+
+            }
+        });
+    }*/
 
     private void prepareData() {
         String[] name = {"Dr Olga Malkin(DDS - Dentistry and Prosthodontics)", "Dr Alison M Maresh (MD - Ear, Nose, and Throat)","Dr Martin Quirno(MD - Orthopedic Suregery)"};

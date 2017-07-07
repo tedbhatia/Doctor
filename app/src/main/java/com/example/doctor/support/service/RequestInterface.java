@@ -19,6 +19,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 import static com.example.doctor.ui.activity.MyAppointments.idDoc;
 import static com.facebook.HttpMethod.GET;
@@ -65,4 +66,7 @@ public interface RequestInterface {
     @FormUrlEncoded
     @POST("api/profile/")
     Call<ResponseBody> signup(@Field("username") String username, @Field("password") String password, @Field("email") String email);
+
+    @GET("api/doctor_list")
+    Call<List<Doctor>> getMYDoctor();
 }

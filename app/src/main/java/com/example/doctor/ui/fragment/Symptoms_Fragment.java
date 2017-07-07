@@ -125,6 +125,7 @@ public class Symptoms_Fragment extends android.support.v4.app.Fragment implement
                 try {
 //                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
                     body_parts = response.body();
+                    flag = 1;
                     progressDialog.dismiss();
                     fm = getChildFragmentManager();
                     fm.beginTransaction().replace(R.id.content_frame2,new Symptoms_Male_Fragment()).commit();
