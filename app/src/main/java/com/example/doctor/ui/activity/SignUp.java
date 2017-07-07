@@ -29,12 +29,18 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,7 +49,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     ImageView image;
     Button register;
     EditText name,email,password,confirm_password;
-    RadioButton rb_male,rb_female;
+    //RadioButton rb_male,rb_female;
     Picasso picasso;
 
     @Override
@@ -62,8 +68,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         password = (EditText)    findViewById(R.id.password);
         confirm_password = (EditText)    findViewById(R.id.confirm_password);
         register = (Button) findViewById(R.id.register);
-        rb_male = (RadioButton) findViewById(R.id.rb_male);
-        rb_female = (RadioButton) findViewById(R.id.rb_female);
+        /*rb_male = (RadioButton) findViewById(R.id.rb_male);
+        rb_female = (RadioButton) findViewById(R.id.rb_female);*/
         register.setOnClickListener(this);
 //        image.setOnClickListener(this);
 //        picasso.with(Screen3.this).load("https://www.hello.com/img_/hello_logo_hero.png").into(image);
@@ -145,9 +151,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 else if(!validPassword())   showToast("Password must be atleast 6 characters long");
                 else if(!validEmail())  showToast("Enter valid email address");
                 else{
-                    showToast("Registration Successful");
-                    Intent intent=new Intent(SignUp.this,LoginScreen.class);
-                    startActivity(intent);
+                    loadJSON();
                 }
 
                 break;
@@ -156,6 +160,35 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 //launchDialog();
                 break;
         }
+    }
+
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<ResponseBody> call = request.signup(name.getText().toString(),password.getText().toString(),email.getText().toString());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    if(response.body()==null){
+                        showToast("Username Already Exists");
+                    }
+                    else{
+                        showToast("Registration Successful");
+                        Intent intent=new Intent(SignUp.this,LoginScreen.class);
+                        startActivity(intent);
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(SignUp.this,"Failure",Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private boolean validEmail() {
@@ -173,7 +206,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         if(isEmpty(email))  empty=true;
         if(isEmpty(password))  empty=true;
         if(isEmpty(confirm_password))  empty=true;
-        if(!rb_male.isChecked() && !rb_female.isChecked())  empty=true;
+        //if(!rb_male.isChecked() && !rb_female.isChecked())  empty=true;
         return empty;
     }
 

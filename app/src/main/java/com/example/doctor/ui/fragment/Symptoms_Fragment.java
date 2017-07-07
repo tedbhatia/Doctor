@@ -1,7 +1,9 @@
 package com.example.doctor.ui.fragment;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -12,8 +14,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
+import com.example.doctor.ui.model.Body_Parts;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
@@ -25,12 +37,33 @@ public class Symptoms_Fragment extends android.support.v4.app.Fragment implement
 
     android.support.v4.app.FragmentManager fm;
     public static int gender = 0;
+    private ProgressDialog progressDialog;
+    public static List<Body_Parts> body_parts;
+    private int flag = 0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_symptoms,container,false);
-        fm = getChildFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame2,new Symptoms_Male_Fragment()).commit();
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if (flag == 0) {
+                    Toast.makeText(getContext(), "Poor Connection, Try Again", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+        }, 20000);
+
+        loadJSON();
+
 //        Spinner spinner = (Spinner)rootView.findViewById(R.id.spin);
 //        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
@@ -81,6 +114,32 @@ public class Symptoms_Fragment extends android.support.v4.app.Fragment implement
 
 
         return rootView;
+    }
+
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<Body_Parts>> call = request.getBODY();
+        call.enqueue(new Callback<List<Body_Parts>>() {
+            @Override
+            public void onResponse(Call<List<Body_Parts>> call, Response<List<Body_Parts>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    body_parts = response.body();
+                    progressDialog.dismiss();
+                    fm = getChildFragmentManager();
+                    fm.beginTransaction().replace(R.id.content_frame2,new Symptoms_Male_Fragment()).commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+               /* bodyPartsAdapter = new Body_Parts_Adapter(getContext(),bodyPartSupers);
+                mRecyclerView.setAdapter(bodyPartsAdapter);*/
+            }
+
+            @Override
+            public void onFailure(Call<List<Body_Parts>> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

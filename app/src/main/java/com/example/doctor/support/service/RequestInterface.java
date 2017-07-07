@@ -61,4 +61,8 @@ public interface RequestInterface {
 
     @GET("api/logout/")
     Call<ResponseBody> logout();
+
+    @FormUrlEncoded
+    @POST("api/profile/")
+    Call<ResponseBody> signup(@Field("username") String username, @Field("password") String password, @Field("email") String email);
 }

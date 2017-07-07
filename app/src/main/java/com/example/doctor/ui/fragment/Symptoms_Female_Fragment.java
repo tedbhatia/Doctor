@@ -36,6 +36,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.fragment.Symptoms_Fragment.body_parts;
+
 /**
  * Created by Aviral on 09-06-2017.
  */
@@ -43,7 +45,7 @@ import retrofit2.Response;
 public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment implements Body_Parts_Adapter.MyChildClickListener{
     private RecyclerView mRecyclerView;
     public Body_Parts_Adapter bodyPartsAdapter;
-    private List<Body_Parts> body_parts;
+    //private List<Body_Parts> body_parts;
     private List<SymptomModel> symptoms;
     private List<BodyPartSuper> bodyPartSupers;
     private ProgressDialog progressDialog;
@@ -58,7 +60,7 @@ public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment im
         View rootView = inflater.inflate(R.layout.symptoms_child, container, false);
         //get_Body_Parts();
 
-        body_parts = new ArrayList<>();
+        //body_parts = new ArrayList<>();
         symptoms = new ArrayList<>();
         bodyPartSupers = new ArrayList<>();
         final Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
@@ -85,7 +87,7 @@ public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment im
             }
         }, 20000);
 
-        loadJSON();
+        //loadJSON();
         loadJSON1();
         return rootView;
     }
@@ -126,7 +128,7 @@ public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment im
         startActivity(intent);
     }
 
-    private void loadJSON() {
+    /*private void loadJSON() {
         final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
         Call<List<Body_Parts>> call = request.getBODY();
         call.enqueue(new Callback<List<Body_Parts>>() {
@@ -138,8 +140,8 @@ public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment im
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-               /* bodyPartsAdapter = new Body_Parts_Adapter(getContext(),bodyPartSupers);
-                mRecyclerView.setAdapter(bodyPartsAdapter);*/
+               *//* bodyPartsAdapter = new Body_Parts_Adapter(getContext(),bodyPartSupers);
+                mRecyclerView.setAdapter(bodyPartsAdapter);*//*
             }
 
             @Override
@@ -148,7 +150,7 @@ public class Symptoms_Female_Fragment extends android.support.v4.app.Fragment im
             }
         });
     }
-
+*/
     private void loadJSON1() {
         final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
         Call<List<SymptomModel>> call = request.getSymptoms();
