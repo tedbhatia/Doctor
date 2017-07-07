@@ -4,13 +4,13 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/find_docs"
-            android:icon="@drawable/find_docs"
-            android:title="@string/find_docs" />
-        <item
             android:id="@+id/health_acc"
             android:icon="@drawable/health_acc"
             android:title="@string/health_account" />
+        <item
+            android:id="@+id/find_docs"
+            android:icon="@drawable/find_docs"
+            android:title="@string/find_docs" />
         <item
             android:id="@+id/symptoms"
             android:icon="@drawable/symptoms"

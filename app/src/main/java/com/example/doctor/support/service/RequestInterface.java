@@ -64,7 +64,7 @@ public interface RequestInterface {
     Call<ResponseBody> logout();
 
     @FormUrlEncoded
-    @POST("api/profile/")
+    @POST("api/register/")
     Call<ResponseBody> signup(@Field("username") String username, @Field("password") String password, @Field("email") String email);
 
     @GET("api/doctor_list")
