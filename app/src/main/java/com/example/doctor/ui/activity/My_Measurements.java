@@ -55,12 +55,12 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
         setContentView(R.layout.activity_my_measurements);
         setTitle("My Measurement");
 
-//        progressDialog=new ProgressDialog(this);
-//        progressDialog.setMessage("Loading...");
-//        progressDialog.setCancelable(false);
-//        progressDialog.isIndeterminate();
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.show();
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
 //
 //        Handler handler = new Handler();
 //        handler.postDelayed(new Runnable() {
@@ -116,12 +116,13 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
         refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.postDelayed(new TimerTask() {
+                /*refreshLayout.postDelayed(new TimerTask() {
                     @Override
                     public void run() {
                         refreshLayout.setRefreshing(false);
                     }
-                }, 3000);
+                }, 3000);*/
+                loadJSON();
             }
         });
 
@@ -157,6 +158,8 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
             public void onResponse(Call<List<Measurement_Info>> call, Response<List<Measurement_Info>> response) {
                 try {
 //                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    refreshLayout.setRefreshing(false);
+                    progressDialog.dismiss();
                     listItems = response.body();
                 } catch (Exception e) {
                     e.printStackTrace();

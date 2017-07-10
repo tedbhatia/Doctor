@@ -65,12 +65,12 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
-        Handler handler = new Handler();
+        /*Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                progressDialog.dismiss();
+
             }
-        }, 3000);
+        }, 2000);*/
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -119,12 +119,13 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
         refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.postDelayed(new TimerTask() {
+                /*refreshLayout.postDelayed(new TimerTask() {
                     @Override
                     public void run() {
                         refreshLayout.setRefreshing(false);
                     }
-                }, 3000);
+                }, 3000);*/
+                loadJSON();
             }
         });
 
@@ -161,6 +162,8 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
                 try {
 //                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
                     data = response.body();
+                    progressDialog.dismiss();
+                    refreshLayout.setRefreshing(false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

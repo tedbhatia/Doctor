@@ -11,6 +11,7 @@ import com.example.doctor.ui.model.Measurement_Info;
 import com.example.doctor.ui.model.MedicineModel;
 import com.example.doctor.ui.model.Medicines;
 import com.example.doctor.ui.model.ProcedureModel;
+import com.example.doctor.ui.model.ProfileModel;
 import com.example.doctor.ui.model.SymptomModel;
 import com.example.doctor.ui.model.find_doctor_model;
 
@@ -80,4 +81,7 @@ public interface RequestInterface {
 
     @GET("api/mydiseases/{id}/")
     Call<List<Diseases>> getMyDiseases(@Path("id") int id);
+
+    @GET("api/profile/{id}/?format=json")
+    Call<ProfileModel> getProfile(@Path("id") int id);
 }

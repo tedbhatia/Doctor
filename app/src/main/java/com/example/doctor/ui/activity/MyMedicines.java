@@ -60,12 +60,12 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
 
         setTitle("My Medicines");
 
-//        progressDialog=new ProgressDialog(this);
-//        progressDialog.setMessage("Loading...");
-//        progressDialog.setCancelable(false);
-//        progressDialog.isIndeterminate();
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.show();
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
 //
 //        Handler handler = new Handler();
 //        handler.postDelayed(new Runnable() {
@@ -130,12 +130,13 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.postDelayed(new TimerTask() {
+               /* refreshLayout.postDelayed(new TimerTask() {
                     @Override
                     public void run() {
                         refreshLayout.setRefreshing(false);
                     }
-                }, 3000);
+                }, 3000);*/
+               loadJSON();
             }
         });
 
@@ -174,6 +175,7 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
                     listItems = response.body();
                     flag = 1;
                     progressDialog.dismiss();
+                    refreshLayout.setRefreshing(false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -257,13 +259,24 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
         dialog.setContentView(R.layout.display_medicines);
         //dialog.findViewById(R.id.imageZoom);
         //((ImageView)dialog.findViewById(R.id.imageZoom)).setImageURI(Uri.parse(person1.getUri()));
-        ((TextView)dialog.findViewById(R.id.med_name_edit)).setText(a.getMedName());
-        ((TextView)dialog.findViewById(R.id.dosage_amount_edit)).setText(a.getDosageAmount());
-        ((TextView)dialog.findViewById(R.id.method_edit)).setText(a.getMethod());
+        ((TextView)dialog.findViewById(R.id.med_name_edit)).setText(a.getMedicine_name());
+        ((TextView)dialog   .findViewById(R.id.dosage_amount_edit)).setText(a.getDosage_amt());
+        switch (a.getMethod()){
+            case "t":  ((TextView)dialog.findViewById(R.id.method_edit)).setText("Tablet");
+                break;
+            case "p": ((TextView)dialog.findViewById(R.id.method_edit)).setText("Powder");
+                break;
+            case "l": ((TextView)dialog.findViewById(R.id.method_edit)).setText("Liquid");
+                break;
+            case "i": ((TextView)dialog.findViewById(R.id.method_edit)).setText("Inhaler");
+                break;
+            default: ((TextView)dialog.findViewById(R.id.method_edit)).setText("Others");
+                break;
+        }
         ((TextView)dialog.findViewById(R.id.frequency_edit)).setText(String.valueOf(a.getFrequency()));
-        ((TextView)dialog.findViewById(R.id.date_edit)).setText(a.getDate());
-        ((TextView)dialog.findViewById(R.id.doctor_name_edit)).setText(a.getDoctorName());
-        ((TextView)dialog.findViewById(R.id.notes_edit)).setText(a.getNotes());
+        ((TextView)dialog.findViewById(R.id.date_edit)).setText(a.getMedicine_date());
+        /*((TextView)dialog.findViewById(R.id.doctor_name_edit)).setText(a.getDoctorName());
+        ((TextView)dialog.findViewById(R.id.notes_edit)).setText(a.getNotes());*/
         dialog.show();
     }
 

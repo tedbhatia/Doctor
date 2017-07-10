@@ -123,12 +123,13 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.postDelayed(new TimerTask() {
+                /*refreshLayout.postDelayed(new TimerTask() {
                     @Override
                     public void run() {
                         refreshLayout.setRefreshing(false);
                     }
-                }, 3000);
+                }, 3000);*/
+                loadJSON();
             }
         });
 
@@ -190,6 +191,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
                     data = response.body();
                     flag = 1;
                     progressDialog.dismiss();
+                    refreshLayout.setRefreshing(false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

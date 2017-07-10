@@ -100,9 +100,9 @@
         <activity
             android:name=".ui.activity.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".ui.activity.SymptomDetail"></activity>
-
-        <activity android:name=".ui.activity.MapsList"></activity>
+        <activity android:name=".ui.activity.SymptomDetail" />
+        <activity android:name=".ui.activity.MapsList" />
+        <activity android:name=".ui.activity.Intermediate"></activity>
     </application>
 
 </manifest>

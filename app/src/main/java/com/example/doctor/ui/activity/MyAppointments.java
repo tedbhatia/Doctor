@@ -162,12 +162,14 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
         refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.postDelayed(new TimerTask() {
+                /*refreshLayout.postDelayed(new TimerTask() {
                     @Override
                     public void run() {
                         refreshLayout.setRefreshing(false);
                     }
-                }, 3000);
+                }, 3000);*/
+                loadJSON();
+                loadJSON1();
             }
         });
 
@@ -198,6 +200,8 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
     private void doSomething() {
         if(flag1!=0 && flag2!=0){
             progressDialog.dismiss();
+            refreshLayout.setRefreshing(false);
+            hybrid = new ArrayList<>();
         }
         for(int i=0;i<model.size()&& doc.size()!=0;i++){
             hybrid.add(i,new AppointmentSuper(doc.get(model.get(i).getDoctor()-1).getDoctor_name(),

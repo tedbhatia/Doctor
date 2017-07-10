@@ -130,12 +130,13 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
         refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.postDelayed(new TimerTask() {
+                /*refreshLayout.postDelayed(new TimerTask() {
                     @Override
                     public void run() {
                         refreshLayout.setRefreshing(false);
                     }
-                }, 3000);
+                }, 3000);*/
+                loadJSON();
             }
         });
 
@@ -234,6 +235,7 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
                     listItems = response.body();
                     flag = 1;
                     progressDialog.dismiss();
+                    refreshLayout.setRefreshing(false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

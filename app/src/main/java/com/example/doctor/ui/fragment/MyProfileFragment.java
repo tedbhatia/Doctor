@@ -19,23 +19,41 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.activity.EditProfile;
+import com.example.doctor.ui.activity.MyDiseases;
+import com.example.doctor.ui.adapter.DiseasesAdapter;
+import com.example.doctor.ui.model.Diseases;
+import com.example.doctor.ui.model.ProcedureModel;
+import com.example.doctor.ui.model.ProfileModel;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.LoginScreen.userid;
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
 /**
  * Created by tejas on 9/6/17.
  */
 
-public class MyProfileFragment extends android.support.v4.app.Fragment {
+public class MyProfileFragment extends Fragment {
 
     private View rootView;
     private ImageView image;
-    private TextView username,email,first_name,last_name,dob,address,mobile_number,blood_group,gender;
+    private TextView username,email,last_name,dob,address,mobile_number,blood_group,gender;
+    public static TextView first_name;
+    private List<ProfileModel> profilemodel;
+    private ProfileModel myProfile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +69,7 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
         rootView=inflater.inflate(R.layout.activity_my_profile,container,false);
 
         bindViews(rootView);
-        setData();
+        loadJSON();
 
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
@@ -80,6 +98,29 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
 
     }
 
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<ProfileModel> call = request.getProfile(userid);
+        call.enqueue(new Callback<ProfileModel>() {
+            @Override
+            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+                try {
+                 //   Toast.makeText(getActivity(),"success",Toast.LENGTH_SHORT).show();
+                    myProfile = response.body();
+                    setData();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileModel> call, Throwable t) {
+                Toast.makeText(getActivity(),"failure",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
     private void bindViews(View rootView) {
         image = (CircleImageView) rootView.findViewById(R.id.image);
         username = (TextView)    rootView.findViewById(R.id.username);
@@ -94,15 +135,38 @@ public class MyProfileFragment extends android.support.v4.app.Fragment {
     }
 
     private void setData() {
-        username.setText("pankaj0010");
-        email.setText("pankaj0010g@gmail.com");
-        first_name.setText("Paankaj");
-        last_name.setText("Kumar");
-        dob.setText("01.01.2001");
-        address.setText("steerrt 5, db road, Ahmedabad, india");
-        mobile_number.setText("9994325347");
-        blood_group.setText("B+");
-        gender.setText("Male");
+
+//        if(!myProfile.getProfile_pic().equals(""))
+//        Picasso.with(getContext()).load((Uri) myProfile.getProfile_pic()).into(image);
+
+        if(!myProfile.getUsername().equals(""))
+        username.setText(myProfile.getUsername());
+
+        if(!myProfile.getEmail().equals(""))
+        email.setText(myProfile.getEmail());
+
+        if(!myProfile.getFirst_name().equals(""))
+        first_name.setText(myProfile.getFirst_name());
+
+        if(!myProfile.getLast_name().equals(""))
+        last_name.setText(myProfile.getLast_name());
+
+        if(!myProfile.getDob().equals(""))
+        dob.setText((CharSequence) myProfile.getDob());
+
+        if(!myProfile.getAddress().equals(""))
+        address.setText((CharSequence) myProfile.getAddress());
+
+        if(!myProfile.getPhone_number().equals(""))
+        mobile_number.setText((CharSequence) myProfile.getPhone_number());
+
+        if(!myProfile.getBlood_group().equals(""))
+        blood_group.setText((CharSequence) myProfile.getBlood_group());
+
+        if(!myProfile.getGender().equals(""))
+        gender.setText((CharSequence) myProfile.getGender());
+
+
     }
 
     @Override

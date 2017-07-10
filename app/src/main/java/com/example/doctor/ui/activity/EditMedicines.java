@@ -88,13 +88,13 @@ public class EditMedicines extends AppCompatActivity {
 
     private void bindView(){
 
-        if(!(medicine.getMedName().equals(""))) {
-            ((EditText) findViewById(R.id.med_name_edit)).setText(medicine.getMedName());
+        if(!(medicine.getMedicine_name().equals(""))) {
+            ((EditText) findViewById(R.id.med_name_edit)).setText(medicine.getMedicine_name());
             ((EditText) findViewById(R.id.med_name_edit)).setSelection(((EditText) findViewById(R.id.med_name_edit)).length());
         }
 
-        if(!(medicine.getDosageAmount().equals(""))) {
-            ((EditText) findViewById(R.id.dosage_amount_edit)).setText(medicine.getDosageAmount());
+        if(!(medicine.getDosage_amt().equals(""))) {
+            ((EditText) findViewById(R.id.dosage_amount_edit)).setText(medicine.getDosage_amt());
             ((EditText) findViewById(R.id.dosage_amount_edit)).setSelection(((EditText) findViewById(R.id.dosage_amount_edit)).length());
         }
 
@@ -109,20 +109,20 @@ public class EditMedicines extends AppCompatActivity {
             ((EditText) findViewById(R.id.frequency_edit)).setSelection(((EditText) findViewById(R.id.frequency_edit)).length());
 
 
-        if(!(medicine.getDate().equals(""))) {
-            ((EditText) findViewById(R.id.date_edit)).setText(medicine.getDate());
+        if(!(medicine.getMedicine_date().equals(""))) {
+            ((EditText) findViewById(R.id.date_edit)).setText(medicine.getMedicine_date());
             ((EditText) findViewById(R.id.date_edit)).setSelection(((EditText) findViewById(R.id.date_edit)).length());
         }
 
-        if(!(medicine.getDoctorName().equals(""))) {
+        /*if(!(medicine.get().equals(""))) {
             ((EditText) findViewById(R.id.doctor_name_edit)).setText(medicine.getDoctorName());
             ((EditText) findViewById(R.id.doctor_name_edit)).setSelection(((EditText) findViewById(R.id.doctor_name_edit)).length());
         }
 
-        if(!(medicine.getNotes().equals(""))) {
+        if(!(medicine.get().equals(""))) {
             ((EditText) findViewById(R.id.notes_edit)).setText(medicine.getNotes());
             ((EditText) findViewById(R.id.notes_edit)).setSelection(((EditText) findViewById(R.id.notes_edit)).length());
-        }
+        }*/
 
 //        ((TextView)findViewById(R.id.MedicinesText)).setText("Edit Medicine");
         setTitle("Edit Medicine");
