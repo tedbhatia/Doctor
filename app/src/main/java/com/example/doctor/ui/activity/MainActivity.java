@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.logout) {
             if (loggedIn == true) {
                 loggedIn = false;
-                Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
                 SharedPreferences sharedPreferences = getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("password");

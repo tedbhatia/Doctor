@@ -36,6 +36,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.LoginScreen.userid;
+
 public class My_Insurance extends AppCompatActivity implements Insurance_Adapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
@@ -152,7 +154,7 @@ public class My_Insurance extends AppCompatActivity implements Insurance_Adapter
 
     private void loadJSON() {
         final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
-        Call<List<Insurance>> call = request.getJSONinsurance();
+        Call<List<Insurance>> call = request.getJSONinsurance(userid);
         call.enqueue(new Callback<List<Insurance>>() {
             @Override
             public void onResponse(Call<List<Insurance>> call, Response<List<Insurance>> response) {

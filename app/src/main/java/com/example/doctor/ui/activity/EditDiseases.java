@@ -87,18 +87,18 @@ public class EditDiseases extends AppCompatActivity {
 
     private void bindView() {
 
-        if (!(disease.getDiseaseName().equals(""))) {
-            ((EditText) findViewById(R.id.disease_name_edit)).setText(disease.getDiseaseName());
+        if (!(disease.getDisease_name().equals(""))) {
+            ((EditText) findViewById(R.id.disease_name_edit)).setText(disease.getDisease_name());
             ((EditText) findViewById(R.id.disease_name_edit)).setSelection(((EditText) findViewById(R.id.disease_name_edit)).length());
         }
 
-        if (!(disease.getDate().equals(""))) {
-            ((EditText) findViewById(R.id.date_edit)).setText(disease.getDate());
+        if (!(disease.getDisease_date().equals(""))) {
+            ((EditText) findViewById(R.id.date_edit)).setText(disease.getDisease_date());
             ((EditText) findViewById(R.id.date_edit)).setSelection(((EditText) findViewById(R.id.date_edit)).length());
         }
 
-        if (!(disease.getNotes().equals(""))) {
-            ((EditText) findViewById(R.id.notes_edit)).setText(disease.getNotes());
+        if (!(disease.getProcedure().equals(""))) {
+            ((EditText) findViewById(R.id.notes_edit)).setText("hello");
             ((EditText) findViewById(R.id.notes_edit)).setSelection(((EditText) findViewById(R.id.notes_edit)).length());
         }
 

@@ -41,6 +41,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.LoginScreen.userid;
+
 public class MyAppointments extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
@@ -209,7 +211,7 @@ public class MyAppointments extends AppCompatActivity implements My_Health_Acc_A
 
     private void loadJSON() {
         final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
-        Call<List<Appointments>> call = request.getAppointment();
+        Call<List<Appointments>> call = request.getAppointment(userid);
         call.enqueue(new Callback<List<Appointments>>() {
             @Override
             public void onResponse(Call<List<Appointments>> call, Response<List<Appointments>> response) {

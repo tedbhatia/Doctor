@@ -70,24 +70,24 @@ public class EditDoctor extends AppCompatActivity {
                 finish();
             }
         });
-        if(!(doctor.getName().equals(""))) {
-            ((EditText) findViewById(R.id.name_edit)).setText(doctor.getName());
+        if(!(doctor.getDoctor_name().equals(""))) {
+            ((EditText) findViewById(R.id.name_edit)).setText(doctor.getDoctor_name());
             //((EditText) findViewById(R.id.plan_edit)).setSelection(((EditText) findViewById(R.id.plan_edit)).length());
         }
-        if(!(doctor.getType().equals(""))) {
-            ((EditText) findViewById(R.id.type_edit)).setText(doctor.getType());
+        if(!(doctor.getDoctor_speciality().equals(""))) {
+            ((EditText) findViewById(R.id.type_edit)).setText(doctor.getDoctor_speciality());
             //((EditText) findViewById(R.id.date_edit)).setSelection(((EditText) findViewById(R.id.date_edit)).length());
         }
-        if(!(doctor.getAddress().equals(""))) {
-            ((EditText) findViewById(R.id.address_edit)).setText(doctor.getAddress());
+        if(!(doctor.getDoctor_address().equals(""))) {
+            ((EditText) findViewById(R.id.address_edit)).setText(doctor.getDoctor_address());
             //((EditText) findViewById(R.id.duration_edit)).setSelection(((EditText) findViewById(R.id.duration_edit)).length());
         }
-        if(!(doctor.getPhone().equals(""))) {
-            ((EditText) findViewById(R.id.phone_edit)).setText(doctor.getPhone());
+        if(!(doctor.getDoctor_phone_number().equals(""))) {
+            ((EditText) findViewById(R.id.phone_edit)).setText(doctor.getDoctor_phone_number());
             //((EditText) findViewById(R.id.note_edit)).setSelection(((EditText) findViewById(R.id.note_edit)).length());
         }
-        if(!(doctor.getNotes().equals(""))) {
-            ((EditText) findViewById(R.id.note_edit)).setText(doctor.getNotes());
+        if(true) {
+            ((EditText) findViewById(R.id.note_edit)).setText("hello");
             //((EditText) findViewById(R.id.note_edit)).setSelection(((EditText) findViewById(R.id.note_edit)).length());
         }
         ((Button)findViewById(R.id.EditButton)).setText("SAVE CHANGES");

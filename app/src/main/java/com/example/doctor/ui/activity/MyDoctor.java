@@ -38,6 +38,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.LoginScreen.userid;
+
 
 public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyClickListener, RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -59,7 +61,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         setContentView(R.layout.activity_my_doctor);
         setTitle("My Doctor");
 
-        /*progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.isIndeterminate();
@@ -76,15 +78,13 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
             }
         }, 20000);
 
-        loadJSON();*/
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         data = new ArrayList<>();
         fData = new ArrayList<>();
 
-        prepareData();
+        loadJSON();
         initRecyclerView();
 
         onTouchListener = new RecyclerTouchListener(this, recyclerView);
@@ -177,9 +177,9 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         this.touchListener = listener;
     }
 
-  /*  private void loadJSON() {
+    private void loadJSON() {
         final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
-        Call<List<Doctor>> call = request.getMYDoctor();
+        Call<List<Doctor>> call = request.getMYDoctor(userid);
         call.enqueue(new Callback<List<Doctor>>() {
             @Override
             public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
@@ -191,8 +191,9 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-               *//* bodyPartsAdapter = new Body_Parts_Adapter(getContext(),bodyPartSupers);
-                mRecyclerView.setAdapter(bodyPartsAdapter);*//*
+                adapter = new MyDoctorAdapter(getApplicationContext(),data);
+                adapter.setOnItemClickListener(MyDoctor.this);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -200,9 +201,9 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
 
             }
         });
-    }*/
+    }
 
-    private void prepareData() {
+  /*  private void prepareData() {
         String[] name = {"Dr Olga Malkin(DDS - Dentistry and Prosthodontics)", "Dr Alison M Maresh (MD - Ear, Nose, and Throat)","Dr Martin Quirno(MD - Orthopedic Suregery)"};
         String[] type = {"Dentistry","ENT Specialist","Orthopedic"};
         String[] note = {"Dr. Olga Malkin is a dentistry and prosthodontics doctor with offices in New York, New York.", "Dr. Alison M Maresh is an ear, nose, and throat (ent) doctor with offices in New York, New York.", "Dr. Martin Quirno is an orthopedic surgery doctor with offices in New York, New York."};
@@ -211,21 +212,21 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
 
         for (int i = 0; i < name.length; i++) {
             Doctor current = new Doctor();
-            current.setName(name[i]);
-            current.setType(type[i]);
-            current.setAddress(address[i]);
-            current.setPhone(phone[i]);
+            current.setDoctor_name(name[i]);
+            current.setDoctor_speciality(type[i]);
+            current.setDoctor_address(address[i]);
+            current.setDoctor_phone_number(phone[i]);
             current.setNotes(note[i]);
             data.add(current);
         }
         adapter = new MyDoctorAdapter(MyDoctor.this, data);
-    }
+    }*/
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         linearLayoutManager=new LinearLayoutManager(this);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(this);
+        /*recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);*/
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
@@ -273,11 +274,11 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         dialog.setContentView(R.layout.display_doctor);
         //dialog.findViewById(R.id.imageZoom);
         ((ImageView)dialog.findViewById(R.id.display_picture)).setImageResource(R.drawable.doctor4);
-        ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getName());
-        ((TextView)dialog.findViewById(R.id.type_edit)).setText(a.getType());
-        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getAddress());
-        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getPhone());
-        ((TextView)dialog.findViewById(R.id.note_edit)).setText(a.getNotes());
+        ((TextView)dialog.findViewById(R.id.name_edit)).setText(a.getDoctor_name());
+        ((TextView)dialog.findViewById(R.id.type_edit)).setText(a.getDoctor_speciality());
+        ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getDoctor_address());
+        ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getDoctor_phone_number());
+        ((TextView)dialog.findViewById(R.id.note_edit)).setText("hello");
         dialog.show();
     }
 

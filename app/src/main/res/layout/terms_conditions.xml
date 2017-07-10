@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Terms and Condition\nContinuing Medical Education: When you register for a Continuing Medical Education (CME) or a Continuing Education (CE) activity through one of our Web sites, we collect certain personally identifiable information from you such as your name, email address and mailing address. If you are a nurse or a pharmacist and wish to receive CE credit, you are also required to provide the state in which you are licensed and your license number. In addition to personally identifiable information, we collect aggregated non-personally identifiable information about the activities undertaken by our users. We use the information that we collect through CME/CE activities in several ways:
+cme2, an Advanstar medical education company, is accredited by the Accreditation Council for Continuing Medical Education (ACCME) to provide continuing medical education for physicians. As an ACCME accredited entity, we are required periodically to submit aggregated data about CME participants and the CME activities we certify. We also provide personally identifiable information to other accredited CME/CE providers who certify CME/CE activities posted on our Web sites, as required by the ACCME and other accrediting bodies. These reports may include personally identifiable information about you and credits issued to you, for the purpose of maintaining records that you can request from the accredited provider for up to six (6) years;
+Commercial supporters of CME/CE activities on our Web Site will receive only aggregated data about CME/CE activities that are relevant to their interests and/or the courses they support;
+Our Editorial and Customer Support Staff will have internal access to files containing personally identifiable information, including evaluation forms and aggregated CME /CE participant information. These files can be accessed in order to respond to your questions or comments. Our staff may also use personally identifiable information, including registration information and evaluation data, in assessing educational needs and planning marketing activities. We may use the information we collect as otherwise permitted in these terms and conditions.
+Third-party Accreditation: Advanstar and ModernMedicine.com are not responsible for ensuring the validity of any continuing education credits issued by third parties who distribute CME/CE programs through this Web Site; issuing notification of credits or certification; ensuring the sufficiency of credits for license renewal; ensuring program content is sufficient to earn continuing education credit; or ensuring the accuracy or completeness of personal transcripts.
+No Medical Advice: This Web Site is not intended to provide, and disclaims any suggestion that it does provide, medical advice of any nature. The information made available through this Web Site should not be construed as medical advice by you or your patients and such information should not be used in place of seeking professional opinions by licensed practitioners. Only licensed medical professionals may offer medical advice, diagnosis and recommendations for treatment of medical conditions. Advanstar and its affiliates do not practice medicine or law, and do not offer any other professional advice or services. You assume full responsibility for appropriate use of the information available through this Web Site.
+Disclaimer of Warranty: This Web Site and all services and Information made available on or through this Web Site are provided on an 'as is', 'where is' and 'as available' basis. OTHER THAN AS EXPLICITLY SET FORTH IN THESE TERMS AND CONDITIONS, ADVANSTAR DISCLAIMS ANY EXPRESS OR IMPLIED REPRESENTATIONS, WARRANTIES, GUARANTIES, AND CONDITIONS TO THE FULLEST EXTENT THAT SUCH DISCLAIMERS ARE LEGALLY PERMISSIBLE, INCLUDING BUT NOT LIMITED TO ANY EXPRESS OR IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT, SUITABILITY, ACCURACY OR FREE FROM ERROR, CURRENCY TIMELINESS, SECURITY, EFFICACY, AVAILABILITY, RELIABILITY, COMPLETENESS OR NON-INTERRUPTION OR THAT DEFECTS WILL BE CORRECTED.
+Any information downloaded or otherwise obtained through the use of this Web Site is done at your own discretion and risk. You shall be solely responsible for any damage or loss of data that results from the downloading or use of the information and for any results or lack of results from the use of such data.
+Limitation of liability: Our liability regarding damages occurring from your use of the Web Site is limited and your use of the Web Site is at your own risk. In no event shall Advanstar or affiliates, or their shareholders, directors, officers, employees or agents, be liable for any claims or losses whatsoever of any kind, whether direct, indirect, special, incidental, consequential or punitive, and whether arising from an action in contract, tort, or otherwise, related to or in connection with this Web Site or any services or information made available on or through this Web Site, or your use thereof. Without limiting the generality of the foregoing, Advanstar and its affiliates shall not be liable for any claims or losses in connection with errors, omissions, or inaccuracies of informational content, or any decision made in reliance on the Information contained on or accessible through the Web Site, including without limitation personal injury or death.
+Your sole remedy for any claims in connection with this Web Site is to discontinue using this Web Site and the related Information and services. The foregoing limitation shall apply and survive notwithstanding any failure of essential purpose of any remedy.
+Some jurisdictions do not allow the exclusion of certain warranties or the limitation or exclusion of liability for incidental or consequential damages. Accordingly, some of the above limitations may not apply to you.
+Indemnification: You agree to indemnify, defend and hold harmless Advanstar and its affiliates from any and all claims or losses arising from your use of or reliance on this Web Site or any services or information made available on or through this Web Site.
+Choice of Law: These terms and conditions and your use of the Web Site shall be governed by and interpreted in accordance with laws of the State of New York, without giving effect to any conflict of laws provisions. By using this Web site, you hereby consent to the exclusive jurisdiction of and agree that venue is proper and convenient in the state and federal courts situated in the State of New York.
+Severability: If any provision of these terms and conditions is held by a court of competent jurisdiction to be invalid or unenforceable, then such provision shall be enforced to the maximum extent permissible so as to effectuate the intent of these terms and conditions, and the remainder of these terms and conditions shall continue in full force and effect.
+Waiver: Our failure to exercise or enforce any right or provision of these terms and conditions will not constitute or be deemed a waiver of such right or provision. "
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/continueTnC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="CONTINUE"
+                    android:background="@drawable/transparent_button"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorAccent"
+                    android:padding="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -31,6 +31,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.LoginScreen.userid;
+
 public class My_Measurements extends AppCompatActivity implements Measurement_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
@@ -149,7 +151,7 @@ public class My_Measurements extends AppCompatActivity implements Measurement_Ad
 
     private void loadJSON() {
         final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
-        Call<List<Measurement_Info>> call = request.getJSONmeas();
+        Call<List<Measurement_Info>> call = request.getJSONmeas(userid);
         call.enqueue(new Callback<List<Measurement_Info>>() {
             @Override
             public void onResponse(Call<List<Measurement_Info>> call, Response<List<Measurement_Info>> response) {

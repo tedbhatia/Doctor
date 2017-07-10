@@ -1,6 +1,7 @@
 package com.example.doctor.ui.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,12 +22,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
 import com.example.doctor.support.service.ApiClient;
 import com.example.doctor.support.service.RequestInterface;
+import com.example.doctor.ui.model.Doctor;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -72,7 +75,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private SignInButton googleSigninButton;
     private Authenticator pAuth;
     private FirebaseAuth mAuth;
-    public int userid;
+    public static int userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -320,6 +323,19 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     private void termsandconditions() {
+
+            final Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
+            dialog.setContentView(R.layout.terms_conditions);
+
+            dialog.show();
+
+        dialog.findViewById(R.id.continueTnC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -352,6 +368,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void initializeGPlusSettings() {

@@ -17,9 +17,13 @@ import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
+import com.example.doctor.ui.adapter.DiseasesAdapter;
 import com.example.doctor.ui.adapter.MedicinesAdapter;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
 import com.example.doctor.ui.model.Appointments;
+import com.example.doctor.ui.model.Diseases;
 import com.example.doctor.ui.model.Medicines;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
@@ -27,6 +31,10 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -37,6 +45,7 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
     private List<Medicines> listItems;
     private Medicines listItem;
 
+    private int flag = 0;
     private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
@@ -75,14 +84,16 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Medicines("Erythromycin","1 tablet","Tablet",3,"2017/06/22","Dr Olga Malkin",""));
-        listItems.add(1,new Medicines("Nasonex","1 spray","Inhaler",1,"2017/06/22","","Dr Alison M Maresh"));
-        listItems.add(2,new Medicines("Minocin","1 tablet","Tablet",2,"2017/06/22","Dr Martin Quirno",""));
+//        listItems.add(0,new Medicines("Erythromycin","1 tablet","Tablet",3,"2017/06/22","Dr Olga Malkin",""));
+//        listItems.add(1,new Medicines("Nasonex","1 spray","Inhaler",1,"2017/06/22","","Dr Alison M Maresh"));
+//        listItems.add(2,new Medicines("Minocin","1 tablet","Tablet",2,"2017/06/22","Dr Martin Quirno",""));
+//
+//        adapter=new MedicinesAdapter(this,listItems);
+//        recyclerView.setAdapter(adapter);
+//
+//        adapter.setOnItemClickListener(this);
 
-        adapter=new MedicinesAdapter(this,listItems);
-        recyclerView.setAdapter(adapter);
-
-        adapter.setOnItemClickListener(this);
+        loadJSON();
 
         onTouchListener=new RecyclerTouchListener(this,recyclerView);
 
@@ -150,6 +161,33 @@ public class MyMedicines extends AppCompatActivity implements My_Health_Acc_Adap
             }
         });
 
+    }
+
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<Medicines>> call = request.getMyMeds(LoginScreen.userid);
+        call.enqueue(new Callback<List<Medicines>>() {
+            @Override
+            public void onResponse(Call<List<Medicines>> call, Response<List<Medicines>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    listItems = response.body();
+                    flag = 1;
+                    progressDialog.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                adapter = new MedicinesAdapter(getApplicationContext(),listItems);
+                adapter.setOnItemClickListener(MyMedicines.this);
+                recyclerView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Medicines>> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

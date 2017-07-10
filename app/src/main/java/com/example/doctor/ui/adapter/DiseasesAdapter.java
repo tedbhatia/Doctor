@@ -47,9 +47,9 @@ public class DiseasesAdapter extends RecyclerView.Adapter<DiseasesAdapter.ViewHo
 
         Diseases listItem=grid.get(position);
 
-        holder.disease_name.setText(listItem.getDiseaseName());
-        holder.date.setText(listItem.getDate());
-        holder.notes.setText(listItem.getNotes());
+        holder.disease_name.setText(listItem.getDisease_name());
+        holder.date.setText(listItem.getDisease_date());
+        holder.notes.setText("hello");
 
     }
 

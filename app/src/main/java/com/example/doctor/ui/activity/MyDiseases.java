@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.example.doctor.R;
+import com.example.doctor.support.service.ApiClient;
+import com.example.doctor.support.service.RequestInterface;
+import com.example.doctor.ui.activity.LoginScreen;
 import com.example.doctor.ui.adapter.DiseasesAdapter;
 import com.example.doctor.ui.adapter.My_Health_Acc_Adapter;
 import com.example.doctor.ui.model.Diseases;
@@ -25,6 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapter.MyClickListener,RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private RecyclerView recyclerView;
@@ -34,6 +42,7 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
     private List<Diseases> listItems;
     private Diseases listItem;
 
+    private int flag = 0;
     private ProgressDialog progressDialog;
 
     private OnActivityTouchListener touchListener;
@@ -48,19 +57,22 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
 
         setTitle("My Diseases");
 
-//        progressDialog=new ProgressDialog(this);
-//        progressDialog.setMessage("Loading...");
-//        progressDialog.setCancelable(false);
-//        progressDialog.isIndeterminate();
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.show();
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
-//                progressDialog.dismiss();
-//            }
-//        }, 3000);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.isIndeterminate();
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if (flag == 0) {
+                    Toast.makeText(getApplicationContext(), "Poor Connection, Try Again", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+        }, 20000);
 
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -73,14 +85,16 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
 
         listItems=new ArrayList<>();
 
-        listItems.add(0,new Diseases("Periodontitis (gum inflammation)","23/05/2017","Periodontitis is a condition that involves inflammation of the gums and other structures that support the teeth. Periodontitis is caused by a bacterial infection. The body's attempt to fight the infection results in damage to the jaw bone and the ligament around the teeth. Pockets form between the teeth and gums. Teeth may become loose and even fall out. Older adults, people with diabetes, and people who smoke are more likely to get periodontitis."));
+        /*listItems.add(0,new Diseases("Periodontitis (gum inflammation)","23/05/2017","Periodontitis is a condition that involves inflammation of the gums and other structures that support the teeth. Periodontitis is caused by a bacterial infection. The body's attempt to fight the infection results in damage to the jaw bone and the ligament around the teeth. Pockets form between the teeth and gums. Teeth may become loose and even fall out. Older adults, people with diabetes, and people who smoke are more likely to get periodontitis."));
         listItems.add(1,new Diseases("Rhinitis (nasal inflammation)","23/05/2017","Inflammation of the mucus membranes of the nose and upper respiratory tract can occur in response to an irritant. In allergic rhinitis, the immune system in the nose reacts strongly to irritants called airborne allergens. This is a common disorder, affecting at least a quarter of the population."));
         listItems.add(2,new Diseases("Arthritis","01/06/2018","Inflammation of a single joint or multiple joints. There are many causes including infection, and inflammatory conditions such as: osteoarthritis, gout, pseudogout, rheumatoid arthritis, lupus, ankylosing spondylitis, and psoriasis."));
 
         adapter=new DiseasesAdapter(listItems,this);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(this);
+        adapter.setOnItemClickListener(this);*/
+
+        loadJSON();
 
         onTouchListener=new RecyclerTouchListener(this,recyclerView);
 
@@ -207,6 +221,32 @@ public class MyDiseases extends AppCompatActivity implements My_Health_Acc_Adapt
 
         return super.onOptionsItemSelected(item);
 
+    }
+
+    private void loadJSON() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<Diseases>> call = request.getMyDiseases(LoginScreen.userid);
+        call.enqueue(new Callback<List<Diseases>>() {
+            @Override
+            public void onResponse(Call<List<Diseases>> call, Response<List<Diseases>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    listItems = response.body();
+                    flag = 1;
+                    progressDialog.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                adapter = new DiseasesAdapter(listItems,getApplicationContext());
+                adapter.setOnItemClickListener(MyDiseases.this);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Diseases>> call, Throwable t) {
+
+            }
+        });
     }
 
 }

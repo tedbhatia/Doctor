@@ -3,10 +3,12 @@ package com.example.doctor.support.service;
 
 import com.example.doctor.ui.model.Appointments;
 import com.example.doctor.ui.model.Body_Parts;
+import com.example.doctor.ui.model.Diseases;
 import com.example.doctor.ui.model.Doctor;
 import com.example.doctor.ui.model.Insurance;
 import com.example.doctor.ui.model.Measurement_Info;
 import com.example.doctor.ui.model.MedicineModel;
+import com.example.doctor.ui.model.Medicines;
 import com.example.doctor.ui.model.ProcedureModel;
 import com.example.doctor.ui.model.SymptomModel;
 import com.example.doctor.ui.model.find_doctor_model;
@@ -19,6 +21,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 import static com.example.doctor.ui.activity.MyAppointments.idDoc;
@@ -39,16 +42,17 @@ public interface RequestInterface {
     @GET("api/procedure_list")
     Call<List<ProcedureModel>> getJSONproc();
 
-    @GET("api/appointment_list")
-    Call<List<Appointments>> getAppointment();
+    @GET("api/myappointments/{id}/")
+    Call<List<Appointments>> getAppointment(@Path("id") int id);
 
+    @GET("api/myinsurances/{id}/")
+    Call<List<Insurance>> getJSONinsurance(@Path("id") int id);
 
+    @GET("api/mymeasurements/{id}")
+    Call<List<Measurement_Info>> getJSONmeas(@Path("id") int id);
 
-    @GET("api/insurance_list")
-    Call<List<Insurance>> getJSONinsurance();
-
-    @GET("api/measurement_list")
-    Call<List<Measurement_Info>> getJSONmeas();
+    @GET("api/mymedicines/{id}")
+    Call<List<Medicines>> getMyMeds(@Path("id") int id);
 
     @GET("api/bodypart_list")
     Call<List<Body_Parts>> getBODY();
@@ -67,6 +71,9 @@ public interface RequestInterface {
     @POST("api/register/")
     Call<ResponseBody> signup(@Field("username") String username, @Field("password") String password, @Field("email") String email);
 
-    @GET("api/doctor_list")
-    Call<List<Doctor>> getMYDoctor();
+    @GET("api/mydoctors/{id}/")
+    Call<List<Doctor>> getMYDoctor(@Path("id") int id);
+
+    @GET("api/mydiseases/{id}/")
+    Call<List<Diseases>> getMyDiseases(@Path("id") int id);
 }

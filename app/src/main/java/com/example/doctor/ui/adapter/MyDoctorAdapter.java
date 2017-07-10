@@ -47,9 +47,9 @@ public class MyDoctorAdapter extends RecyclerView.Adapter<MyDoctorAdapter.MyView
     public void onBindViewHolder(MyDoctorAdapter.MyViewHolder holder, int position) {
 
         final Doctor current = data.get(position);
-        holder.name.setText(current.getName());
-        holder.type.setText(current.getType());
-        holder.phone.setText(current.getPhone());
+        holder.name.setText(current.getDoctor_name());
+        holder.type.setText(current.getDoctor_speciality());
+        holder.phone.setText(current.getDoctor_phone_number());
     }
 
     @Override
