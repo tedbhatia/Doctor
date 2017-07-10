@@ -165,7 +165,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
                 progressDialog.dismiss();
             }
-        }, 3000);
+        }, 500);
 
 
     }

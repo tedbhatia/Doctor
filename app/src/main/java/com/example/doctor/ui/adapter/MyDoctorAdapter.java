@@ -37,10 +37,13 @@ public class MyDoctorAdapter extends RecyclerView.Adapter<MyDoctorAdapter.MyView
 
     @Override
     public MyDoctorAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflator.inflate(R.layout.doctor_custom_box,parent,false);
-        MyDoctorAdapter.MyViewHolder myViewHolder = new MyDoctorAdapter.MyViewHolder(view);
+//        View view = inflator.inflate(R.layout.doctor_custom_box,parent,false);
+//        MyDoctorAdapter.MyViewHolder myViewHolder = new MyDoctorAdapter.MyViewHolder(view);
 
-        return myViewHolder;
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.doctor_custom_box, parent, false);
+
+        return new MyViewHolder(itemView);
     }
 
     @Override

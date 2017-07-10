@@ -82,7 +82,6 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         data = new ArrayList<>();
-        fData = new ArrayList<>();
 
         loadJSON();
         initRecyclerView();
