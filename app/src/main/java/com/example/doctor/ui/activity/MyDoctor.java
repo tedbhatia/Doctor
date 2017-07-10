@@ -24,6 +24,7 @@ import com.example.doctor.ui.adapter.MyDoctorAdapter;
 import com.example.doctor.ui.fragment.Symptoms_Male_Fragment;
 import com.example.doctor.ui.model.Body_Parts;
 import com.example.doctor.ui.model.Doctor;
+import com.example.doctor.ui.model.DoctorNotes;
 import com.example.doctor.ui.model.Insurance;
 import com.example.doctor.ui.model.Measurement_Info;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
@@ -47,6 +48,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
     private LinearLayoutManager linearLayoutManager;
     private MyDoctorAdapter adapter;
     private List<Doctor> data, fData;
+    private List<DoctorNotes> data1;
     private int flag = 0;
     private ProgressDialog progressDialog;
 
@@ -82,6 +84,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         data = new ArrayList<>();
+        data1 = new ArrayList<>();
 
         loadJSON();
         initRecyclerView();
@@ -202,6 +205,32 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         });
     }
 
+    private void loadJSON1(int docId) {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<List<DoctorNotes>> call = request.getMYDoctorNotes(userid, 2);
+        call.enqueue(new Callback<List<DoctorNotes>>() {
+            @Override
+            public void onResponse(Call<List<DoctorNotes>> call, Response<List<DoctorNotes>> response) {
+                try {
+//                    Toast.makeText(getApplicationContext(),response.body().string(),Toast.LENGTH_SHORT).show();
+                    data1 = response.body();
+                    flag = 1;
+                    progressDialog.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                adapter = new MyDoctorAdapter(getApplicationContext(),data);
+                adapter.setOnItemClickListener(MyDoctor.this);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<DoctorNotes>> call, Throwable t) {
+
+            }
+        });
+    }
+
   /*  private void prepareData() {
         String[] name = {"Dr Olga Malkin(DDS - Dentistry and Prosthodontics)", "Dr Alison M Maresh (MD - Ear, Nose, and Throat)","Dr Martin Quirno(MD - Orthopedic Suregery)"};
         String[] type = {"Dentistry","ENT Specialist","Orthopedic"};
@@ -267,7 +296,7 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
 
     private void details(int position) {
         Doctor a = data.get(position);
-
+        loadJSON1(a.getId());
         //
         Dialog dialog = new Dialog(this,R.style.Theme_AppCompat_DialogWhenLarge);
         dialog.setContentView(R.layout.display_doctor);
@@ -277,7 +306,8 @@ public class MyDoctor extends AppCompatActivity implements MyDoctorAdapter.MyCli
         ((TextView)dialog.findViewById(R.id.type_edit)).setText(a.getDoctor_speciality());
         ((TextView)dialog.findViewById(R.id.address_edit)).setText(a.getDoctor_address());
         ((TextView)dialog.findViewById(R.id.phone_edit)).setText(a.getDoctor_phone_number());
-        ((TextView)dialog.findViewById(R.id.note_edit)).setText("hello");
+//        ((TextView)dialog.findViewById(R.id.note_edit)).setText(data1.get(0).getDoctor_note());
+
         dialog.show();
     }
 

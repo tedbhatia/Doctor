@@ -5,6 +5,7 @@ import com.example.doctor.ui.model.Appointments;
 import com.example.doctor.ui.model.Body_Parts;
 import com.example.doctor.ui.model.Diseases;
 import com.example.doctor.ui.model.Doctor;
+import com.example.doctor.ui.model.DoctorNotes;
 import com.example.doctor.ui.model.Insurance;
 import com.example.doctor.ui.model.Measurement_Info;
 import com.example.doctor.ui.model.MedicineModel;
@@ -73,6 +74,9 @@ public interface RequestInterface {
 
     @GET("api/mydoctors/{id}/")
     Call<List<Doctor>> getMYDoctor(@Path("id") int id);
+
+    @GET("api/mydoctors/{id1}/{id2}/")
+    Call<List<DoctorNotes>> getMYDoctorNotes(@Path("id1") int id1, @Path("id2") int id2);
 
     @GET("api/mydiseases/{id}/")
     Call<List<Diseases>> getMyDiseases(@Path("id") int id);
