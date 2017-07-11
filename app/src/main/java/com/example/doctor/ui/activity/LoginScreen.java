@@ -35,6 +35,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -47,6 +49,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.Authenticator;
 import java.util.List;
@@ -277,7 +282,41 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                //Toast.makeText(LoginScreen.this, "Success", Toast.LENGTH_SHORT);
+                GraphRequest request=GraphRequest.newMeRequest(loginResult.getAccessToken(),new GraphRequest.GraphJSONObjectCallback(){
+
+                    @Override
+                    public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                        setProfileToView(jsonObject);
+                    }
+                });
+
+
+                Bundle parameters= new Bundle();
+                parameters.putString("fields", "id,name,email,gender, birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
+                /*Intent intent= new Intent(LoginScreen.this, MainActivity.class);
+                startActivity(intent);*/
+                Intent intent = new Intent(LoginScreen.this,MainActivity.class);
+                intent.putExtra("user",myProfile.getUsername());
+                startActivity(intent);
+
                 Toast.makeText(LoginScreen.this, "Success", Toast.LENGTH_SHORT);
+            }
+
+            private void setProfileToView(JSONObject jsonObject) {
+                try {
+                    myProfile.setEmail(jsonObject.getString("email"));
+                    myProfile.setGender(jsonObject.getString("gender"));
+                    myProfile.setUsername(jsonObject.getString("name"));
+                    loggedIn = true;
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             }
 
             @Override
