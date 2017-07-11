@@ -22,6 +22,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctor.R;
@@ -35,6 +36,7 @@ import com.example.doctor.ui.fragment.MyProfileFragment;
 import com.example.doctor.ui.fragment.NotificationsFragment;
 import com.example.doctor.ui.fragment.ProcedureFragment;
 import com.example.doctor.ui.fragment.Symptoms_Fragment;
+import com.example.doctor.ui.model.Measurement_Info;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     MenuItem item;
     public static NavigationView navigationView;
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +87,15 @@ public class MainActivity extends AppCompatActivity
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame, new Health_Acc_Fragment()).commit();
 
+        if(getIntent().hasExtra("user")){
+            user = (String) getIntent().getSerializableExtra("user");
+        }
+
         View view = navigationView.getHeaderView(0);
         view.findViewById(R.id.imageView).setOnClickListener(this);
+
+        TextView view1 = (TextView) navigationView.getHeaderView(0).findViewById(R.id.profileId);
+        view1.setText(user);
 
     }
 

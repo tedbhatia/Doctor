@@ -30,6 +30,7 @@ import com.example.doctor.R;
 import com.example.doctor.support.service.ApiClient;
 import com.example.doctor.support.service.RequestInterface;
 import com.example.doctor.ui.model.Doctor;
+import com.example.doctor.ui.model.ProfileModel;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -48,6 +49,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.net.Authenticator;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -76,6 +78,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private Authenticator pAuth;
     private FirebaseAuth mAuth;
     public static int userid;
+    private ProfileModel myProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -400,7 +403,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         userid=Integer.valueOf(body);
                         Toast.makeText(LoginScreen.this, "Logged in as " + body, Toast.LENGTH_SHORT).show();
                         loggedIn = true;
-                        startActivity(new Intent(LoginScreen.this, MainActivity.class));
+                        loadJSON1();
                     }
                 }
                 catch (Exception e) {
@@ -412,6 +415,32 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(LoginScreen.this,"Failure",Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+    }
+
+    private void loadJSON1() {
+        final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
+        Call<ProfileModel> call = request.getProfile(userid);
+        call.enqueue(new Callback<ProfileModel>() {
+            @Override
+            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+                try {
+                    //   Toast.makeText(getActivity(),"success",Toast.LENGTH_SHORT).show();
+                    myProfile = response.body();
+                    Intent intent = new Intent(LoginScreen.this,MainActivity.class);
+                    intent.putExtra("user",myProfile.getUsername());
+                    startActivity(intent);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileModel> call, Throwable t) {
+                Toast.makeText(LoginScreen.this,"failure",Toast.LENGTH_SHORT).show();
             }
         });
 
