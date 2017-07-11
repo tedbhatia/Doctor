@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -346,7 +347,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     private void forgotpassword() {
-        LayoutInflater li = LayoutInflater.from(LoginScreen.this);
+        /*LayoutInflater li = LayoutInflater.from(LoginScreen.this);
         View v = li.inflate(R.layout.forgotpasswordprompt, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(v);
@@ -360,8 +361,10 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             }
         });
         builder.show();
-
-
+*/
+        Intent callIntent = new Intent(Intent.ACTION_VIEW);
+        callIntent.setData(Uri.parse("http://med-4-u.appspot.com/reset_password/"));
+        startActivity(callIntent);
     }
 
     private void termsandconditions() {

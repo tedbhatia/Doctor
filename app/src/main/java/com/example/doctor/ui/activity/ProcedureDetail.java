@@ -1,5 +1,6 @@
 package com.example.doctor.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -105,11 +106,17 @@ public class ProcedureDetail extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.share:
-                Toast.makeText(this,"Sharing..",Toast.LENGTH_SHORT).show();
-                break;
+        if (v.getId() == R.id.share) {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"emailaddress@example.com"});
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "This is Subject");
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
         }
+
+
     }
 }
 
