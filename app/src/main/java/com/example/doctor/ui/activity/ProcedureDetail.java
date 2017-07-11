@@ -56,7 +56,7 @@ public class ProcedureDetail extends AppCompatActivity implements View.OnClickLi
         listHeading.add("Possible Complication");
         listHeading.add("Specialist");
         listHeading.add("Body Parts");
-        listHeading.add("Sysmtom");
+        listHeading.add("Symptom");
         listHeading.add("Medicines");
 
 

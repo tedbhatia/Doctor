@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.SearchView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ import retrofit2.Response;
 
 import static com.example.doctor.ui.activity.LoginScreen.myProfile;
 import static com.example.doctor.ui.activity.LoginScreen.userid;
+import static com.example.doctor.ui.activity.MainActivity.drawer;
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
 /**
@@ -85,6 +87,7 @@ public class MyProfileFragment extends Fragment {
                     transaction.replace(R.id.content_frame,health_acc_fragment);
 
                     transaction.commit();
+                    drawer.closeDrawer(GravityCompat.START);
 
 
                     return true;

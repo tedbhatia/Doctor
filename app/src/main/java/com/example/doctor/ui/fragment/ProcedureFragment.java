@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -33,6 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.MainActivity.drawer;
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
 /**
@@ -75,6 +77,7 @@ public class ProcedureFragment extends android.support.v4.app.Fragment implement
 
                     Health_Acc_Fragment health_acc_fragment = new Health_Acc_Fragment();
 
+                    drawer.closeDrawer(GravityCompat.START);
                     navigationView.getMenu().getItem(0).setChecked(true);
 
                     FragmentTransaction transaction=getFragmentManager().beginTransaction();

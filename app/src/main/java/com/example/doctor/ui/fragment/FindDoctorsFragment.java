@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.MainActivity.drawer;
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
 /**
@@ -89,6 +91,7 @@ public class FindDoctorsFragment extends Fragment implements FindDoctorAdapter.M
                     transaction.replace(R.id.content_frame,health_acc_fragment);
 
                     transaction.commit();
+                    drawer.closeDrawer(GravityCompat.START);
 
 
                     return true;

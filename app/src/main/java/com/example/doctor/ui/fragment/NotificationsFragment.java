@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -24,6 +25,7 @@ import com.example.doctor.ui.model.SwipeUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.doctor.ui.activity.MainActivity.drawer;
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
 /**
@@ -73,6 +75,7 @@ public class NotificationsFragment extends Fragment implements My_Health_Acc_Ada
                     transaction.replace(R.id.content_frame,health_acc_fragment);
 
                     transaction.commit();
+                    drawer.closeDrawer(GravityCompat.START);
 
                     return true;
                 }

@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-    DrawerLayout drawer;
+    public static DrawerLayout drawer;
     MenuItem item;
     public static NavigationView navigationView;
     String user;
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
