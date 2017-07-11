@@ -78,7 +78,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private Authenticator pAuth;
     private FirebaseAuth mAuth;
     public static int userid;
-    private ProfileModel myProfile;
+    public static ProfileModel myProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

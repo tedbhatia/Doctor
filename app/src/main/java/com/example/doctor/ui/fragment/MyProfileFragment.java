@@ -39,6 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.doctor.ui.activity.LoginScreen.myProfile;
 import static com.example.doctor.ui.activity.LoginScreen.userid;
 import static com.example.doctor.ui.activity.MainActivity.navigationView;
 
@@ -50,10 +51,7 @@ public class MyProfileFragment extends Fragment {
 
     private View rootView;
     private ImageView image;
-    private TextView username,email,last_name,dob,address,mobile_number,blood_group,gender;
-    public static TextView first_name;
-    private List<ProfileModel> profilemodel;
-    private ProfileModel myProfile;
+    private TextView username,email,first_name,last_name,dob,address,mobile_number,blood_group,gender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +67,8 @@ public class MyProfileFragment extends Fragment {
         rootView=inflater.inflate(R.layout.activity_my_profile,container,false);
 
         bindViews(rootView);
-        loadJSON();
+        //loadJSON();
+        setData();
 
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
@@ -98,7 +97,7 @@ public class MyProfileFragment extends Fragment {
 
     }
 
-    private void loadJSON() {
+    /*private void loadJSON() {
         final RequestInterface request = ApiClient.getClient().create(RequestInterface.class);
         Call<ProfileModel> call = request.getProfile(userid);
         call.enqueue(new Callback<ProfileModel>() {
@@ -119,7 +118,7 @@ public class MyProfileFragment extends Fragment {
             }
         });
 
-    }
+    }*/
 
     private void bindViews(View rootView) {
         image = (CircleImageView) rootView.findViewById(R.id.image);
