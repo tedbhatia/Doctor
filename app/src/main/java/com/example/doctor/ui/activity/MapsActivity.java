@@ -80,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(MapsActivity.this,
-                        new String[]{Manifest.permission.CAMERA}, 400);
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 400);
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
