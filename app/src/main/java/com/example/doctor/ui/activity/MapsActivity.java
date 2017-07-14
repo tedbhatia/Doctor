@@ -174,7 +174,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     //Wait
                     Log.d("onClick", "Button is Clicked");
                     mMap.clear();
-                    String url = getUrl(latitude, longitude, Doctor);
+                    String url = getUrl(
+                            23.0381040, 72.5137860, Doctor);
                     Object[] DataTransfer = new Object[2];
                     DataTransfer[0] = mMap;
                     DataTransfer[1] = url;
